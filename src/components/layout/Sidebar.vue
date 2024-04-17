@@ -33,7 +33,7 @@
                                 <div class="flex items-center">
                                     <icon-menu-dashboard class="group-hover:!text-primary shrink-0" />
                                     <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">
-                                        {{ $t('dashboard') }}
+                                        {{ $t('evaluation') }}
                                     </span>
                                 </div>
                                 <div :class="{ 'rtl:rotate-90 -rotate-90': activeDropdown !== 'dashboard' }">
@@ -43,16 +43,13 @@
                             <vue-collapsible :isOpen="activeDropdown === 'dashboard'">
                                 <ul class="sub-menu text-gray-500">
                                     <li>
-                                        <router-link to="/" @click="toggleMobileMenu">{{ $t('sales') }}</router-link>
+                                        <router-link to="/evaluations/comparisons" @click="toggleMobileMenu">{{ $t('comparisons_evaluation') }}</router-link>
                                     </li>
                                     <li>
-                                        <router-link to="/analytics" @click="toggleMobileMenu">{{ $t('analytics') }}</router-link>
+                                        <router-link to="/analytics" @click="toggleMobileMenu">{{ $t('direct_capitlization_evaluation') }}</router-link>
                                     </li>
                                     <li>
-                                        <router-link to="/finance" @click="toggleMobileMenu">{{ $t('finance') }}</router-link>
-                                    </li>
-                                    <li>
-                                        <router-link to="/crypto" @click="toggleMobileMenu">{{ $t('crypto') }}</router-link>
+                                        <router-link to="/finance" @click="toggleMobileMenu">{{ $t('cost_evaluation') }}</router-link>
                                     </li>
                                 </ul>
                             </vue-collapsible>

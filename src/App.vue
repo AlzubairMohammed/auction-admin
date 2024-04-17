@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
     import { computed } from 'vue';
 
     import appLayout from '@/layouts/app-layout.vue';
