@@ -1,607 +1,227 @@
-<template>
-    <div>
-        <div class="panel pb-0 mt-6">
-            <AddingBar />
-
-            <div class="datatable">
-                <vue3-datatable
-                    :rows="rows"
-                    :columns="datatable1Cols"
-                    :totalRows="rows?.length"
-                    :sortable="true"
-                    sortColumn="firstName"
-                    :search="search1"
-                    skin="whitespace-nowrap bh-table-hover"
-                    firstArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M13 19L7 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M16.9998 19L10.9998 12L16.9998 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
-                    lastArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg> '
-                    previousArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
-                    nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
-                >
-                    <template #firstName="data">
-                        <div class="flex items-center w-max">
-                            <img class="w-9 h-9 rounded-full ltr:mr-2 rtl:ml-2 object-cover" :src="`/assets/images/profile-${data.value.id}.jpeg`" />
-                            {{ data.value.firstName + ' ' + data.value.lastName }}
-                        </div>
-                    </template>
-                    <template #dob="data">
-                        {{ formatDate(data.value.dob) }}
-                    </template>
-                    <template #status>
-                        <span class="badge" :class="`bg-${randomColor()}`">{{ randomStatus() }}</span>
-                    </template>
-                    <template #action>
-                        <div class="text-center">
-                            <button type="button" v-tippy>
-                                <icon-x-circle />
-                            </button>
-                            <tippy>Delete</tippy>
-                        </div>
-                    </template>
-                </vue3-datatable>
-            </div>
-        </div>
-    </div>
-</template>
-<script setup lang="ts">
+<script setup>
     import { ref } from 'vue';
-    import Vue3Datatable from '@bhplugin/vue3-datatable';
-    import { useMeta } from '@/composables/use-meta';
-
-    import IconBell from '@/components/icon/icon-bell.vue';
-    import IconXCircle from '@/components/icon/icon-x-circle.vue';
-    import IconPencil from '@/components/icon/icon-pencil.vue';
-    import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
+    import MultipleInputs from '@/components/Inputs/MultipleInputs.vue';
     import AddingBar from '@/components/AddingBar/AddingBar.vue';
+    import { useComparisonsEvaluationsStore } from '@/stores/comparisonsEvaluations';
 
-    useMeta({ title: 'Multiple Tables' });
-    const search1 = ref('');
-    const search2 = ref('');
-    const datatable1Cols =
-        ref([
-            { field: 'firstName', title: 'Name' },
-            { field: 'company', title: 'Company' },
-            { field: 'age', title: 'Age' },
-            { field: 'dob', title: 'Start Date' },
-            { field: 'email', title: 'Email' },
-            { field: 'phone', title: 'Phone No.' },
-            { field: 'status', title: 'Status' },
-            { field: 'action', title: 'Action', sort: false, headerClass: 'justify-center' },
-        ]) || [];
-    const rows = ref(
+    const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
+
+    const isModalActive = ref(false);
+    const isAddPropertyModalActive = ref(false);
+    const title = ref('');
+    let result = ref(0.0);
+
+    let properties = ref(['السعر', 'ظروف السوق', 'شروط التمويل', 'الاستخدام', 'عدد الشوارع', 'المرجح الموزون']);
+    const multiArray = ref([
         [
             {
-                id: 1,
-                firstName: 'Caroline',
-                lastName: 'Jensen',
-                email: 'carolinejensen@zidant.com',
-                dob: '2004-05-28',
-                address: {
-                    street: '529 Scholes Street',
-                    city: 'Temperanceville',
-                    zipcode: 5235,
-                    geo: {
-                        lat: 23.806115,
-                        lng: 164.677197,
-                    },
-                },
-                phone: '+1 (821) 447-3782',
-                isActive: true,
-                age: 39,
-                company: 'POLARAX',
+                value: '',
+                percentage: '',
             },
             {
-                id: 2,
-                firstName: 'Celeste',
-                lastName: 'Grant',
-                email: 'celestegrant@polarax.com',
-                dob: '1989-11-19',
-                address: {
-                    street: '639 Kimball Street',
-                    city: 'Bascom',
-                    zipcode: 8907,
-                    geo: {
-                        lat: 65.954483,
-                        lng: 98.906478,
-                    },
-                },
-                phone: '+1 (838) 515-3408',
-                isActive: false,
-                age: 32,
-                company: 'MANGLO',
+                value: '',
+                percentage: '',
             },
             {
-                id: 3,
-                firstName: 'Tillman',
-                lastName: 'Forbes',
-                email: 'tillmanforbes@manglo.com',
-                dob: '2016-09-05',
-                address: {
-                    street: '240 Vandalia Avenue',
-                    city: 'Thynedale',
-                    zipcode: 8994,
-                    geo: {
-                        lat: -34.949388,
-                        lng: -82.958111,
-                    },
-                },
-                phone: '+1 (969) 496-2892',
-                isActive: false,
-                age: 26,
-                company: 'APPLIDECK',
+                value: '',
+                percentage: '',
             },
             {
-                id: 4,
-                firstName: 'Daisy',
-                lastName: 'Whitley',
-                email: 'daisywhitley@applideck.com',
-                dob: '1987-03-23',
-                address: {
-                    street: '350 Pleasant Place',
-                    city: 'Idledale',
-                    zipcode: 9369,
-                    geo: {
-                        lat: -54.458809,
-                        lng: -127.476556,
-                    },
-                },
-                phone: '+1 (861) 564-2877',
-                isActive: true,
-                age: 21,
-                company: 'VOLAX',
+                value: '',
+                percentage: '',
             },
             {
-                id: 5,
-                firstName: 'Weber',
-                lastName: 'Bowman',
-                email: 'weberbowman@volax.com',
-                dob: '1983-02-24',
-                address: {
-                    street: '154 Conway Street',
-                    city: 'Broadlands',
-                    zipcode: 8131,
-                    geo: {
-                        lat: 54.501351,
-                        lng: -167.47138,
-                    },
-                },
-                phone: '+1 (962) 466-3483',
-                isActive: false,
-                age: 26,
-                company: 'ORBAXTER',
+                value: '',
+                percentage: '',
             },
             {
-                id: 6,
-                firstName: 'Buckley',
-                lastName: 'Townsend',
-                email: 'buckleytownsend@orbaxter.com',
-                dob: '2011-05-29',
-                address: {
-                    street: '131 Guernsey Street',
-                    city: 'Vallonia',
-                    zipcode: 6779,
-                    geo: {
-                        lat: -2.681655,
-                        lng: 3.528942,
-                    },
-                },
-                phone: '+1 (884) 595-2643',
-                isActive: true,
-                age: 40,
-                company: 'OPPORTECH',
+                value: '',
+                percentage: '',
+            },
+        ],
+        [
+            {
+                value: '',
+                percentage: '',
             },
             {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+        ],
+        [
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+        ],
+    ]);
+    let form = ref();
+    const onSubmit = async () => {
+        const data = {
+            comparisons: multiArray.value,
+            properties: properties.value,
+            realestate: {
                 id: 7,
-                firstName: 'Latoya',
-                lastName: 'Bradshaw',
-                email: 'latoyabradshaw@opportech.com',
-                dob: '2010-11-23',
-                address: {
-                    street: '668 Lenox Road',
-                    city: 'Lowgap',
-                    zipcode: 992,
-                    geo: {
-                        lat: 36.026423,
-                        lng: 130.412198,
-                    },
-                },
-                phone: '+1 (906) 474-3155',
-                isActive: true,
-                age: 24,
-                company: 'GORGANIC',
+                meters: 2250,
             },
-            {
-                id: 8,
-                firstName: 'Kate',
-                lastName: 'Lindsay',
-                email: 'katelindsay@gorganic.com',
-                dob: '1987-07-02',
-                address: {
-                    street: '773 Harrison Avenue',
-                    city: 'Carlton',
-                    zipcode: 5909,
-                    geo: {
-                        lat: 42.464724,
-                        lng: -12.948403,
-                    },
-                },
-                phone: '+1 (930) 546-2952',
-                isActive: true,
-                age: 24,
-                company: 'AVIT',
-            },
-            {
-                id: 9,
-                firstName: 'Marva',
-                lastName: 'Sandoval',
-                email: 'marvasandoval@avit.com',
-                dob: '2010-11-02',
-                address: {
-                    street: '200 Malta Street',
-                    city: 'Tuskahoma',
-                    zipcode: 1292,
-                    geo: {
-                        lat: -52.206169,
-                        lng: 74.19452,
-                    },
-                },
-                phone: '+1 (927) 566-3600',
-                isActive: false,
-                age: 28,
-                company: 'QUILCH',
-            },
-            {
-                id: 10,
-                firstName: 'Decker',
-                lastName: 'Russell',
-                email: 'deckerrussell@quilch.com',
-                dob: '1994-04-21',
-                address: {
-                    street: '708 Bath Avenue',
-                    city: 'Coultervillle',
-                    zipcode: 1268,
-                    geo: {
-                        lat: -41.550295,
-                        lng: -146.598075,
-                    },
-                },
-                phone: '+1 (846) 535-3283',
-                isActive: false,
-                age: 27,
-                company: 'MEMORA',
-            },
-            {
-                id: 11,
-                firstName: 'Odom',
-                lastName: 'Mills',
-                email: 'odommills@memora.com',
-                dob: '2010-01-24',
-                address: {
-                    street: '907 Blake Avenue',
-                    city: 'Churchill',
-                    zipcode: 4400,
-                    geo: {
-                        lat: -56.061694,
-                        lng: -130.238523,
-                    },
-                },
-                phone: '+1 (995) 525-3402',
-                isActive: true,
-                age: 34,
-                company: 'ZORROMOP',
-            },
-            {
-                id: 12,
-                firstName: 'Sellers',
-                lastName: 'Walters',
-                email: 'sellerswalters@zorromop.com',
-                dob: '1975-11-12',
-                address: {
-                    street: '978 Oakland Place',
-                    city: 'Gloucester',
-                    zipcode: 3802,
-                    geo: {
-                        lat: 11.732587,
-                        lng: 96.118099,
-                    },
-                },
-                phone: '+1 (830) 430-3157',
-                isActive: true,
-                age: 28,
-                company: 'ORBOID',
-            },
-            {
-                id: 13,
-                firstName: 'Wendi',
-                lastName: 'Powers',
-                email: 'wendipowers@orboid.com',
-                dob: '1979-06-02',
-                address: {
-                    street: '376 Greenpoint Avenue',
-                    city: 'Elliott',
-                    zipcode: 9149,
-                    geo: {
-                        lat: -78.159578,
-                        lng: -9.835103,
-                    },
-                },
-                phone: '+1 (863) 457-2088',
-                isActive: true,
-                age: 31,
-                company: 'SNORUS',
-            },
-            {
-                id: 14,
-                firstName: 'Sophie',
-                lastName: 'Horn',
-                email: 'sophiehorn@snorus.com',
-                dob: '2018-09-20',
-                address: {
-                    street: '343 Doughty Street',
-                    city: 'Homestead',
-                    zipcode: 330,
-                    geo: {
-                        lat: 65.484087,
-                        lng: 137.413998,
-                    },
-                },
-                phone: '+1 (885) 418-3948',
-                isActive: true,
-                age: 22,
-                company: 'XTH',
-            },
-            {
-                id: 15,
-                firstName: 'Levine',
-                lastName: 'Rodriquez',
-                email: 'levinerodriquez@xth.com',
-                dob: '1973-02-08',
-                address: {
-                    street: '643 Allen Avenue',
-                    city: 'Weedville',
-                    zipcode: 8931,
-                    geo: {
-                        lat: -63.185586,
-                        lng: 117.327808,
-                    },
-                },
-                phone: '+1 (999) 565-3239',
-                isActive: true,
-                age: 27,
-                company: 'COMTRACT',
-            },
-            {
-                id: 16,
-                firstName: 'Little',
-                lastName: 'Hatfield',
-                email: 'littlehatfield@comtract.com',
-                dob: '2012-01-03',
-                address: {
-                    street: '194 Anthony Street',
-                    city: 'Williston',
-                    zipcode: 7456,
-                    geo: {
-                        lat: 47.480837,
-                        lng: 6.085909,
-                    },
-                },
-                phone: '+1 (812) 488-3011',
-                isActive: false,
-                age: 33,
-                company: 'ZIDANT',
-            },
-            {
-                id: 17,
-                firstName: 'Larson',
-                lastName: 'Kelly',
-                email: 'larsonkelly@zidant.com',
-                dob: '2010-06-14',
-                address: {
-                    street: '978 Indiana Place',
-                    city: 'Innsbrook',
-                    zipcode: 639,
-                    geo: {
-                        lat: -71.766732,
-                        lng: 150.854345,
-                    },
-                },
-                phone: '+1 (892) 484-2162',
-                isActive: true,
-                age: 20,
-                company: 'SUREPLEX',
-            },
-            {
-                id: 18,
-                firstName: 'Kendra',
-                lastName: 'Molina',
-                email: 'kendramolina@sureplex.com',
-                dob: '2002-07-19',
-                address: {
-                    street: '567 Charles Place',
-                    city: 'Kimmell',
-                    zipcode: 1966,
-                    geo: {
-                        lat: 50.765816,
-                        lng: -117.106499,
-                    },
-                },
-                phone: '+1 (920) 528-3330',
-                isActive: false,
-                age: 31,
-                company: 'DANJA',
-            },
-            {
-                id: 19,
-                firstName: 'Ebony',
-                lastName: 'Livingston',
-                email: 'ebonylivingston@danja.com',
-                dob: '1994-10-18',
-                address: {
-                    street: '284 Cass Place',
-                    city: 'Navarre',
-                    zipcode: 948,
-                    geo: {
-                        lat: 65.271256,
-                        lng: -83.064729,
-                    },
-                },
-                phone: '+1 (970) 591-3039',
-                isActive: false,
-                age: 33,
-                company: 'EURON',
-            },
-            {
-                id: 20,
-                firstName: 'Kaufman',
-                lastName: 'Rush',
-                email: 'kaufmanrush@euron.com',
-                dob: '2011-07-10',
-                address: {
-                    street: '408 Kingsland Avenue',
-                    city: 'Beaulieu',
-                    zipcode: 7911,
-                    geo: {
-                        lat: 41.513153,
-                        lng: 54.821641,
-                    },
-                },
-                phone: '+1 (924) 463-2934',
-                isActive: false,
-                age: 39,
-                company: 'ILLUMITY',
-            },
-            {
-                id: 21,
-                firstName: 'Frank',
-                lastName: 'Hays',
-                email: 'frankhays@illumity.com',
-                dob: '2005-06-15',
-                address: {
-                    street: '973 Caton Place',
-                    city: 'Dargan',
-                    zipcode: 4104,
-                    geo: {
-                        lat: 63.314988,
-                        lng: -138.771323,
-                    },
-                },
-                phone: '+1 (930) 577-2670',
-                isActive: false,
-                age: 31,
-                company: 'SYBIXTEX',
-            },
-            {
-                id: 22,
-                firstName: 'Carmella',
-                lastName: 'Mccarty',
-                email: 'carmellamccarty@sybixtex.com',
-                dob: '1980-03-06',
-                address: {
-                    street: '919 Judge Street',
-                    city: 'Canby',
-                    zipcode: 8283,
-                    geo: {
-                        lat: 9.198597,
-                        lng: -138.809971,
-                    },
-                },
-                phone: '+1 (876) 456-3218',
-                isActive: true,
-                age: 21,
-                company: 'ZEDALIS',
-            },
-            {
-                id: 23,
-                firstName: 'Massey',
-                lastName: 'Owen',
-                email: 'masseyowen@zedalis.com',
-                dob: '2012-03-01',
-                address: {
-                    street: '108 Seaview Avenue',
-                    city: 'Slovan',
-                    zipcode: 3599,
-                    geo: {
-                        lat: -74.648318,
-                        lng: 99.620699,
-                    },
-                },
-                phone: '+1 (917) 567-3786',
-                isActive: false,
-                age: 40,
-                company: 'DYNO',
-            },
-            {
-                id: 24,
-                firstName: 'Lottie',
-                lastName: 'Lowery',
-                email: 'lottielowery@dyno.com',
-                dob: '1982-10-10',
-                address: {
-                    street: '557 Meserole Avenue',
-                    city: 'Fowlerville',
-                    zipcode: 4991,
-                    geo: {
-                        lat: 54.811546,
-                        lng: -20.996515,
-                    },
-                },
-                phone: '+1 (912) 539-3498',
-                isActive: true,
-                age: 36,
-                company: 'MULTIFLEX',
-            },
-            {
-                id: 25,
-                firstName: 'Addie',
-                lastName: 'Luna',
-                email: 'addieluna@multiflex.com',
-                dob: '1988-05-01',
-                address: {
-                    street: '688 Bulwer Place',
-                    city: 'Harmon',
-                    zipcode: 7664,
-                    geo: {
-                        lat: -12.762766,
-                        lng: -39.924497,
-                    },
-                },
-                phone: '+1 (962) 537-2981',
-                isActive: true,
-                age: 32,
-                company: 'PHARMACON',
-            },
-        ] || []
-    );
-
-    const datatable2Cols =
-        ref([
-            { field: 'firstName', title: 'Name' },
-            { field: 'age', title: 'Progress' },
-            { field: 'company', title: 'Company' },
-            { field: 'dob', title: 'Start Date' },
-            { field: 'email', title: 'Email' },
-            { field: 'phone', title: 'Phone No.' },
-            { field: 'action', title: 'Action', sort: false },
-        ]) || [];
-
-    const formatDate = (date) => {
-        if (date) {
-            const dt = new Date(date);
-            const month = dt.getMonth() + 1 < 10 ? '0' + (dt.getMonth() + 1) : dt.getMonth() + 1;
-            const day = dt.getDate() < 10 ? '0' + dt.getDate() : dt.getDate();
-            return day + '/' + month + '/' + dt.getFullYear();
-        }
-        return '';
+        };
+        comparisonsEvaluationsStore.addComparisonsEvaluation(data);
+        result.value = comparisonsEvaluationsStore.comparisonsEvaluation;
+        isModalActive.value = true;
     };
-
-    const randomColor = () => {
-        const color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'];
-        const random = Math.floor(Math.random() * color.length);
-        return color[random];
+    const pushToRealestates = () => {
+        multiArray.value.push([
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+            {
+                value: '',
+                percentage: '',
+            },
+        ]);
     };
-
-    const randomStatus = () => {
-        const status = ['PAID', 'APPROVED', 'FAILED', 'CANCEL', 'SUCCESS', 'PENDING', 'COMPLETE'];
-        const random = Math.floor(Math.random() * status.length);
-        return status[random];
+    const pushToComparisons = () => {
+        //looping in multiArray to add new property to each realestate
+        multiArray.value.forEach((realestate) => {
+            realestate.push({
+                value: '',
+                percentage: '',
+            });
+        });
+        // properties.splice(properties.length - 1, 0, title.value)
+        properties.value.splice(properties.value.length - 1, 0, title.value);
+        title.value = '';
     };
+    const trashProperty = (index) => {
+        properties.value.splice(index, 1);
+        multiArray.value.forEach((realestate) => {
+            realestate.splice(index, 1);
+        });
+    };
+    // const spliceComparisons = (index) => {
+    //   multiArray.value[0].splice(index, 1)
+    // }
 </script>
+<template>
+    <!-- <CardBoxModal v-model="isAddPropertyModalActive" button="info" button-label="اضافة" :submit-function="pushToComparisons">
+        <MultipleInputs v-model="title" placeholder="ادخل البيان لهذا العنصر" type="text" />
+    </CardBoxModal> -->
+    <!-- <CardBoxModal v-model="isModalActive" title="النتيجة">
+    <p>
+      قيمة المتر <b>{{ result ? result : 0 }} ريال</b>
+    </p>
+  </CardBoxModal> -->
+    <form ref="form" action="" @submit.prevent="onSubmit">
+        <AddingBar :clicked-function="pushToRealestates" title="اضافة عقار" class="mt-3" />
+        <table>
+            <thead>
+                <tr>
+                    <th class="text-center">عوامل التسوية</th>
+                    <th v-for="(attribute, RealestateIndex) in multiArray" :key="RealestateIndex" class="text-center">
+                        {{ RealestateIndex === 0 ? 'عقار التقييم' : `عقار${RealestateIndex}` }}
+                        <button
+                            v-if="RealestateIndex !== 0"
+                            class="py-1 mr-1 px-1 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-900 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 dark:bg-white dark:text-gray-800"
+                            type="button"
+                            @click="multiArray.splice(RealestateIndex, 1)"
+                        >
+                            <box-icon color="white" name="trash"></box-icon>
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(variation, index) in properties" :key="index">
+                    <td class="text-right">
+                        <button
+                            class="py-1 ml-3 mr-1 px-1 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-900 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 dark:bg-white dark:text-gray-800"
+                            type="button"
+                            @click="trashProperty(index)"
+                        >
+                            <box-icon class="text-xs p-0 m-0" color="white" name="trash"></box-icon></button
+                        >{{ properties[index] }}
+                    </td>
+                    <td v-for="(attribute, RealestateIndex) in multiArray" :key="RealestateIndex">
+                        <MultipleInputs v-if="RealestateIndex === 0" v-model="multiArray[RealestateIndex][index].value" placeholder="القيمة" required />
+                        <MultipleInputs
+                            v-if="index !== 0 && RealestateIndex !== 0 && index !== multiArray[0].length - 1"
+                            v-model="multiArray[RealestateIndex][index].value"
+                            :name="`compairson_value_${index}`"
+                            placeholder="القيمة"
+                            :value="index !== 0 && RealestateIndex !== 0 && index !== multiArray[0].length - 1 ? 'لايوجد' : ''"
+                            required
+                        />
+                        <MultipleInputs
+                            v-if="RealestateIndex !== 0"
+                            v-model="multiArray[RealestateIndex][index].percentage"
+                            :name="`compairson_percentage_${index}`"
+                            type="number"
+                            required
+                            class="pt-2"
+                            :placeholder="index === 0 ? 'السعر' : 'التسوية'"
+                        />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <AddingBar :clicked-function="() => (isAddPropertyModalActive = true)" title="اضافة عامل" class="mt-3" />
+
+        <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">تقييم</button>
+        </div>
+    </form>
+</template>
