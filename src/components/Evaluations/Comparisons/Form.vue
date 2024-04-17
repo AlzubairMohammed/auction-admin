@@ -197,14 +197,14 @@
                     </td>
                     <td v-for="(attribute, RealestateIndex) in multiArray" :key="RealestateIndex">
                         <MultipleInputs v-if="RealestateIndex === 0" v-model="multiArray[RealestateIndex][index].value" placeholder="القيمة" required />
-                        <MultipleInputs
+                        <!-- <MultipleInputs
                             v-if="index !== 0 && RealestateIndex !== 0 && index !== multiArray[0].length - 1"
                             v-model="multiArray[RealestateIndex][index].value"
                             :name="`compairson_value_${index}`"
                             placeholder="القيمة"
                             :value="index !== 0 && RealestateIndex !== 0 && index !== multiArray[0].length - 1 ? 'لايوجد' : ''"
                             required
-                        />
+                        /> -->
                         <MultipleInputs
                             v-if="RealestateIndex !== 0"
                             v-model="multiArray[RealestateIndex][index].percentage"
@@ -212,13 +212,14 @@
                             type="number"
                             required
                             class="pt-2"
-                            :placeholder="index === 0 ? 'السعر' : 'التسوية'"
+                            :inputOnePlaceholder="index === 0 ? 'السعر' : 'التسوية'"
+                            inputTwoPlaceholder="القيمة"
                         />
                     </td>
                 </tr>
             </tbody>
         </table>
-        <AddingBar :clicked-function="() => (isAddPropertyModalActive = true)" title="اضافة عامل" class="mt-3" />
+        <AddingBar :clickedFunction="() => (isAddPropertyModalActive = true)" title="اضافة عامل" class="mt-3" />
 
         <div class="flex items-center justify-between">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">تقييم</button>
