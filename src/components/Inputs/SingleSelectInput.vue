@@ -1,31 +1,25 @@
 <template>
- <div class="mb-5">
-  <multiselect
-   v-model="input1"
-   :options="options"
-   class="custom-multiselect"
-   :searchable="false"
-   :preselect-first="true"
-   :allow-empty="false"
-   :disabled="true"
-   selected-label=""
-   select-label=""
-   deselect-label=""
-  ></multiselect>
- </div>
+ <multiselect
+  v-model="input3"
+  :options="options3"
+  class="custom-multiselect"
+  :searchable="false"
+  :allow-empty="false"
+  track-by="name"
+  label="name"
+  :preselect-first="true"
+  selected-label=""
+  select-label=""
+  deselect-label=""
+ ></multiselect>
 </template>
-<script>
- export default {
-  data() {
-   return {
-    input1: null,
-    options: [
-     { value: 'option1', label: 'Option 1' },
-     { value: 'option2', label: 'Option 2' },
-     { value: 'option3', label: 'Option 3' },
-     // Add more options here
-    ],
-   };
-  },
- };
+
+<!-- script -->
+<script lang="ts" setup>
+ import { ref } from 'vue';
+ import Multiselect from '@suadelabs/vue3-multiselect';
+ import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
+
+ const options3 = ref([{ name: 'Orange' }, { name: 'White', $isDisabled: true }, { name: 'Purple' }]);
+ const input3 = ref({ name: 'Orange' });
 </script>
