@@ -836,6 +836,18 @@ const routes: RouteRecordRaw[] = [
       ),
     meta: { layout: "app" },
   },
+
+  // New scan
+  {
+    path: "/scans",
+    name: "scan",
+    component: () =>
+      import(
+        /* webpackChunkName: "evaluations-scan" */ "../views/scans/scans.vue"
+      ),
+    meta: { layout: "app" },
+  },
+
 ];
 
 const router = createRouter({
