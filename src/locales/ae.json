@@ -129,5 +129,8 @@
   "comparisons_evaluation": "المقارنات",
   "direct_capitlization_evaluation": "الرسملة المباشرة",
   "cost_evaluation": "التكلفة",
-  "scan": "المسح الميداني"
+  "scan": "المسح الميداني",
+  "auctions":"المزادات",
+  "add_auction":"اضافة مزاد",
+  "add_realestate":"اضافة عقار"
 }
