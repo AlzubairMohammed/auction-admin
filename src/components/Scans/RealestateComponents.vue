@@ -1,5 +1,5 @@
 <template>
- <form style="height: 500px">
+ <form>
   <div class="mb-5 grid grid-cols-5 gap-5">
    <div class="dropdown">
     <label for="btnRight">Right</label>

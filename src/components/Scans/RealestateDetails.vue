@@ -1,5 +1,5 @@
 <template>
- <form style="height: 500px">
+ <form>
   <div class="mb-5">
    <AddingBar title="اضافة خاصية" />
    <div class="grid grid-cols-5 gap-5">

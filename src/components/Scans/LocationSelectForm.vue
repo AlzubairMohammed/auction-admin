@@ -1,5 +1,5 @@
 <template>
- <form style="height: 500px">
+ <form>
   <div class="mb-5">
    <div class="flex mb-5">
     <input id="addonsLeft" type="text" placeholder="ادخل العنوان أو ابحث عنه في الخريطة" class="form-input ltr:rounded-r-none rtl:rounded-l-none" />
