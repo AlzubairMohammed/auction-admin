@@ -5,26 +5,11 @@
   class="custom-multiselect"
   :multiple="true"
   :searchable="false"
-  :close-on-select="false"
-  :clear-on-select="false"
-  :preserve-search="true"
-  placeholder="اختار خيار"
+  placeholder="اختر"
   selected-label=""
   select-label=""
   deselect-label=""
-  tag-placeholder=""
-  :taggable="true"
-  :tag-position="tagPosition"
-  :tag-class="tagClass"
-  :tag-placeholder="tagPlaceholder"
-  option-color="#000"
  >
-  <template #singleLabel="{ option }">
-   <div class="custom-option">
-    <input type="checkbox" :value="option" v-model="input6" :id="option" class="custom-checkbox" />
-    <label :for="option" class="custom-label">{{ option }}</label>
-   </div>
-  </template>
  </multiselect>
 </template>
 
@@ -39,6 +24,4 @@
  const tagPosition = ref('top');
  const tagClass = ref('custom-tag');
  const tagPlaceholder = ref('Add a custom tag');
-
- // ... your other code ...
 </script>

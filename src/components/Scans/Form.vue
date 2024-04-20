@@ -1,3 +1,22 @@
+<script lang="ts" setup>
+ import highlight from '@/components/plugins/highlight.vue';
+ import codePreview from '@/composables/codePreview';
+ import { FormWizard, TabContent } from 'vue3-form-wizard';
+ import 'vue3-form-wizard/dist/style.css';
+ import { useMeta } from '@/composables/use-meta';
+ import LocationSelectForm from '@/components/Scans/LocationSelectForm.vue';
+ import RealestateDetails from '@/components/Scans/RealestateDetails.vue';
+ import RealestateComponents from '@/components/Scans/RealestateComponents.vue';
+ import MultiFileUpload from '@/components/FileUpload/MultiFileUpload.vue';
+ import IconBell from '@/components/icon/icon-bell.vue';
+ import IconCode from '@/components/icon/icon-code.vue';
+ import { ref } from 'vue';
+
+ useMeta({ title: 'Wizards' });
+
+ const { codeArr, toggleCode } = codePreview();
+</script>
+
 <template>
  <div>
   <div class="pt-5 space-y-8">
@@ -40,20 +59,3 @@
   </div>
  </div>
 </template>
-<script lang="ts" setup>
- import highlight from '@/components/plugins/highlight.vue';
- import codePreview from '@/composables/codePreview';
- import { FormWizard, TabContent } from 'vue3-form-wizard';
- import 'vue3-form-wizard/dist/style.css';
- import { useMeta } from '@/composables/use-meta';
- import LocationSelectForm from '@/components/Scans/LocationSelectForm.vue';
- import RealestateDetails from '@/components/Scans/RealestateDetails.vue';
- import RealestateComponents from '@/components/Scans/RealestateComponents.vue';
- import MultiFileUpload from '@/components/FileUpload/MultiFileUpload.vue';
- import IconBell from '@/components/icon/icon-bell.vue';
- import IconCode from '@/components/icon/icon-code.vue';
-
- useMeta({ title: 'Wizards' });
-
- const { codeArr, toggleCode } = codePreview();
-</script>

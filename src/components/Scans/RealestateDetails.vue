@@ -1,7 +1,17 @@
+<script lang="ts" setup>
+ import MultiselectInput from '@/components/Inputs/MultiselectInput.vue';
+ import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
+ import BasicInput from '@/components/Inputs/BasicInput.vue';
+ import AddingBar from '@/components/AddingBar/AddingBar.vue';
+ import AttributeModal from '@/components/Scans/AttributeModal.vue';
+ import { ref } from 'vue';
+ let isAddPropertyModalActive = ref(false);
+</script>
 <template>
+ <AttributeModal v-model="isAddPropertyModalActive" :params="{ id: null, title: '' }" />
  <form>
   <div class="mb-5">
-   <AddingBar title="اضافة خاصية" />
+   <AddingBar :clicked-function="() => (isAddPropertyModalActive = true)" title="اضافة خاصية" />
    <div class="grid grid-cols-5 gap-5">
     <MultiselectInput class="col-span-1" />
     <MultiselectInput class="col-span-1" />
@@ -19,13 +29,6 @@
   </div>
  </form>
 </template>
-
-<script lang="ts" setup>
- import MultiselectInput from '@/components/Inputs/MultiselectInput.vue';
- import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
- import BasicInput from '@/components/Inputs/BasicInput.vue';
- import AddingBar from '@/components/AddingBar/AddingBar.vue';
-</script>
 
 <style scoped>
  .grid {
