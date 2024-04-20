@@ -5,7 +5,7 @@
   class="custom-multiselect"
   :multiple="true"
   :searchable="false"
-  placeholder="اختر"
+  :placeholder="'اختر الخيارات'"
   selected-label=""
   select-label=""
   deselect-label=""
