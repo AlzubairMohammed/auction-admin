@@ -1,17 +1,16 @@
-<script lang="ts" setup>
+<script setup>
  import BasicInput from '@/components/Inputs/BasicInput.vue';
+ import { useRealestatesStore } from '@/stores/realestates';
+ const useStore = useRealestatesStore();
+ const customerData = useStore.customer;
 </script>
 <template>
  <form>
   <div class="mb-5">
-   <div class="flex mb-5">
-    <BasicInput placeholder="اسم العميل" />
-   </div>
-   <div class="flex mb-5">
-    <BasicInput placeholder="رقم الهاتف" />
-   </div>
-   <div class="flex mb-5"></div>
-   <div class=""></div>
+   <BasicInput class="m-3" required v-model="customerData.customer_name" placeholder="اسم العميل" />
+   <BasicInput class="m-3" required v-model="customerData.customer_number" placeholder="رقم جوال العميل" type="number" />
+   <BasicInput class="m-3" required v-model="customerData.owner_name" placeholder="اسم المالك" />
+   <BasicInput class="m-3" required v-model="customerData.owner_number" placeholder="رقم جوال المالك" type="number" />
   </div>
  </form>
 </template>
