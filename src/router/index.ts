@@ -868,7 +868,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: "/realestates/add-page",
-    name: "add-page",
+    name: "realestates/add-page",
     component: () =>
       import(
         /* webpackChunkName: "evaluations-scan" */ "../views/realestates/add-page.vue"

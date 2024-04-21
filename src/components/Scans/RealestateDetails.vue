@@ -6,24 +6,18 @@
  import AttributeModal from '@/components/Scans/AttributeModal.vue';
  import { ref } from 'vue';
  let isAddPropertyModalActive = ref(false);
+ const activeModal = () => {
+  isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
+ };
 </script>
 <template>
  <AttributeModal v-model="isAddPropertyModalActive" :params="{ id: null, title: '' }" />
  <form>
   <div class="mb-5">
-   <AddingBar :clicked-function="() => (isAddPropertyModalActive = true)" title="اضافة خاصية" />
+   <AddingBar :clicked-function="activeModal" title="اضافة خاصية" />
    <div class="grid grid-cols-5 gap-5">
     <MultiselectInput class="col-span-1" />
-    <MultiselectInput class="col-span-1" />
-    <MultiselectInput class="col-span-1" />
-    <MultiselectInput class="col-span-1" />
-    <MultiselectInput class="col-span-1" />
-    <MultiselectInput class="col-span-1" />
-    <MultiselectInput class="col-span-1" />
-    <SingleSelectInput class="col-span-1" />
-    <SingleSelectInput class="col-span-1" />
-    <SingleSelectInput class="col-span-1" />
-    <SingleSelectInput class="col-span-1" />
+    <SingleSelectInput :options="['1', '2', '3']" class="col-span-1" />
     <BasicInput class="col-span-1" />
    </div>
   </div>

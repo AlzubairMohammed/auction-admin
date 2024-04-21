@@ -1,7 +1,9 @@
 <!-- basic -->
 <template>
- <label v-if="props.labelValue" class="block text-sm text-gray-700"> {{ props.labelValue }}</label>
- <flat-pickr :placeholder="props.placeholder" class="form-input" :config="basic"></flat-pickr>
+ <div>
+  <label v-if="props.labelValue" class="block text-sm text-gray-700"> {{ props.labelValue }}</label>
+  <flat-pickr :placeholder="props.placeholder" class="form-input" :config="basic"></flat-pickr>
+ </div>
 </template>
 
 <!-- script -->

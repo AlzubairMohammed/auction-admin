@@ -33,15 +33,15 @@
         <icon-x />
        </button>
        <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]">
-        {{ params.id ? 'تعديل معامل' : 'اضافة معامل' }}
+        {{ params.id ? 'تعديل خاصية' : 'اضافة خاصية' }}
        </div>
        <div class="p-5">
         <form @submit.prevent="saveAttribute">
          <div class="mb-5">
-          <input id="title" type="text" placeholder="ادخل اسم المعامل" class="form-input" v-model="params.title" />
+          <SingleSelectInput :placeholder="'نوع الخاصية'" :options="['نص', 'متعددة الاختيار', 'اختيار من بين متعدد']" />
          </div>
          <div class="mb-5">
-          <SingleSelectInput />
+          <input id="title" type="text" placeholder="ادخل اسم الخاصية" class="form-input" v-model="params.title" />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
           <button type="button" class="btn btn-outline-danger" @click="cancel">الغاء</button>
