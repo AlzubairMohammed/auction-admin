@@ -1,14 +1,13 @@
 <template>
  <label v-if="props.label" class="block text-sm text-gray-700"> {{ props.label }}</label>
  <multiselect
-  v-model="props.options[0]"
+  :placeholder="props.placeholder"
   :options="props.options"
   class="custom-multiselect"
   :searchable="true"
   selected-label=""
   select-label=""
   deselect-label=""
-  placeholder=""
  ></multiselect>
 </template>
 
@@ -19,5 +18,6 @@
  const props = defineProps<{
   options: { name: string }[];
   label: string;
+  placeholder: string;
  }>();
 </script>

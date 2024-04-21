@@ -1,6 +1,7 @@
 <!-- basic -->
 <template>
- <flat-pickr v-model="date1" class="form-input" :config="basic"></flat-pickr>
+ <label v-if="props.labelValue" class="block text-sm text-gray-700"> {{ props.labelValue }}</label>
+ <flat-pickr :placeholder="props.placeholder" class="form-input" :config="basic"></flat-pickr>
 </template>
 
 <!-- script -->
@@ -19,4 +20,8 @@
   dateFormat: 'Y-m-d',
   position: store.rtlClass === 'rtl' ? 'auto right' : 'auto left',
  });
+ const props = defineProps<{
+  labelValue: string;
+  placeholder: string;
+ }>();
 </script>
