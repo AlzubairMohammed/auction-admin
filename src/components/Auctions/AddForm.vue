@@ -1,5 +1,5 @@
 <script lang="ts" setup>
- import MultiSelectInput from '@/components/Inputs/MultiSelectInput.vue';
+ import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import { ref } from 'vue';
  let isAddPropertyModalActive = ref(false);
@@ -8,8 +8,8 @@
  <form class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
   <BasicInput placeholder="اسم المزاد" />
   <BasicInput placeholder="رقم التكليف" />
-  <MultiSelectInput placeholder="اختار نوع المزاد" :options="['مزاد١', 'مزاد٢', 'مزاد٣']" />
-  <BasicInput placeholder="تاريخ بداية المزاد" />
+  <SingleSelectInput :label="'اختار نوع المزاد'" :options="['الكتروني', 'هجين']" />
+  <BasicInput placeholder="تاريخ بداية المزاد" type="date" />
   <BasicInput placeholder="تاريخ نهاية المزاد" />
   <button type="button" class="btn btn-primary w-1/6 mb-0">التالي</button>
  </form>
