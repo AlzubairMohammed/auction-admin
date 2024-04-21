@@ -195,7 +195,7 @@
       <MultipleInputs
        v-if="RealestateIndex === 0"
        v-model="multiArray[RealestateIndex][index].value"
-       :inputOnePlaceholder="index === 0 ? 'السعر' : 'التسوية'"
+       :inputOnePlaceholder="index === 0 ? 'السعر' : index === properties.length - 1 ? 'لايوجد' : 'التسوية'"
        required
       />
       <!-- <MultipleInputs
