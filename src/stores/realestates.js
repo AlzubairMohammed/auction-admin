@@ -8,7 +8,7 @@ export const useRealestatesStore = defineStore('realestates', {
   customer: {
    customer_name: '',
    customer_number: '',
-   owner_name: 'Ali',
+   owner_name: '',
    owner_number: '',
   },
  }),

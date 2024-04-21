@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
- import { defineProps } from 'vue';
+ import { defineProps, ref, computed } from 'vue';
 
  const props = defineProps({
   inputOnePlaceholder: {
