@@ -31,28 +31,28 @@
     <SingleSelectInput placeholder="الحي" :options="['1', '2', '3']" class="w-1/4 p-2" />
     <AddingBar :clicked-function="activeModal" title="الحدود و الاطوال" class="mt-3 w-full" />
     <div class="p-3 w-1/4">
-     <div class="bg-gray-200 rounded-md p-3">
+     <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">شمالا</label>
       <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
       <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
      </div>
     </div>
     <div class="p-3 w-1/4">
-     <div class="bg-gray-200 rounded-md p-3">
+     <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">شمالا</label>
       <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
       <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
      </div>
     </div>
     <div class="p-3 w-1/4">
-     <div class="bg-gray-200 rounded-md p-3">
+     <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">شمالا</label>
       <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
       <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
      </div>
     </div>
     <div class="p-3 w-1/4">
-     <div class="bg-gray-200 rounded-md p-3">
+     <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">شمالا</label>
       <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
       <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
