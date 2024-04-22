@@ -7,6 +7,9 @@
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import TextAreaInput from '@/components/Inputs/TextAreaInput.vue';
  import { ref } from 'vue';
+ import { useRealestatesStore } from '@/stores/realestates';
+ const useRealestateStore = useRealestatesStore();
+ const doumentData = useRealestateStore.realestate;
  let isAddPropertyModalActive = ref(false);
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;

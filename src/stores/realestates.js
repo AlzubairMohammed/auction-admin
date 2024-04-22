@@ -4,12 +4,28 @@ export const useRealestatesStore = defineStore('realestates', {
  state: () => ({
   url: '/realestates',
   realestates: [],
-  realestate: {},
-  customer: {
+  realestate: {
    customer_name: '',
    customer_number: '',
    owner_name: '',
    owner_number: '',
+   auction_id: '',
+   license: {
+    number: '',
+    issuance_place_id: '',
+    date: '',
+    path: '',
+    realestate_type_id: '',
+    note: '',
+   },
+   owners: [
+    {
+     name: '',
+     identity_number: '',
+     nationality: '',
+     ownership_percentage: '',
+    },
+   ],
   },
  }),
 
