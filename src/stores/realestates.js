@@ -26,11 +26,8 @@ export const useRealestatesStore = defineStore('realestates', {
      ownership_percentage: '',
     },
    ],
-   files: [
-    { name: 'الصك', path: '' },
-    { name: 'الرخصة', path: '' },
-    { name: 'المخطط', path: '' },
-   ],
+   files: [],
+   filesNames: [{ name: 'الصك' }, { name: 'الرخصة' }, { name: 'المخطط' }],
   },
  }),
 

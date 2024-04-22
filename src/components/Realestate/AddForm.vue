@@ -21,7 +21,7 @@
  const { codeArr, toggleCode } = codePreview();
 
  const onSubmit = () => {
-  console.log(customerData);
+  useStore.addRealestate(customerData);
  };
 </script>
 
