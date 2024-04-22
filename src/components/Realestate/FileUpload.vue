@@ -5,13 +5,15 @@
  import { useRealestatesStore } from '@/stores/realestates';
  import { ref } from 'vue';
  const useRealestateStore = useRealestatesStore();
- const realestateData = useRealestateStore.realestate;
- const fileItems = ref([
-  { name: 'الصك', path: '' },
-  { name: 'الرخصة', path: '' },
-  { name: 'المخطط', path: '' },
- ]);
+ const fileItems = useRealestateStore.realestate.files;
  let isAddFileModalActive = ref(false);
+
+ const handleFileUpload = (file) => {
+  fileItems[file.index].path = file.value;
+  console.log(fileItems);
+ };
+
+ const fileInput = ref(null);
 </script>
 <template>
  <AddingBar :clickedFunction="() => fileItems.push({ name: '', path: '' })" title="اضافة حقل لتحميل مزيد من الملفات" class="mt-3" />
@@ -24,6 +26,6 @@
    <label :for="index" v-if="item.name">{{ item.name }}</label> <BasicInput v-else placeholder="الوصف" type="text" class="w-1/8 p-2" />
    <a href="javascript:;" @click="fileItems.splice(index, 1)" class="font-size-14">×</a>
   </div>
-  <FlexibleFileUpload class="m-3" required v-model="item.path" />
+  <FlexibleFileUpload @file-selected="handleFileUpload" :index="index" class="m-3" required />
  </div>
 </template>

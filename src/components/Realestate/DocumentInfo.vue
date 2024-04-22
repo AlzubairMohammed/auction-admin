@@ -39,21 +39,21 @@
     </div>
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
-      <label for="btnRight">شمالا</label>
+      <label for="btnRight">شرقا</label>
       <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
       <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
      </div>
     </div>
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
-      <label for="btnRight">شمالا</label>
+      <label for="btnRight">غربا</label>
       <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
       <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
      </div>
     </div>
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
-      <label for="btnRight">شمالا</label>
+      <label for="btnRight">جنوبا</label>
       <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
       <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
      </div>
