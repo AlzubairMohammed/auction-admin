@@ -1,5 +1,7 @@
 import request from '@/services/request';
 import { defineStore } from 'pinia';
+import { useAppStore } from '.';
+const useApp = useAppStore();
 export const useAuctionsStore = defineStore('auctions', {
  state: () => {
   return {
@@ -14,9 +16,12 @@ export const useAuctionsStore = defineStore('auctions', {
   },
  },
  actions: {
-  fetchAuctions() {
-   request.get(this.url).then((response) => {
+  fetchAuctions: async function () {
+   await request.get(this.url).then((response) => {
     this.auctions = response.data;
+    if (this.auctions) {
+     useApp.isShowMainLoader = false;
+    }
    });
   },
   getAuction(id) {
