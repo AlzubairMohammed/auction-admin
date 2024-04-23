@@ -1,15 +1,18 @@
 <template>
  <div>
-  <label v-if="props.label" class="block text-sm text-gray-700"> {{ props.label }}</label>
+  <label v-if="label" class="block text-sm text-gray-700"> {{ label }}</label>
   <multiselect
-   :placeholder="props.placeholder"
-   :options="props.options"
+   :placeholder="placeholder"
+   :options="options"
    class="custom-multiselect"
    :searchable="true"
    selected-label=""
    select-label=""
    deselect-label=""
    ref="inputEl"
+   track-by="id"
+   label="name"
+   @select="onChange"
    :required="isRequired"
    v-model="computedValue"
   ></multiselect>
@@ -35,13 +38,16 @@
   };
  }>();
  const inputEl = ref<HTMLInputElement | null>(null);
- const emit = defineEmits(['update:modelValue', 'setRef']);
+ const emit = defineEmits(['update:modelValue', 'setRef', 'on-select']);
 
  const computedValue = computed({
   get: () => props.modelValue,
   set: (value) => {
-   emit('update:modelValue', value);
+   emit('update:modelValue', value.id);
   },
  });
  emit('setRef', inputEl.value);
+ const onChange = (event) => {
+  emit('on-select', event);
+ };
 </script>

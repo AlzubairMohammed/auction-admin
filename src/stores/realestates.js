@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 export const useRealestatesStore = defineStore('realestates', {
  state: () => ({
   url: '/realestates',
+  realestateTypes: [],
   realestates: [],
   realestate: {
    auction_id: 4,
@@ -67,6 +68,11 @@ export const useRealestatesStore = defineStore('realestates', {
   },
   updateRealestate(realestate) {
    this.realestates = this.realestates.map((r) => (r.id === realestate?.id ? realestate : r));
+  },
+  fetchRealestateTypes() {
+   request.get('realestateTypes').then(({ data }) => {
+    this.realestateTypes = data;
+   });
   },
  },
 });

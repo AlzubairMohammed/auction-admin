@@ -7,15 +7,19 @@
  </div>
 </template>
 
-<script lang="ts" setup>
- import { computed } from 'vue';
+<script setup>
+ import { computed, onMounted } from 'vue';
 
  import appLayout from '@/layouts/app-layout.vue';
  import authLayout from '@/layouts/auth-layout.vue';
 
  import { useAppStore } from '@/stores/index';
  import { useMeta } from '@/composables/use-meta';
+ import { useAreasCitiesQuartersStore } from '@/stores/areasCitiesQuarters';
+ import { useRealestatesStore } from '@/stores/realestates';
 
+ const useAreasCitiesQuarters = useAreasCitiesQuartersStore();
+ const useRealestates = useRealestatesStore();
  const store = useAppStore();
 
  // meta
@@ -23,5 +27,9 @@
 
  const mainLayout = computed(() => {
   return store.mainLayout === 'auth' ? authLayout : appLayout;
+ });
+ onMounted(() => {
+  useRealestates.fetchRealestateTypes();
+  useAreasCitiesQuarters.fetchAreas();
  });
 </script>
