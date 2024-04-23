@@ -9,10 +9,13 @@
  import { ref } from 'vue';
  import { useRealestatesStore } from '@/stores/realestates';
  const useRealestateStore = useRealestatesStore();
- const doumentData = useRealestateStore.realestate;
+ const doumentData = useRealestateStore.realestate.document;
  let isAddPropertyModalActive = ref(false);
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
+ };
+ const logDate = (date) => {
+  doumentData.date = date;
  };
 </script>
 <template>
@@ -20,45 +23,45 @@
  <form>
   <div class="mb-5">
    <div class="flex flex-wrap justify-between items-center">
-    <BasicInput placeholder="رقم الصك" type="number" class="w-1/4 p-2" />
-    <DateInput placeholder=" تاريخ الصك" class="w-1/4 p-2" />
-    <BasicInput placeholder="رقم القطعة" type="number" class="w-1/4 p-2" />
-    <BasicInput placeholder="رقم البلك" type="number" class="w-1/4 p-2" />
-    <BasicInput placeholder="رقم المخطط" type="number" class="w-1/4 p-2" />
-    <BasicInput placeholder="المساحة" type="number" class="w-1/4 p-2" />
+    <BasicInput v-model="doumentData.number" placeholder="رقم الصك" type="number" class="w-1/4 p-2" />
+    <DateInput @getDate="logDate" placeholder=" تاريخ الصك" class="w-1/4 p-2" />
+    <BasicInput v-model="doumentData.area_number" placeholder="رقم القطعة" type="number" class="w-1/4 p-2" />
+    <BasicInput v-model="doumentData.block_number" placeholder="رقم البلك" type="number" class="w-1/4 p-2" />
+    <BasicInput v-model="doumentData.graph_number" placeholder="رقم المخطط" type="number" class="w-1/4 p-2" />
+    <BasicInput v-model="doumentData.space" placeholder="المساحة" type="number" class="w-1/4 p-2" />
     <SingleSelectInput placeholder="المنطقة" :options="['1', '2', '3']" class="w-1/4 p-2" />
     <SingleSelectInput placeholder="المدينة" :options="['1', '2', '3']" class="w-1/4 p-2" />
-    <SingleSelectInput placeholder="الحي" :options="['1', '2', '3']" class="w-1/4 p-2" />
+    <SingleSelectInput v-model="doumentData.quarter_id" placeholder="الحي" :options="['1', '2', '3']" class="w-1/4 p-2" />
     <AddingBar :clicked-function="activeModal" title="الحدود و الاطوال" class="mt-3 w-full" />
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">شمالا</label>
-      <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
-      <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
+      <BasicInput v-model="doumentData.north_desc" placeholder="الوصف" type="number" class="w-full p-2" />
+      <BasicInput v-model="doumentData.north_space" placeholder="الطول" type="number" class="w-full p-2" />
      </div>
     </div>
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">شرقا</label>
-      <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
-      <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
+      <BasicInput v-model="doumentData.west_desc" placeholder="الوصف" type="number" class="w-full p-2" />
+      <BasicInput v-model="doumentData.west_space" placeholder="الطول" type="number" class="w-full p-2" />
      </div>
     </div>
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">غربا</label>
-      <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
-      <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
+      <BasicInput v-model="doumentData.east_desc" placeholder="الوصف" type="number" class="w-full p-2" />
+      <BasicInput v-model="doumentData.east_space" placeholder="الطول" type="number" class="w-full p-2" />
      </div>
     </div>
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">جنوبا</label>
-      <BasicInput placeholder="الوصف" type="number" class="w-full p-2" />
-      <BasicInput placeholder="الطول" type="number" class="w-full p-2" />
+      <BasicInput v-model="doumentData.south_desc" placeholder="الوصف" type="number" class="w-full p-2" />
+      <BasicInput v-model="doumentData.south_space" placeholder="الطول" type="number" class="w-full p-2" />
      </div>
     </div>
-    <TextAreaInput class="w-full p-2" label="الملاحظات" />
+    <TextAreaInput v-model="doumentData.note" class="w-full p-2" label="الملاحظات" />
    </div>
   </div>
  </form>

@@ -10,6 +10,7 @@
    :placeholder="placeholder"
    v-model="modelValue"
    rows="4"
+   ref="inputEl"
    class="form-textarea ltr:rounded-l-none rtl:rounded-r-none"
   ></textarea>
  </div>
@@ -22,7 +23,6 @@
   placeholder: string;
   modelValue: {
    type: [String, Number, Boolean, Array, Object];
-   default: '';
   };
   required: {
    type: Boolean;
