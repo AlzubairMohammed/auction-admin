@@ -10,7 +10,6 @@
    select-label=""
    deselect-label=""
    ref="inputEl"
-   track-by="id"
    label="name"
    @select="onChange"
    :required="isRequired"
@@ -23,7 +22,8 @@
 <script lang="ts" setup>
  import Multiselect from '@suadelabs/vue3-multiselect';
  import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
- import { ref, computed } from 'vue';
+ import { ref, computed, onMounted } from 'vue';
+ const placeholder = ref('');
  const props = defineProps<{
   options: string[];
   label: string;
@@ -37,6 +37,7 @@
    default: false;
   };
  }>();
+ placeholder.value = props.placeholder;
  const inputEl = ref<HTMLInputElement | null>(null);
  const emit = defineEmits(['update:modelValue', 'setRef', 'on-select']);
 
@@ -46,7 +47,9 @@
    emit('update:modelValue', value.id);
   },
  });
- emit('setRef', inputEl.value);
+ onMounted(() => {
+  emit('setRef', inputEl.value);
+ });
  const onChange = (event) => {
   emit('on-select', event);
  };

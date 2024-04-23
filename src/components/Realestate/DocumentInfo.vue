@@ -8,14 +8,28 @@
  import TextAreaInput from '@/components/Inputs/TextAreaInput.vue';
  import { ref } from 'vue';
  import { useRealestatesStore } from '@/stores/realestates';
+ import { useAreasCitiesQuartersStore } from '@/stores/areasCitiesQuarters';
  const useRealestateStore = useRealestatesStore();
+ const useAreasCitiesQuarters = useAreasCitiesQuartersStore();
+ const areas = useAreasCitiesQuarters.areas;
  const doumentData = useRealestateStore.realestate.document;
  let isAddPropertyModalActive = ref(false);
+ const cities = ref([]);
+ const quarters = ref([]);
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
  };
  const logDate = (date) => {
   doumentData.date = date;
+ };
+ const getCities = async (event) => {
+  await useAreasCitiesQuarters.getAreaCities(event?.id);
+  cities.value = useAreasCitiesQuarters.cities;
+  console.log(cities.value);
+ };
+ const getQuarters = async (event) => {
+  await useAreasCitiesQuarters.getCityQuarters(event?.id);
+  quarters.value = useAreasCitiesQuarters.quarters;
  };
 </script>
 <template>
@@ -29,9 +43,9 @@
     <BasicInput v-model="doumentData.block_number" placeholder="رقم البلك" type="number" class="w-1/4 p-2" />
     <BasicInput v-model="doumentData.graph_number" placeholder="رقم المخطط" type="number" class="w-1/4 p-2" />
     <BasicInput v-model="doumentData.space" placeholder="المساحة" type="number" class="w-1/4 p-2" />
-    <SingleSelectInput placeholder="المنطقة" :options="['1', '2', '3']" class="w-1/4 p-2" />
-    <SingleSelectInput placeholder="المدينة" :options="['1', '2', '3']" class="w-1/4 p-2" />
-    <SingleSelectInput v-model="doumentData.quarter_id" placeholder="الحي" :options="['1', '2', '3']" class="w-1/4 p-2" />
+    <SingleSelectInput @on-select="getCities" placeholder="المنطقة" :options="areas" class="w-1/4 p-2" />
+    <SingleSelectInput @on-select="getQuarters" placeholder="المدينة" :options="cities" class="w-1/4 p-2" />
+    <SingleSelectInput v-model="doumentData.quarter_id" placeholder="الحي" :options="quarters" class="w-1/4 p-2" />
     <AddingBar :clicked-function="activeModal" title="الحدود و الاطوال" class="mt-3 w-full" />
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">

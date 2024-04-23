@@ -11,8 +11,7 @@
  const areas = useAreasCitiesQuarters.areas;
  const licenseData = useRealestateStore.realestate.license;
  const realestateTypes = useRealestateStore.realestateTypes;
- const area_id = ref('');
- const city_id = ref('');
+
  const cities = ref([]);
  const quarters = ref([]);
  const logDate = (date) => {
@@ -35,9 +34,8 @@
    <div class="flex flex-wrap justify-between items-center">
     <BasicInput v-model="licenseData.number" placeholder="رقم الرخصة" type="number" class="w-1/5 p-2" />
     <DateInput @getDate="logDate" placeholder=" تاريخ الرخصة" class="w-1/5 p-2" />
-    <SingleSelectInput v-model="area_id" @on-select="getCities" placeholder="المنطقة" :options="areas" class="w-1/5 p-2" />
-    <SingleSelectInput v-model="city_id" @on-select="getQuarters" placeholder="المدينة" :options="cities" class="w-1/5 p-2" />
-    <SingleSelectInput v-model="licenseData.issuance_place_id" placeholder="الحي" :options="quarters" class="w-1/5 p-2" />
+    <SingleSelectInput @on-select="getCities" placeholder="المنطقة" :options="areas" class="w-1/5 p-2" />
+    <SingleSelectInput v-model="licenseData.issuance_place_id" placeholder="المدينة" :options="cities" class="w-1/5 p-2" />
     <SingleSelectInput v-model="licenseData.realestate_type_id" placeholder="نوع العقار" :options="realestateTypes" class="w-1/5 p-2" />
     <TextAreaInput v-model="licenseData.note" class="w-full p-2" label="الملاحظات" />
    </div>
