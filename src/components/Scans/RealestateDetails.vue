@@ -21,10 +21,10 @@
  <PropertiesModal v-model="isAddPropertyModalActive" />
  <form @submit.prevent="logTest">
   <AddingBar :clicked-function="activeModal" title="اضافة خاصية" />
-  <div class="flex flex-wrap gap-3" :key="index">
-   <div v-for="(item, index) in formData" class="w-1/5">
-    <MultiselectInput v-if="item.type === 'multiple'" v-model="test" :options="item.options" :placeholder="item.name" />
-    <SingleSelectInput v-else-if="item.type === 'single'" :options="item.options" :placeholder="item.name" />
+  <div class="flex flex-wrap" :key="index">
+   <div v-for="(item, index) in formData" class="w-1/5 p-2">
+    <MultiselectInput v-if="item.type === 'multiple'" v-model="test" :options="item.properties_options" :placeholder="item.name" />
+    <SingleSelectInput v-else-if="item.type === 'single'" :options="item.properties_options" :placeholder="item.name" />
     <BasicInput v-else :placeholder="item.name" />
    </div>
   </div>

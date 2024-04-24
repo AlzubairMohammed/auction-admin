@@ -1,27 +1,36 @@
-<template>
- <multiselect
-  v-model="input6"
+<!-- <template>
+ <MultiSelect
+  display="chip"
   :options="options"
-  class="custom-multiselect"
-  :multiple="true"
-  :searchable="true"
-  :placeholder="'اختر الخيارات'"
-  selected-label=""
-  deselect-label=""
+  optionLabel="name"
+  placeholder="اختر الخيارات"
+  :maxSelectedLabels="3"
+  class="w-full md:w-20rem"
   @select="$emit('update:modelValue', $event)"
- >
- </multiselect>
+ />
 </template>
 
-<!-- script -->
-<script lang="ts" setup>
- import { ref } from 'vue';
- import Multiselect from '@suadelabs/vue3-multiselect';
- import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
+script -->
 
- const options = ref(['خيار', 'اثنين', 'ثلاثة', 'أربعة', 'خمسة']);
- const input6 = ref([]);
- const tagPosition = ref('top');
- const tagClass = ref('custom-tag');
- const tagPlaceholder = ref('Add a custom tag');
+<template>
+ <div class="card flex justify-content-center">
+  <MultiSelect
+   v-model="selectedCities"
+   display="chip"
+   :options="options"
+   optionLabel="name"
+   placeholder="Select Cities"
+   :maxSelectedLabels="3"
+   class="w-full md:w-20rem border border-300"
+  />
+ </div>
+</template>
+
+<script setup>
+ import { ref } from 'vue';
+ import MultiSelect from 'primevue/multiselect';
+ const selectedCities = ref();
+ const props = defineProps({
+  options: [],
+ });
 </script>

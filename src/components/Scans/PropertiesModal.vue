@@ -7,7 +7,7 @@
  import { useScansStore } from '@/stores/scans';
 
  const useScans = useScansStore();
- const formData = ref({ type: '', name: '', options: [] });
+ const formData = ref({ type: '', name: '', properties_options: [] });
 
  const props = defineProps({
   title: {
@@ -64,7 +64,7 @@
  const addProperty = () => {
   useScans.properties.push(formData.value);
   console.log(formData.value);
-  formData.value = { type: '', name: '', options: [] };
+  formData.value = { type: '', name: '', properties_options: [] };
   cancel();
  };
 </script>
@@ -106,7 +106,7 @@
         {{ formData.id ? 'تعديل خاصية' : 'اضافة خاصية' }}
        </div>
        <div class="p-5">
-        <AddingBar :clicked-function="() => formData.options.push({ name: '' })" title="اضافة  خيار" class="mt-3" />
+        <AddingBar :clicked-function="() => formData.properties_options.push({ name: '' })" title="اضافة  خيار" class="mt-3" />
         <form @submit.prevent="addProperty">
          <div class="mb-5">
           <SingleSelectInput
@@ -126,8 +126,16 @@
          <div class="mb-5">
           <input id="title" type="text" placeholder="ادخل اسم الخاصية" class="form-input" v-model="formData.name" />
          </div>
-         <div v-for="(item, index) in formData.options" class="mb-5">
-          <input id="title" type="text" :placeholder="`ادخل الخيار${index + 1}`" class="form-input" v-model="item.name" />
+         <div v-for="(item, index) in formData.properties_options" class="mb-5">
+          <input
+           v-if="formData.type === 'multiple'"
+           id="title"
+           type="text"
+           :placeholder="`ادخل الخيار${index + 1}`"
+           class="form-input"
+           v-model="formData.properties_options[index]"
+          />
+          <input v-else id="title" type="text" :placeholder="`ادخل الخيار${index + 1}`" class="form-input" v-model="item.name" />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
           <button type="button" class="btn btn-outline-danger" @click="cancel">الغاء</button>

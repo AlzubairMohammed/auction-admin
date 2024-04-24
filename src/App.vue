@@ -17,7 +17,9 @@
  import { useMeta } from '@/composables/use-meta';
  import { useAreasCitiesQuartersStore } from '@/stores/areasCitiesQuarters';
  import { useRealestatesStore } from '@/stores/realestates';
+ import { useScansStore } from '@/stores/scans';
 
+ const useScans = useScansStore();
  const useAreasCitiesQuarters = useAreasCitiesQuartersStore();
  const useRealestates = useRealestatesStore();
  const store = useAppStore();
@@ -31,5 +33,6 @@
  onMounted(() => {
   useRealestates.fetchRealestateTypes();
   useAreasCitiesQuarters.fetchAreas();
+  useScans.fetchProperties();
  });
 </script>
