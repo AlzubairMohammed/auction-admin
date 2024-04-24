@@ -13,15 +13,16 @@
 script -->
 
 <template>
- <div class="card flex justify-content-center">
+ <div class="card flex justify-content-center custom-multiselect">
   <MultiSelect
+   style=""
    v-model="selectedCities"
-   display="chip"
    :options="options"
    optionLabel="name"
-   placeholder="Select Cities"
+   :placeholder="placeholder"
    :maxSelectedLabels="3"
-   class="w-full md:w-20rem border border-300"
+   class="w-full md:w-20rem border border-md"
+   @select="$emit('update:modelValue', $event)"
   />
  </div>
 </template>
@@ -32,5 +33,12 @@ script -->
  const selectedCities = ref();
  const props = defineProps({
   options: [],
+  placeholder: '',
  });
 </script>
+
+<style scoped>
+ .custom-multiselect .p-multiselect .p-inputtext .p-component:focus {
+  border-color: gray !important;
+ }
+</style>
