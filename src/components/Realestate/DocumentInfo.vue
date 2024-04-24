@@ -2,7 +2,7 @@
  import MultiselectInput from '@/components/Inputs/MultiselectInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
- import AttributeModal from '@/components/Scans/AttributeModal.vue';
+ import AttributeModal from '@/components/Scans/PropertiesModal.vue';
  import DateInput from '@/components/Inputs/DateInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import TextAreaInput from '@/components/Inputs/TextAreaInput.vue';
@@ -45,7 +45,16 @@
     <BasicInput v-model="doumentData.space" placeholder="المساحة" type="number" class="w-1/4 p-2" />
     <SingleSelectInput @on-select="getCities" placeholder="المنطقة" :options="areas" class="w-1/4 p-2" />
     <SingleSelectInput @on-select="getQuarters" placeholder="المدينة" :options="cities" class="w-1/4 p-2" />
-    <SingleSelectInput v-model="doumentData.quarter_id" placeholder="الحي" :options="quarters" class="w-1/4 p-2" />
+    <SingleSelectInput
+     @on-select="
+      (event) => {
+       doumentData.quarter_id = event?.id;
+      }
+     "
+     placeholder="الحي"
+     :options="quarters"
+     class="w-1/4 p-2"
+    />
     <AddingBar :clicked-function="activeModal" title="الحدود و الاطوال" class="mt-3 w-full" />
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">

@@ -4,11 +4,11 @@
   :options="options"
   class="custom-multiselect"
   :multiple="true"
-  :searchable="false"
+  :searchable="true"
   :placeholder="'اختر الخيارات'"
   selected-label=""
-  select-label=""
   deselect-label=""
+  @select="$emit('update:modelValue', $event)"
  >
  </multiselect>
 </template>

@@ -1,43 +1,31 @@
-<script lang="ts" setup>
+<script setup>
  import MultiselectInput from '@/components/Inputs/MultiselectInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
- import AttributeModal from '@/components/Scans/AttributeModal.vue';
+ import PropertiesModal from '@/components/Scans/PropertiesModal.vue';
+ import { useScansStore } from '@/stores/scans';
  import { ref } from 'vue';
+ const useScans = useScansStore();
  let isAddPropertyModalActive = ref(false);
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
  };
+
+ const formData = useScans.properties;
 </script>
 <template>
- <AttributeModal v-model="isAddPropertyModalActive" :params="{ id: null, title: '' }" />
+ <PropertiesModal v-model="isAddPropertyModalActive" />
  <form>
-  <div class="mb-5">
-   <AddingBar :clicked-function="activeModal" title="اضافة خاصية" />
-   <div class="grid grid-cols-5 gap-5">
-    <MultiselectInput class="col-span-1" />
-    <SingleSelectInput :options="['1', '2', '3']" class="col-span-1" />
-    <BasicInput class="col-span-1" />
+  <AddingBar :clicked-function="activeModal" title="اضافة خاصية" />
+  <div class="flex flex-wrap gap-3" :key="index">
+   <div v-for="(item, index) in formData" class="w-1/5">
+    <MultiselectInput v-if="item.type === 'multiple'" :options="item.options" :placeholder="item.name" />
+    <SingleSelectInput v-else-if="item.type === 'single'" :options="item.options" :placeholder="item.name" />
+    <BasicInput v-else :placeholder="item.name" />
    </div>
   </div>
  </form>
 </template>
 
-<style scoped>
- .grid {
-  display: grid;
- }
-
- .grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
- }
-
- .gap-5 {
-  gap: 1.25rem;
- }
-
- .col-span-1 {
-  grid-column: span 1;
- }
-</style>
+<style scoped></style>

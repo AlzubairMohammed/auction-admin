@@ -10,6 +10,7 @@
    select-label=""
    deselect-label=""
    ref="inputEl"
+   track-by="value"
    label="name"
    @select="onChange"
    :required="isRequired"
@@ -44,7 +45,7 @@
  const computedValue = computed({
   get: () => props.modelValue,
   set: (value) => {
-   emit('update:modelValue', value.id);
+   emit('update:modelValue', value.value);
   },
  });
  onMounted(() => {
