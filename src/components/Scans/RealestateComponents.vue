@@ -1,6 +1,6 @@
 <template>
  <form>
-  <div class="mb-5 grid grid-cols-5 gap-5">
+  <div class="mb-5 grid grid-cols-4 gap-2">
    <div class="dropdown">
     <label for="btnRight">Right</label>
     <div class="flex">
@@ -8,25 +8,15 @@
       id="btnRight"
       type="text"
       placeholder=""
-      class="form-input w-[50px] ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0 font-semibold border border-secondary cursor-pointer"
+      class="form-input w-[50px] ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0 font-semibold border border-[#e0e6ed] cursor-pointer"
      />
-     <Popper :placement="store.rtlClass === 'rtl' ? 'bottom-start' : 'bottom-end'" offsetDistance="0" class="align-middle input-group-dropodwn">
-      <div
-       class="bg-white dark:bg-[#1b2e4b] text-secondary flex justify-center items-center rounded-none px-3 font-semibold border border-secondary cursor-pointer h-full"
-      >
-       <icon-caret-down class="w-[80px] h-5" />
-      </div>
-      <template #content="{ close }">
-       <ul @click="close()">
-        <li><a href="javascript:;">Action</a></li>
-        <li><a href="javascript:;">Another action</a></li>
-        <li><a href="javascript:;">Something else here</a></li>
-        <li><a href="javascript:;">Separated link</a></li>
-       </ul>
-      </template>
-     </Popper>
+     <select class="border border-[#e0e6ed] w-[100px] rounded-none select-no-ring:focus" @change="setStyle" @focus="setStyle" ref="select">
+      <option>اختار المكون</option>
+      <option value="1">two</option>
+      <option value="1">three</option>
+     </select>
      <div
-      class="bg-secondary text-white flex justify-center items-center ltr:rounded-r-md rtl:rounded-l-md px-3 font-semibold border ltr:border-l-0 rtl:border-r-0 border-secondary cursor-pointer"
+      class="bg-info text-white flex justify-center items-center ltr:rounded-r-md rtl:rounded-l-md px-3 font-semibold border ltr:border-l-0 rtl:border-r-0 border-info cursor-pointer"
      >
       <icon-trash-lines />
      </div>
@@ -40,5 +30,17 @@
  import IconCode from '@/components/Icons/IconCode.vue';
  import IconCaretDown from '@/components/icon/icon-caret-down.vue';
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
+ import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
+ import { ref } from 'vue';
  const store = useAppStore();
+ const select = ref();
+ const setStyle = () => {
+  select.value.blur();
+ };
 </script>
+
+<style scoped>
+ .select-selected:after {
+  border-radius: 0 !important;
+ }
+</style>
