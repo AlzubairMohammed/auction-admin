@@ -11,16 +11,19 @@
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
  };
-
+ const test = ref('');
  const formData = useScans.properties;
+ const logTest = () => {
+  console.log(test.value);
+ };
 </script>
 <template>
  <PropertiesModal v-model="isAddPropertyModalActive" />
- <form>
+ <form @submit.prevent="logTest">
   <AddingBar :clicked-function="activeModal" title="اضافة خاصية" />
   <div class="flex flex-wrap gap-3" :key="index">
    <div v-for="(item, index) in formData" class="w-1/5">
-    <MultiselectInput v-if="item.type === 'multiple'" :options="item.options" :placeholder="item.name" />
+    <MultiselectInput v-if="item.type === 'multiple'" v-model="test" :options="item.options" :placeholder="item.name" />
     <SingleSelectInput v-else-if="item.type === 'single'" :options="item.options" :placeholder="item.name" />
     <BasicInput v-else :placeholder="item.name" />
    </div>
