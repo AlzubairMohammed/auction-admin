@@ -836,7 +836,6 @@ const routes: RouteRecordRaw[] = [
       ),
     meta: { layout: "app" },
   },
-
   // New scan
   {
     path: "/scans",
@@ -847,7 +846,6 @@ const routes: RouteRecordRaw[] = [
       ),
     meta: { layout: "app" },
   },
-
   {
     path: "/auctions/list-page",
     name: "auctions-list",
@@ -875,6 +873,16 @@ const routes: RouteRecordRaw[] = [
       ),
     meta: { layout: "app" },
   },
+  {
+    path: "/evaluations/cost",
+    name: "evaluations/cost",
+    component: () =>
+      import(
+        /* webpackChunkName: "evaluations-scan" */ "../views/evaluations/Cost.vue"
+      ),
+    meta: { layout: "app" },
+  },
+  
 
 ];
 
