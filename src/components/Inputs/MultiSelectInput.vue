@@ -1,17 +1,3 @@
-<!-- <template>
- <MultiSelect
-  display="chip"
-  :options="options"
-  optionLabel="name"
-  placeholder="اختر الخيارات"
-  :maxSelectedLabels="3"
-  class="w-full md:w-20rem"
-  @select="$emit('update:modelValue', $event)"
- />
-</template>
-
-script -->
-
 <template>
  <div class="card flex justify-content-center custom-multiselect">
   <MultiSelect
@@ -22,6 +8,7 @@ script -->
    :placeholder="placeholder"
    :maxSelectedLabels="3"
    class="w-full md:w-20rem border border-md"
+   :class="classValue"
    @select="$emit('update:modelValue', $event)"
   />
  </div>
@@ -34,6 +21,7 @@ script -->
  const props = defineProps({
   options: [],
   placeholder: '',
+  classValue: '',
  });
 </script>
 

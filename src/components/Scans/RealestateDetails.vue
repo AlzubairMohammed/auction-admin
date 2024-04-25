@@ -4,6 +4,7 @@
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import PropertiesModal from '@/components/Scans/PropertiesModal.vue';
+ import InputDeleteButton from '@/components/Buttons/InputDeleteButton.vue';
  import { useScansStore } from '@/stores/scans';
  import { ref } from 'vue';
  const useScans = useScansStore();
@@ -23,9 +24,29 @@
   <AddingBar :clicked-function="activeModal" title="اضافة خاصية" />
   <div class="flex flex-wrap" :key="index">
    <div v-for="(item, index) in formData" class="w-1/5 p-2">
-    <MultiselectInput v-if="item.type === 'multiple'" v-model="test" :options="item.properties_options" :placeholder="item.name" />
-    <SingleSelectInput v-else-if="item.type === 'single'" :options="item.properties_options" :placeholder="item.name" />
-    <BasicInput v-else :placeholder="item.name" />
+    <div v-if="item.type === 'multiple'" class="flex flex-wrap">
+     <MultiselectInput
+      v-model="test"
+      :options="item.properties_options"
+      :placeholder="item.name"
+      class="w-5/6"
+      classValue="ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0"
+     />
+     <InputDeleteButton @click="formData.splice(index, 1)" class="w-1/6" />
+    </div>
+    <div v-else-if="item.type === 'single'" class="flex flex-wrap">
+     <SingleSelectInput
+      :options="item.properties_options"
+      :placeholder="item.name"
+      class="w-5/6"
+      classValue=" ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0"
+     />
+     <InputDeleteButton @click="formData.splice(index, 1)" class="w-1/6" />
+    </div>
+    <div v-else class="flex flex-wrap">
+     <BasicInput :placeholder="item.name" class="w-5/6" classValue="ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0" />
+     <InputDeleteButton @click="formData.splice(index, 1)" class="w-1/6" />
+    </div>
    </div>
   </div>
  </form>

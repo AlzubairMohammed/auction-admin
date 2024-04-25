@@ -1,7 +1,7 @@
 <template>
  <div>
-  <label v-if="props.label" class="block text-sm text-gray-700"> {{ props.label }}</label>
-  <input type="text" v-model="computedValue" :placeholder="props.placeholder" class="form-input" :required="required" />
+  <label v-if="label" class="block text-sm text-gray-700"> {{ label }}</label>
+  <input type="text" v-model="computedValue" :placeholder="placeholder" class="form-input" :class="classValue" :required="required" />
  </div>
 </template>
 <script lang="ts" setup>
@@ -17,6 +17,7 @@
    type: Boolean;
    default: false;
   };
+  classValue: string;
  }>();
  const inputEl = ref<HTMLInputElement | null>(null);
  const emit = defineEmits(['update:modelValue', 'setRef']);

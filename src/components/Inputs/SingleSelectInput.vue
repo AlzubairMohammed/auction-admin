@@ -4,7 +4,7 @@
   <multiselect
    :placeholder="placeholder"
    :options="options"
-   class="custom-multiselect"
+   :class="['custom-multiselect', classValue]"
    :searchable="true"
    selected-label=""
    select-label=""
@@ -37,6 +37,7 @@
    type: Boolean;
    default: false;
   };
+  classValue: string;
  }>();
  placeholder.value = props.placeholder;
  const inputEl = ref<HTMLInputElement | null>(null);
