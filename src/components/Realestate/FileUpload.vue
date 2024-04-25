@@ -24,7 +24,7 @@
   <div class="flex justify-between">
    <label :for="index" v-if="item">{{ item.name }}</label>
    <BasicInput v-else v-model="fileItems.filesNames[index].name" placeholder="الوصف" type="text" class="w-1/8 p-2" />
-   <a href="javascript:;" @click="fileItems.splice(index, 1)" class="font-size-14">×</a>
+   <a href="javascript:;" @click="fileItems.filesNames.splice(index, 1)" class="font-size-14">×</a>
   </div>
   <FlexibleFileUpload @file-selected="handleFileUpload" :index="index" class="m-3" required />
  </div>

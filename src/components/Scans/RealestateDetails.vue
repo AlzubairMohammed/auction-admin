@@ -12,7 +12,6 @@
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
  };
- const test = ref('');
  const formData = useScans.properties;
  const logTest = () => {
   console.log(test.value);
@@ -29,7 +28,7 @@
    <div v-for="(item, index) in formData" class="w-1/5 p-2">
     <div v-if="item.type === 'multiple'" class="flex flex-wrap">
      <MultiselectInput
-      v-model="test"
+      v-model="item.value"
       :options="item.properties_options"
       :placeholder="item.name"
       class="w-5/6"
@@ -41,13 +40,14 @@
      <SingleSelectInput
       :options="item.properties_options"
       :placeholder="item.name"
+      v-model="item.value"
       class="w-5/6"
       classValue=" ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0"
      />
      <InputDeleteButton @click="removeProperty(item.id)" class="w-1/6" />
     </div>
     <div v-else class="flex flex-wrap">
-     <BasicInput :placeholder="item.name" class="w-5/6" classValue="ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0" />
+     <BasicInput :placeholder="item.name" v-model="item.value" class="w-5/6" classValue="ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0" />
      <InputDeleteButton @click="removeProperty(item.id)" class="w-1/6" />
     </div>
    </div>

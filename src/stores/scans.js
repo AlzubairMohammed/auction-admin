@@ -7,9 +7,11 @@ export const useScansStore = defineStore('scans', {
   return {
    url: '/scans',
    properties_url: '/properties',
-   auctions: [],
-   auction: {},
+   components_url: '/realestateComponents',
    properties: [],
+   images: [],
+   imagesNames: [{ description: 'الصك' }, { description: 'الرخصة' }, { description: 'المخطط' }],
+   realestateComponents: [],
   };
  },
  getters: {
@@ -27,13 +29,21 @@ export const useScansStore = defineStore('scans', {
    });
   },
   removeProperty: async function (id) {
-   request.delete(this.properties_url, id).then(() => {
+   await request.delete(this.properties_url, id).then(() => {
     this.properties = this.properties.filter((r) => r?.id !== id);
    });
   },
   addProperty: async function (property) {
-   request.post(this.properties_url, property).then((response) => {
+   await request.post(this.properties_url, property).then((response) => {
     this.properties.push(response.data);
+   });
+  },
+  fetchRealestateComponents: async function () {
+   await request.get(this.components_url).then((response) => {
+    this.realestateComponents = response.data;
+    if (this.realestateComponents) {
+     //  useApp.isShowMainLoader = false;
+    }
    });
   },
  },
