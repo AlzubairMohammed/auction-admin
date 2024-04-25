@@ -12,7 +12,7 @@
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
  };
- const formData = useScans.properties;
+ const formData = useScans.scan.properties;
  const logTest = () => {
   console.log(test.value);
  };

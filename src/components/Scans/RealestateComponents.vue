@@ -17,7 +17,7 @@
  };
  onMounted(async () => {
   await useScans.fetchRealestateComponents();
-  realestateComponents.value = useScans.realestateComponents;
+  realestateComponents.value = useScans.scan.realestateComponents;
  });
 </script>
 <template>

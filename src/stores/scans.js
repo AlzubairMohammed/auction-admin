@@ -8,10 +8,13 @@ export const useScansStore = defineStore('scans', {
    url: '/scans',
    properties_url: '/properties',
    components_url: '/realestateComponents',
-   properties: [],
-   images: [],
-   imagesNames: [{ description: 'الصك' }, { description: 'الرخصة' }, { description: 'المخطط' }],
-   realestateComponents: [],
+   scans: [],
+   scan: {
+    properties: [],
+    images: [],
+    imagesNames: [{ description: 'الصك' }, { description: 'الرخصة' }, { description: 'المخطط' }],
+    realestateComponents: [],
+   },
   };
  },
  getters: {
@@ -22,29 +25,32 @@ export const useScansStore = defineStore('scans', {
  actions: {
   fetchProperties: async function () {
    await request.get(this.properties_url).then((response) => {
-    this.properties = response.data;
-    if (this.properties) {
+    this.scan.properties = response.data;
+    if (this.scan.properties) {
      //  useApp.isShowMainLoader = false;
     }
    });
   },
   removeProperty: async function (id) {
    await request.delete(this.properties_url, id).then(() => {
-    this.properties = this.properties.filter((r) => r?.id !== id);
+    this.scan.properties = this.scan.properties.filter((r) => r?.id !== id);
    });
   },
   addProperty: async function (property) {
    await request.post(this.properties_url, property).then((response) => {
-    this.properties.push(response.data);
+    this.scan.properties.push(response.data);
    });
   },
   fetchRealestateComponents: async function () {
    await request.get(this.components_url).then((response) => {
-    this.realestateComponents = response.data;
-    if (this.realestateComponents) {
+    this.scan.realestateComponents = response.data;
+    if (this.scan.realestateComponents) {
      //  useApp.isShowMainLoader = false;
     }
    });
+  },
+  addScan: async function (scan) {
+   await request.post(this.url, scan).then((response) => {});
   },
  },
 });

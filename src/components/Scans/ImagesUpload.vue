@@ -5,7 +5,7 @@
  import { useScansStore } from '@/stores/scans';
  import { ref } from 'vue';
  const useScans = useScansStore();
- const fileItems = useScans;
+ const fileItems = useScans.scan;
  let isAddFileModalActive = ref(false);
  const handleFileUpload = (file) => {
   fileItems.images[file.index] = file.value;
