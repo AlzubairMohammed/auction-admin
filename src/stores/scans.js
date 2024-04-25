@@ -26,5 +26,15 @@ export const useScansStore = defineStore('scans', {
     }
    });
   },
+  removeProperty: async function (id) {
+   request.delete(this.properties_url, id).then(() => {
+    this.properties = this.properties.filter((r) => r?.id !== id);
+   });
+  },
+  addProperty: async function (property) {
+   request.post(this.properties_url, property).then((response) => {
+    this.properties.push(response.data);
+   });
+  },
  },
 });

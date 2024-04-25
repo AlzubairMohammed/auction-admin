@@ -17,6 +17,9 @@
  const logTest = () => {
   console.log(test.value);
  };
+ const removeProperty = async (id) => {
+  await useScans.removeProperty(id);
+ };
 </script>
 <template>
  <PropertiesModal v-model="isAddPropertyModalActive" />
@@ -32,7 +35,7 @@
       class="w-5/6"
       classValue="ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0"
      />
-     <InputDeleteButton @click="formData.splice(index, 1)" class="w-1/6" />
+     <InputDeleteButton @click="removeProperty(item.id)" class="w-1/6" />
     </div>
     <div v-else-if="item.type === 'single'" class="flex flex-wrap">
      <SingleSelectInput
@@ -41,11 +44,11 @@
       class="w-5/6"
       classValue=" ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0"
      />
-     <InputDeleteButton @click="formData.splice(index, 1)" class="w-1/6" />
+     <InputDeleteButton @click="removeProperty(item.id)" class="w-1/6" />
     </div>
     <div v-else class="flex flex-wrap">
      <BasicInput :placeholder="item.name" class="w-5/6" classValue="ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0" />
-     <InputDeleteButton @click="formData.splice(index, 1)" class="w-1/6" />
+     <InputDeleteButton @click="removeProperty(item.id)" class="w-1/6" />
     </div>
    </div>
   </div>
