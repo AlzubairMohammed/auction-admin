@@ -95,12 +95,12 @@
         <icon-x />
        </button>
        <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]">
-        {{ formData.id ? 'تعديل معامل' : 'اضافة معامل' }}
+        {{ formData.id ? 'تعديل' : 'اضافة' }}
        </div>
        <div class="p-5">
         <form @submit.prevent="pushItem">
          <div class="mb-5">
-          <input id="title" type="text" placeholder="ادخل اسم المعامل" class="form-input" v-model="formData.title" />
+          <input id="title" type="text" placeholder="ادخل اسم البيان" class="form-input" v-model="formData.title" />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
           <button type="button" class="btn btn-outline-danger" @click="cancel">الغاء</button>

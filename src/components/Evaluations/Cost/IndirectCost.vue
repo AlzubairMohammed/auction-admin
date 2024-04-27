@@ -1,7 +1,7 @@
 <script setup>
- //  import { useCostEvaluationStore } from '@/stores/costEvaluation';
+ import { useCostEvaluationsStore } from '@/stores/costEvaluations';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
- import AddPropertyModal from './AddPropertyModal.vue';
+ import AddPropertyModal from './AddIndirectCostPropertyModal.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import { ref } from 'vue';
 
@@ -9,22 +9,19 @@
  const isResultModalActive = ref(false);
  let title = ref('');
  const totalIndirectCost = ref(0);
- //  const costEvaluationSotre = useCostEvaluationStore();
- const itemsData = costEvaluationSotre.buildingIndirectCost;
- let directTotalCost = computed(() => {
-  return costEvaluationSotre.directTotalCost;
- });
+ const costEvaluationSotre = useCostEvaluationsStore();
+ const itemsData = costEvaluationSotre.IndirectCostOperations;
 
- const indirectTotal = () => {
-  console.log(directTotalCost);
-  let sum = 0;
-  for (const item of itemsData) {
-   sum += (directTotalCost.value / 100) * item.precentage;
-  }
-  totalIndirectCost.value = sum;
-  costEvaluationSotre.totalIndirectCost = totalIndirectCost.value + directTotalCost.value;
-  isResultModalActive.value = true;
- };
+ //  const indirectTotal = () => {
+ //   console.log(directTotalCost);
+ //   let sum = 0;
+ //   for (const item of itemsData) {
+ //    sum += (directTotalCost.value / 100) * item.precentage;
+ //   }
+ //   totalIndirectCost.value = sum;
+ //   costEvaluationSotre.totalIndirectCost = totalIndirectCost.value + directTotalCost.value;
+ //   isResultModalActive.value = true;
+ //  };
 
  const pushItem = () => {
   itemsData.push({ title: title.value, precentage: '' });

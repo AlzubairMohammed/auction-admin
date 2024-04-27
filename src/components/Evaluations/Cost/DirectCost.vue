@@ -1,6 +1,6 @@
 <script setup>
  import { ref } from 'vue';
- import AddProperyModal from './AddPropertyModal.vue';
+ import AddProperyModal from './AddDirectCostPropertyModal.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
 

@@ -9,6 +9,7 @@ export const useCostEvaluationsStore = defineStore('costEvaluations', {
    page: 1,
    perPage: 10,
    directCostOperations: [],
+   IndirectCostOperations: [],
   };
  },
  actions: {
