@@ -3,6 +3,7 @@
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import AddPropertyModal from './AddPropertyModal.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
+ import { ref } from 'vue';
 
  const isModalActive = ref(false);
  const isResultModalActive = ref(false);

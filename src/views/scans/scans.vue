@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
  import Form from '@/components/Scans/Form.vue';
 </script>
 <template>

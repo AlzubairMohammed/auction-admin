@@ -260,7 +260,7 @@
  </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
  import { ref, onMounted } from 'vue';
 
  import { useAppStore } from '@/stores/index';
@@ -293,16 +293,16 @@
  import IconMenuDocumentation from '@/components/icon/menu/icon-menu-documentation.vue';
 
  const store = useAppStore();
- const activeDropdown: any = ref('');
- const subActive: any = ref('');
+ const activeDropdown = ref('');
+ const subActive = ref('');
 
  onMounted(() => {
   const selector = document.querySelector('.sidebar ul a[href="' + window.location.pathname + '"]');
   if (selector) {
    selector.classList.add('active');
-   const ul: any = selector.closest('ul.sub-menu');
+   const ul = selector.closest('ul.sub-menu');
    if (ul) {
-    let ele: any = ul.closest('li.menu').querySelectorAll('.nav-link') || [];
+    let ele = ul.closest('li.menu').querySelectorAll('.nav-link') || [];
     if (ele.length) {
      ele = ele[0];
      setTimeout(() => {

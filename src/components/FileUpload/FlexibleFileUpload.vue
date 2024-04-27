@@ -12,7 +12,7 @@
 </template>
 
 <!-- script -->
-<script lang="ts" setup>
+<script setup>
  import { onMounted, ref, computed } from 'vue';
  import FileUploadWithPreview from 'file-upload-with-preview';
  import 'file-upload-with-preview/dist/file-upload-with-preview.min.css';
@@ -32,11 +32,9 @@
   });
  });
 
- const props = defineProps<{
-  index: {
-   type: Number;
-  };
- }>();
+ const props = defineProps({
+  index: 0,
+ });
  const handleFileUpload = (event) => {
   file.value = event.target.files[0];
   file.index = props.index;

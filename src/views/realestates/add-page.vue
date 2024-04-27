@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
  import AddForm from '@/components/Realestate/AddForm.vue';
 </script>
 <template>

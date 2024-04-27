@@ -4,22 +4,16 @@
   <input type="text" v-model="computedValue" :placeholder="placeholder" class="form-input" :class="classValue" :required="required" />
  </div>
 </template>
-<script lang="ts" setup>
+<script setup>
  import { computed, ref } from 'vue';
- const props = defineProps<{
-  label: string;
-  placeholder: string;
-  modelValue: {
-   type: [String, Number, Boolean, Array, Object];
-   default: '';
-  };
-  required: {
-   type: Boolean;
-   default: false;
-  };
-  classValue: string;
- }>();
- const inputEl = ref<HTMLInputElement | null>(null);
+ const props = defineProps({
+  label: '',
+  placeholder: '',
+  modelValue: '',
+  required: false,
+  classValue: '',
+ });
+ const inputEl = ref(null);
  const emit = defineEmits(['update:modelValue', 'setRef']);
 
  const computedValue = computed({

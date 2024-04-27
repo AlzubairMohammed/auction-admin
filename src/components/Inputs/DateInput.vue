@@ -14,7 +14,7 @@
  </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
  import { ref, onMounted, computed } from 'vue';
  import { useAppStore } from '@/stores/index';
 
@@ -33,7 +33,7 @@
    }
    return '';
   },
-  set: (val: string) => {
+  set: (val) => {
    date.value = val;
   },
  });
@@ -41,13 +41,13 @@
   emit('getDate', date.value);
  };
  const date = ref('');
- const basic: any = ref({
+ const basic = ref({
   dateFormat: 'Y-m-d',
   position: store.rtlClass === 'rtl' ? 'auto right' : 'auto left',
  });
- const props = defineProps<{
-  labelValue: string;
-  placeholder: string;
-  required: boolean;
- }>();
+ const props = defineProps({
+  labelValue: '',
+  placeholder: '',
+  required: false,
+ });
 </script>

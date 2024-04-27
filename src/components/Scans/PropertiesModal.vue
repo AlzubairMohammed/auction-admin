@@ -14,27 +14,12 @@
    type: String,
    required: true,
   },
-  button: {
-   type: String,
-   default: 'info',
-  },
-  buttonLabel: {
-   type: String,
-   default: '',
-  },
-  hasCancel: Boolean,
-  modelValue: {
-   type: [String, Number, Boolean],
-   default: null,
-  },
-  submitFunction: {
-   type: Function, // Add the new prop for the submit function
-   required: true,
-  },
-  formData: {
-   id: null,
-   title: '',
-  },
+  button: '',
+  buttonLabel: '',
+  hasCancel: '',
+  modelValue: '',
+  submitFunction: '',
+  formData: null,
  });
 
  const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);

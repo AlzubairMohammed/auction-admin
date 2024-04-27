@@ -21,7 +21,7 @@
  </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
  import { defineProps, ref, computed } from 'vue';
 
  const props = defineProps({
@@ -49,7 +49,7 @@
   },
  });
 
- const inputEl = ref<HTMLInputElement | null>(null);
+ const inputEl = (ref < HTMLInputElement) | (null > null);
  const emit = defineEmits(['update:modelValue', 'setRef']);
 
  const computedValue = computed({

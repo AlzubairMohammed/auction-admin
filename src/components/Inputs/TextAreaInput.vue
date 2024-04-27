@@ -16,21 +16,21 @@
  </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
  import { ref, computed } from 'vue';
- const props = defineProps<{
-  label: string;
-  placeholder: string;
+ const props = defineProps({
+  label: string,
+  placeholder: string,
   modelValue: {
-   type: [String, Number, Boolean, Array, Object];
-  };
+   type: [String, Number, Boolean, Array, Object],
+  },
   required: {
-   type: Boolean;
-   default: false;
-  };
- }>();
+   type: Boolean,
+   default: false,
+  },
+ });
 
- const inputEl = ref<HTMLInputElement | null>(null);
+ const inputEl = (ref < HTMLInputElement) | (null > null);
  const emit = defineEmits(['update:modelValue', 'setRef']);
 
  const computedValue = computed({

@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
  import { ref, onMounted } from 'vue';
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
  import IconPencil from '@/components/icon/icon-pencil.vue';

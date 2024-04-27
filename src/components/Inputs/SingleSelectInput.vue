@@ -20,27 +20,27 @@
 </template>
 
 <!-- script -->
-<script lang="ts" setup>
+<script setup>
  import Multiselect from '@suadelabs/vue3-multiselect';
  import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
  import { ref, computed, onMounted } from 'vue';
  const placeholder = ref('');
- const props = defineProps<{
-  options: string[];
-  label: string;
-  placeholder: string;
+ const props = defineProps({
+  options: '',
+  label: '',
+  placeholder: '',
   modelValue: {
-   type: [String, Number, Boolean, Array, Object];
-   default: '';
-  };
+   type: [String, Number, Boolean, Array, Object],
+   default: '',
+  },
   isRequired: {
-   type: Boolean;
-   default: false;
-  };
-  classValue: string;
- }>();
+   type: Boolean,
+   default: false,
+  },
+  classValue: '',
+ });
  placeholder.value = props.placeholder;
- const inputEl = ref<HTMLInputElement | null>(null);
+ const inputEl = ref(null);
  const emit = defineEmits(['update:modelValue', 'setRef', 'on-select']);
 
  const computedValue = computed({

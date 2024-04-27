@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
  import highlight from '@/components/plugins/highlight.vue';
  import codePreview from '@/composables/codePreview';
  import { FormWizard, TabContent } from 'vue3-form-wizard';

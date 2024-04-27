@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
  import { ref } from 'vue';
  import AddProperyModal from './AddPropertyModal.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';

@@ -4,6 +4,6 @@
  </button>
 </template>
 
-<script lang="ts" setup>
+<script setup>
  import IconPluse from '@/components/icon/icon-plus.vue';
 </script>

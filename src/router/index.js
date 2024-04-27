@@ -1,0 +1,76 @@
+import { createRouter, createWebHistory } from 'vue-router';
+import { useAppStore } from '@/stores/index';
+import appSetting from '@/app-setting';
+
+import HomeView from '../views/index.vue';
+
+const routes = [
+ // dashboard
+ { path: '/', name: 'home', component: HomeView },
+ // New adding
+ {
+  path: '/evaluations/comparisons',
+  name: 'comparisons',
+  component: () => import(/* webpackChunkName: "evaluations-comparisons" */ '../views/evaluations/comparisons.vue'),
+  meta: { layout: 'app' },
+ },
+ // New scan
+ {
+  path: '/scans',
+  name: 'scan',
+  component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/scans/scans.vue'),
+  meta: { layout: 'app' },
+ },
+ {
+  path: '/auctions/list-page',
+  name: 'auctions-list',
+  component: () => import(/* webpackChunkName: "list-page" */ '../views/auctions/list-page.vue'),
+  meta: { layout: 'app' },
+ },
+ {
+  path: '/auctions/add-page',
+  name: 'auctions/add-page',
+  component: () => import(/* webpackChunkName: "add-page */ '../views/auctions/add-page.vue'),
+  meta: { layout: 'app' },
+ },
+ {
+  path: '/realestates/add-page',
+  name: 'realestates/add-page',
+  component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/realestates/add-page.vue'),
+  meta: { layout: 'app' },
+ },
+ {
+  path: '/evaluations/cost',
+  name: 'evaluations/cost',
+  component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/Cost.vue'),
+  meta: { layout: 'app' },
+ },
+];
+
+const router = createRouter({
+ history: createWebHistory(),
+ linkExactActiveClass: 'active',
+ routes,
+ scrollBehavior(to, from, savedPosition) {
+  if (savedPosition) {
+   return savedPosition;
+  } else {
+   return { left: 0, top: 0 };
+  }
+ },
+});
+
+router.beforeEach((to, from, next) => {
+ const store = useAppStore();
+
+ if (to?.meta?.layout == 'auth') {
+  store.setMainLayout('auth');
+ } else {
+  store.setMainLayout('app');
+ }
+ next(true);
+});
+router.afterEach((to, from, next) => {
+ appSetting.changeAnimation();
+});
+export default router;
