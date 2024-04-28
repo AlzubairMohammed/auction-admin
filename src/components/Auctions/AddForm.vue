@@ -24,7 +24,7 @@
  <form @submit.prevent="submit" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
   <SingleSelectInput
    :isRequired="true"
-   @on-select="(event) => (auctionData.auction_type = event)"
+   @on-select="(event) => (auctionData.auction_type = event.id)"
    :placeholder="'اختار نوع المزاد'"
    :options="[
     { name: 'type2', id: 1 },
