@@ -6,19 +6,22 @@
  import PropertiesModal from '@/components/Scans/PropertiesModal.vue';
  import InputDeleteButton from '@/components/Buttons/InputDeleteButton.vue';
  import { useScansStore } from '@/stores/scans';
- import { ref } from 'vue';
+ import { ref, onMounted } from 'vue';
  const useScans = useScansStore();
  let isAddPropertyModalActive = ref(false);
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
  };
- const formData = useScans.scan.properties;
+ const formData = ref([]);
  const logTest = () => {
   console.log(test.value);
  };
  const removeProperty = async (id) => {
   await useScans.removeProperty(id);
  };
+ onMounted(() => {
+  formData.value = useScans.scan.properties.filter((item) => !item.is_feature);
+ });
 </script>
 <template>
  <PropertiesModal v-model="isAddPropertyModalActive" />
