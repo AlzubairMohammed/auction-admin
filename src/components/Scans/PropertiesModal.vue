@@ -20,6 +20,7 @@
   modelValue: '',
   submitFunction: '',
   formData: null,
+  isFeature: '',
  });
 
  const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
@@ -42,6 +43,7 @@
  const cancel = () => confirmCancel('cancel');
 
  const addProperty = async () => {
+  formData.value.is_feature = props.isFeature;
   await useScans.addProperty(formData.value);
   cancel();
  };
