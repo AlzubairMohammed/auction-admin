@@ -5,7 +5,9 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
   return {
    url: '/comparisonsEvaluations',
    comparisonsEvaluations: [],
-   comparisonsEvaluation: {},
+   comparisonsEvaluation: {
+    properties: [],
+   },
   };
  },
  getters: {

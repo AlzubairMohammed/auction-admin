@@ -1,11 +1,11 @@
 <script setup>
  import { computed, ref } from 'vue';
- import { useCostEvaluationStore } from '@/stores/costEvaluation';
+ import { useCostEvaluationsStore } from '@/stores/costEvaluations';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
- //  import AddPropertyModal from './AddPropertyModal.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
+ import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
 
- const costEvaluationSotre = useCostEvaluationStore();
+ const costEvaluationSotre = useCostEvaluationsStore();
 
  const isModalActive = ref(false);
  let title = ref('');
@@ -36,13 +36,12 @@
  };
 </script>
 <template>
- <AddPropertyModal v-model="isModalActive" button="info" button-label="اضافة" :submit-function="pushItem" />
  <table>
   <tbody>
    <tr>
     <td class="text-center">نوع الاهلاك</td>
     <td>
-     <BasicInput v-model="realestateAge" type="select" :options="['العمر المتدد', 'الثابت']" />
+     <SingleSelectInput v-model="realestateAge" type="select" :options="[{ name: 'العمر المتدد' }, { name: 'الثابت' }]" />
     </td>
    </tr>
    <tr>

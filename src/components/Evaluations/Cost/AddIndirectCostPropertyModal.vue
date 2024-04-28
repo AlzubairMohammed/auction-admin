@@ -22,7 +22,7 @@
  //   isResultModalActive.value = true;
  //  };
  const pushItem = async () => {
-  await costEvaluationsSotre.directCostOperations.push(formData.value);
+  await costEvaluationsSotre.IndirectCostOperations.push(formData.value);
   formData.value = { id: null, title: '', area: '', price: '' };
   confirmCancel('confirm');
  };
@@ -105,11 +105,11 @@
          <div class="mb-5">
           <SingleSelectInput
            :options="[{ name: 'نسبة' }, { name: 'ريال' }]"
-           id="title"
+           id="type"
            type="text"
            placeholder="ادخل نوع البيان"
            class="form-input"
-           v-model="formData.title"
+           v-model="formData.type"
           />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
