@@ -6,12 +6,8 @@
  import { ref } from 'vue';
  const useRealestateStore = useRealestatesStore();
  const fileItems = useRealestateStore.realestate;
+ const fileValidatonError = useRealestateStore.realestateErrors.files;
  let isAddFileModalActive = ref(false);
- const handleFileUpload = (file) => {
-  fileItems.files[file.index] = file.value;
-  console.log(fileItems);
- };
-
  const fileInput = ref(null);
 </script>
 <template>
@@ -26,6 +22,12 @@
    <BasicInput v-else v-model="fileItems.filesNames[index].name" placeholder="الوصف" type="text" class="w-1/8 p-2" />
    <a href="javascript:;" @click="fileItems.filesNames.splice(index, 1)" class="font-size-14">×</a>
   </div>
-  <FlexibleFileUpload @file-selected="handleFileUpload" :index="index" class="m-3" required />
+  <FlexibleFileUpload
+   @file-selected="(file) => (fileItems.files[file.index] = file.value)"
+   :index="index"
+   class="m-3"
+   :error-message="index === 0 ? 'يجب ادخال صورة علي الاقل' : ''"
+   required
+  />
  </div>
 </template>

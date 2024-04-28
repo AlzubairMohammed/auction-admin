@@ -29,7 +29,7 @@ export const useRealestatesStore = defineStore('realestates', {
     date: '',
     realestate_type_id: '',
    },
-   files: [],
+   files: '',
   },
   realestate: {
    auction_id: 4,
@@ -133,10 +133,8 @@ export const useRealestatesStore = defineStore('realestates', {
     return;
    }
    // files validation
-   this.realestateErrors.files = [];
-   if (realestate.files.length === 0) {
-    this.realestateErrors.files = 'يجب تحميل صورة واحدة على الأقل';
-   }
+   !realestate.files[0] && (this.realestateErrors.files = 'يجب تحميل صورة واحدة على الأقل');
+
    //    if (realestate.files.length > 0) {
    //     realestate.files.forEach((file, index) => {
    //      if (!file.path) {
@@ -145,6 +143,7 @@ export const useRealestatesStore = defineStore('realestates', {
    //     });
    //    }
    if (this.realestateErrors.files) {
+    tabControll.navigateToTab(0);
     tabControll.navigateToTab(3);
     return;
    }
