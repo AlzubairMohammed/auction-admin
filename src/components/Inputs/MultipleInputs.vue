@@ -60,3 +60,8 @@
  });
  emit('setRef', inputEl.value);
 </script>
+<style scoped>
+ .error-msg {
+  font-size: 0.875rem;
+ }
+</style>

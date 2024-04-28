@@ -1,5 +1,6 @@
 <template>
  <div class="card flex justify-content-center custom-multiselect">
+  <p v-if="errorMessage" class="error-msg text-red-300">{{ errorMessage }}</p>
   <MultiSelect
    style=""
    v-model="selectedCities"
@@ -8,7 +9,7 @@
    :placeholder="placeholder"
    :maxSelectedLabels="3"
    class="w-full md:w-20rem border border-md"
-   :class="classValue"
+   :class="{ 'ring-1 ring-red-300': errorMessage }"
    @select="$emit('update:modelValue', $event)"
   />
  </div>
@@ -22,11 +23,17 @@
   options: [],
   placeholder: '',
   classValue: '',
+  errorMessage: '',
  });
 </script>
 
 <style scoped>
  .custom-multiselect .p-multiselect .p-inputtext .p-component:focus {
   border-color: gray !important;
+ }
+</style>
+<style scoped>
+ .error-msg {
+  font-size: 0.875rem;
  }
 </style>

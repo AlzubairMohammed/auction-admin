@@ -2,7 +2,7 @@
  import { computed, ref } from 'vue';
  import { useCostEvaluationStore } from '@/stores/costEvaluation';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
- import AddPropertyModal from './AddPropertyModal.vue';
+ //  import AddPropertyModal from './AddPropertyModal.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
 
  const costEvaluationSotre = useCostEvaluationStore();

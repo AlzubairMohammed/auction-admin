@@ -5,6 +5,7 @@
   >
    {{ label }}
   </div>
+  <p v-if="errorMessage" class="error-msg text-red-300">{{ errorMessage }}</p>
   <textarea
    :required="required"
    :placeholder="placeholder"
@@ -12,6 +13,7 @@
    rows="4"
    ref="inputEl"
    class="form-textarea ltr:rounded-l-none rtl:rounded-r-none"
+   :class="{ 'ring-1 ring-red-300': errorMessage }"
   ></textarea>
  </div>
 </template>
@@ -19,15 +21,11 @@
 <script setup>
  import { ref, computed } from 'vue';
  const props = defineProps({
-  label: string,
-  placeholder: string,
-  modelValue: {
-   type: [String, Number, Boolean, Array, Object],
-  },
-  required: {
-   type: Boolean,
-   default: false,
-  },
+  label: '',
+  placeholder: '',
+  modelValue: '',
+  required: '',
+  errorMessage: '',
  });
 
  const inputEl = (ref < HTMLInputElement) | (null > null);
@@ -41,3 +39,8 @@
  });
  emit('setRef', inputEl.value);
 </script>
+<style scoped>
+ .error-msg {
+  font-size: 0.875rem;
+ }
+</style>

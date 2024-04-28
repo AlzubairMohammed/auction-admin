@@ -1,17 +1,26 @@
 <template>
  <div>
   <label v-if="label" class="block text-sm text-gray-700"> {{ label }}</label>
-  <input type="text" v-model="computedValue" :placeholder="placeholder" class="form-input" :class="classValue" :required="required" />
+  <p v-if="errorMessage" class="error-msg text-red-300">{{ errorMessage }}</p>
+  <input
+   type="text"
+   ref="inputEl"
+   v-model="computedValue"
+   :placeholder="placeholder"
+   class="form-input"
+   :class="{ 'ring-1 ring-red-300': errorMessage }"
+   :required="required"
+  />
  </div>
 </template>
 <script setup>
- import { computed, ref } from 'vue';
+ import { computed, ref, onMounted } from 'vue';
  const props = defineProps({
   label: '',
   placeholder: '',
   modelValue: '',
+  errorMessage: '',
   required: false,
-  classValue: '',
  });
  const inputEl = ref(null);
  const emit = defineEmits(['update:modelValue', 'setRef']);
@@ -24,3 +33,8 @@
  });
  emit('setRef', inputEl.value);
 </script>
+<style scoped>
+ .error-msg {
+  font-size: 0.875rem;
+ }
+</style>

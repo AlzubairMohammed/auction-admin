@@ -2,11 +2,13 @@
 <template>
  <div>
   <label v-if="props.labelValue" class="block text-sm text-gray-700"> {{ props.labelValue }}</label>
+  <p v-if="errorMessage" class="error-msg text-red-300">{{ errorMessage }}</p>
   <flat-pickr
    v-model="computedValue"
    @on-change="logDate"
    :placeholder="props.placeholder"
    class="form-input"
+   :class="{ 'ring-1 ring-red-300': errorMessage }"
    :config="basic"
    :required="props.required"
    ref="inputEl"
@@ -49,5 +51,11 @@
   labelValue: '',
   placeholder: '',
   required: false,
+  errorMessage: '',
  });
 </script>
+<style scoped>
+ .error-msg {
+  font-size: 0.875rem;
+ }
+</style>

@@ -4,7 +4,8 @@
  import DateInput from '@/components/Inputs/DateInput.vue';
  import { useAuctionsStore } from '@/stores/auctions';
  import { ref } from 'vue';
- const useStore = useAuctionsStore();
+ const auctionsStore = useAuctionsStore();
+ const auctionErrors = auctionsStore.auctionErrors;
  let isAddPropertyModalActive = ref(false);
  let auctionData = ref({
   assignment_number: '',
@@ -15,17 +16,26 @@
   name: '',
  });
  const submit = async () => {
-  const data = await useStore.addAuction(auctionData.value);
-  console.log(data);
+  const data = await auctionsStore.addAuction(auctionData.value);
+  console.log(auctionData.value);
  };
 </script>
 <template>
  <form @submit.prevent="submit" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
-  <SingleSelectInput :isRequired="true" v-model="auctionData.auction_type" :placeholder="'اختار نوع المزاد'" :options="['type2', 'type1']" />
-  <BasicInput required v-model="auctionData.name" :placeholder="'اسم المزاد'" />
-  <BasicInput required v-model="auctionData.assignment_number" :placeholder="'رقم التكليف'" />
-  <DateInput required v-model="auctionData.start_date" :placeholder="'تاريخ بداية المزاد'" type="date" />
-  <DateInput required v-model="auctionData.end_date" :placeholder="'تاريخ نهاية المزاد'" />
+  <SingleSelectInput
+   :isRequired="true"
+   @on-select="(event) => (auctionData.auction_type = event)"
+   :placeholder="'اختار نوع المزاد'"
+   :options="[
+    { name: 'type2', id: 1 },
+    { name: 'type1', id: 2 },
+   ]"
+   :errorMessage="auctionErrors.auction_type"
+  />
+  <BasicInput v-model="auctionData.name" :errorMessage="auctionErrors.name" :placeholder="'اسم المزاد'" />
+  <BasicInput v-model="auctionData.assignment_number" :errorMessage="auctionErrors.assignment_number" :placeholder="'رقم التكليف'" />
+  <DateInput v-model="auctionData.start_date" :errorMessage="auctionErrors.start_date" :placeholder="'تاريخ بداية المزاد'" type="date" />
+  <DateInput v-model="auctionData.end_date" :errorMessage="auctionErrors.end_date" :placeholder="'تاريخ نهاية المزاد'" />
   <button type="submit" class="btn btn-primary w-1/6 mb-0">التالي</button>
  </form>
 </template>

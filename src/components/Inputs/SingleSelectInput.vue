@@ -1,10 +1,12 @@
 <template>
  <div>
   <label v-if="label" class="block text-sm text-gray-700"> {{ label }}</label>
+  <p v-if="errorMessage" class="error-msg text-red-300">{{ errorMessage }}</p>
   <multiselect
    :placeholder="placeholder"
    :options="options"
-   :class="['custom-multiselect', classValue]"
+   class="custom-multiselect"
+   :class="{ 'ring-1 ring-red-300 rounded': errorMessage }"
    :searchable="true"
    selected-label=""
    select-label=""
@@ -29,15 +31,9 @@
   options: '',
   label: '',
   placeholder: '',
-  modelValue: {
-   type: [String, Number, Boolean, Array, Object],
-   default: '',
-  },
-  isRequired: {
-   type: Boolean,
-   default: false,
-  },
-  classValue: '',
+  modelValue: '',
+  isRequired: false,
+  errorMessage: '',
  });
  placeholder.value = props.placeholder;
  const inputEl = ref(null);
@@ -58,3 +54,8 @@
   emit('on-select', event);
  };
 </script>
+<style scoped>
+ .error-msg {
+  font-size: 0.875rem;
+ }
+</style>

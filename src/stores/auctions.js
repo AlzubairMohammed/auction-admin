@@ -7,7 +7,21 @@ export const useAuctionsStore = defineStore('auctions', {
   return {
    url: '/auctions',
    auctions: [],
-   auction: {},
+   auction: {
+    assignment_number: '',
+    auction_type: '',
+    start_date: '',
+    end_date: '',
+    user_id: 2,
+    name: '',
+   },
+   auctionErrors: {
+    assignment_number: '',
+    auction_type: '',
+    start_date: '',
+    end_date: '',
+    name: '',
+   },
   };
  },
  getters: {
@@ -27,8 +41,22 @@ export const useAuctionsStore = defineStore('auctions', {
   getAuction(id) {
    return request.get(`${this.url}/${id}`);
   },
-  addAuction(auction) {
-   request.post(this.url, auction).then((response) => {
+  addAuction: async function (auction) {
+   this.auctionErrors.assignment_number = '';
+   this.auctionErrors.auction_type = '';
+   this.auctionErrors.start_date = '';
+   this.auctionErrors.end_date = '';
+   this.auctionErrors.name = '';
+
+   !auction.assignment_number && (this.auctionErrors.assignment_number = 'الحقل مطلوب');
+   !auction.auction_type && (this.auctionErrors.auction_type = 'الحقل مطلوب');
+   !auction.start_date && (this.auctionErrors.start_date = 'الحقل مطلوب');
+   !auction.end_date && (this.auctionErrors.end_date = 'الحقل مطلوب');
+   !auction.name && (this.auctionErrors.name = 'الحقل مطلوب');
+   if (Object.values(this.auctionErrors).some((r) => r !== '')) {
+    return;
+   }
+   await request.post(this.url, auction).then((response) => {
     this.auction = response.data;
    });
   },
