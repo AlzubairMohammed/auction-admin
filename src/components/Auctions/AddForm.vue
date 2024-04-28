@@ -34,8 +34,8 @@
   />
   <BasicInput v-model="auctionData.name" :errorMessage="auctionErrors.name" :placeholder="'اسم المزاد'" />
   <BasicInput v-model="auctionData.assignment_number" :errorMessage="auctionErrors.assignment_number" :placeholder="'رقم التكليف'" />
-  <DateInput v-model="auctionData.start_date" :errorMessage="auctionErrors.start_date" :placeholder="'تاريخ بداية المزاد'" type="date" />
-  <DateInput v-model="auctionData.end_date" :errorMessage="auctionErrors.end_date" :placeholder="'تاريخ نهاية المزاد'" />
+  <DateInput @get-date="(date) => (auctionData.start_date = date)" :errorMessage="auctionErrors.start_date" :placeholder="'تاريخ بداية المزاد'" type="date" />
+  <DateInput @get-date="(date) => (auctionData.end_date = date)" :errorMessage="auctionErrors.end_date" :placeholder="'تاريخ نهاية المزاد'" />
   <button type="submit" class="btn btn-primary w-1/6 mb-0">التالي</button>
  </form>
 </template>
