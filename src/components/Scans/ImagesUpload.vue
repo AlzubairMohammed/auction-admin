@@ -8,7 +8,7 @@
  const fileItems = useScans.scan;
  let isAddFileModalActive = ref(false);
  const handleFileUpload = (file) => {
-  fileItems.images[file.index] = file.value;
+  fileItems.files[file.index] = file.value;
   console.log(fileItems);
  };
 
@@ -22,8 +22,8 @@
   :key="index"
  >
   <div class="flex justify-between">
-   <label :for="index" v-if="item">{{ item.description }}</label>
-   <BasicInput v-else v-model="fileItems.imagesNames[index].description" placeholder="الوصف" type="text" class="w-1/8 p-2" />
+   <label :for="index" v-if="item">{{ item.name }}</label>
+   <BasicInput v-else v-model="fileItems.imagesNames[index].name" placeholder="الوصف" type="text" class="w-1/8 p-2" />
    <a href="javascript:;" @click="fileItems.imagesNames.splice(index, 1)" class="font-size-14">×</a>
   </div>
   <FlexibleFileUpload @file-selected="handleFileUpload" :index="index" class="m-3" required />

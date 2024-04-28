@@ -90,10 +90,10 @@ export const useRealestatesStore = defineStore('realestates', {
    this.realestateErrors.customer.customer_number = '';
    this.realestateErrors.customer.owner_name = '';
    this.realestateErrors.customer.owner_number = '';
-   !this.realestate.customer_name && (this.realestateErrors.customer_name = 'الحقل مطلوب');
-   !this.realestate.customer_number && (this.realestateErrors.customer_number = 'الحقل مطلوب');
-   !this.realestate.owner_name && (this.realestateErrors.owner_name = 'الحقل مطلوب');
-   !this.realestate.owner_number && (this.realestateErrors.owner_number = 'الحقل مطلوب');
+   !this.realestate.customer_name && (this.realestateErrors.customer.customer_name = 'الحقل مطلوب');
+   !this.realestate.customer_number && (this.realestateErrors.customer.customer_number = 'الحقل مطلوب');
+   !this.realestate.owner_name && (this.realestateErrors.customer.owner_name = 'الحقل مطلوب');
+   !this.realestate.owner_number && (this.realestateErrors.customer.owner_number = 'الحقل مطلوب');
    if (Object.values(this.realestateErrors.customer).some((r) => r !== '')) {
     tabControll.navigateToTab(0);
     console.log(realestate);
@@ -148,7 +148,7 @@ export const useRealestatesStore = defineStore('realestates', {
     return;
    }
    // files validation
-   !realestate.files[0] && (this.realestateErrors.files = 'يجب تحميل صورة واحدة على الأقل');
+   //    !realestate.files[0] && (this.realestateErrors.files = 'يجب تحميل صورة واحدة على الأقل');
 
    //    if (realestate.files.length > 0) {
    //     realestate.files.forEach((file, index) => {
@@ -157,10 +157,10 @@ export const useRealestatesStore = defineStore('realestates', {
    //      }
    //     });
    //    }
-   if (this.realestateErrors.files) {
-    tabControll.navigateToTab(3);
-    return;
-   }
+   //    if (this.realestateErrors.files) {
+   //     tabControll.navigateToTab(3);
+   //     return;
+   //    }
    await request.post(this.url, realestate).then((response) => {
     this.realestate = response.data;
    });

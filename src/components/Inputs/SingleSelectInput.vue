@@ -50,7 +50,6 @@
  });
  const onChange = (event) => {
   placeholder.value = event.name;
-  console.log('hi from onchange', event);
   emit('on-select', event);
  };
 </script>

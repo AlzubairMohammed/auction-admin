@@ -9,10 +9,19 @@ export const useScansStore = defineStore('scans', {
    properties_url: '/properties',
    components_url: '/realestateComponents',
    scans: [],
-   scan: {
+   scanErrors: {
     properties: [],
-    images: [],
-    imagesNames: [{ description: 'الصك' }, { description: 'الرخصة' }, { description: 'المخطط' }],
+    files: [],
+    realestateComponents: [],
+   },
+   scan: {
+    user_id: 2,
+    realestate_id: 3,
+    lat: '5.2323',
+    lng: '4.2333',
+    properties: [],
+    files: [],
+    imagesNames: [{ name: 'الصك' }, { name: 'الرخصة' }, { name: 'المخطط' }],
     realestateComponents: [],
    },
   };
@@ -50,6 +59,7 @@ export const useScansStore = defineStore('scans', {
    });
   },
   addScan: async function (scan) {
+   console.log(this.scan);
    await request.post(this.url, scan).then((response) => {});
   },
  },
