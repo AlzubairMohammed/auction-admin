@@ -6,6 +6,7 @@ export const useRealestatesStore = defineStore('realestates', {
   realestateTypes: [],
   realestates: [],
   realestateErrors: {
+   customer: { customer_name: '', customer_number: '', owner_name: '', owner_number: '' },
    document: {
     number: '',
     area_number: '',
@@ -84,6 +85,20 @@ export const useRealestatesStore = defineStore('realestates', {
    return request.get(`${this.url}/${id}`);
   },
   addRealestate: async function (realestate, tabControll) {
+   // rest fields validation
+   this.realestateErrors.customer.customer_name = '';
+   this.realestateErrors.customer.customer_number = '';
+   this.realestateErrors.customer.owner_name = '';
+   this.realestateErrors.customer.owner_number = '';
+   !this.realestate.customer_name && (this.realestateErrors.customer_name = 'الحقل مطلوب');
+   !this.realestate.customer_number && (this.realestateErrors.customer_number = 'الحقل مطلوب');
+   !this.realestate.owner_name && (this.realestateErrors.owner_name = 'الحقل مطلوب');
+   !this.realestate.owner_number && (this.realestateErrors.owner_number = 'الحقل مطلوب');
+   if (Object.values(this.realestateErrors.customer).some((r) => r !== '')) {
+    tabControll.navigateToTab(0);
+    console.log(realestate);
+    return;
+   }
    // document validation
    this.realestateErrors.document.number = '';
    this.realestateErrors.document.area_number = '';
@@ -143,11 +158,9 @@ export const useRealestatesStore = defineStore('realestates', {
    //     });
    //    }
    if (this.realestateErrors.files) {
-    tabControll.navigateToTab(0);
     tabControll.navigateToTab(3);
     return;
    }
-
    await request.post(this.url, realestate).then((response) => {
     this.realestate = response.data;
    });

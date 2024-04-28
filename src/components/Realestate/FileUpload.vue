@@ -26,7 +26,7 @@
    @file-selected="(file) => (fileItems.files[file.index] = file.value)"
    :index="index"
    class="m-3"
-   :error-message="index === 0 ? 'يجب ادخال صورة علي الاقل' : ''"
+   :error-message="index === 0 ? 'يجب ادخال ملف علي الاقل' : ''"
    required
   />
  </div>
