@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
  import List from '@/components/Auctions/List.vue';
 </script>
 <template>
