@@ -11,95 +11,14 @@
 
  const isModalActive = ref(false);
  const isAddPropertyModalActive = ref(false);
- const title = ref('');
  let result = ref(0.0);
-
- let properties = ref(['السعر', 'ظروف السوق', 'شروط التمويل', 'الاستخدام', 'عدد الشوارع', 'المرجح الموزون']);
- const multiArray = ref([
-  [
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-  ],
-  [
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-  ],
-  [
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-  ],
- ]);
+ let properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
+ const multiArray = comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
  let form = ref();
  const onSubmit = async () => {
   const data = {
-   comparisons: multiArray.value,
-   properties: properties.value,
+   comparisons: multiArray,
+   properties: properties,
    realestate: {
     id: 7,
     meters: 2250,
@@ -110,65 +29,24 @@
   isModalActive.value = true;
  };
  const pushToRealestates = () => {
-  multiArray.value.push([
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-   {
-    value: '',
-    percentage: '',
-   },
-  ]);
+  const counter = properties.length;
+  const length = multiArray.length;
+  multiArray.push([]);
+  for (let i = 0; i < properties.length; i++) {
+   multiArray[length].push({ value: '', percentage: '' });
+  }
  };
- const pushToComparisons = () => {
-  //looping in multiArray to add new property to each realestate
-  multiArray.value.forEach((realestate) => {
-   realestate.push({
-    value: '',
-    percentage: '',
-   });
-  });
-  // properties.splice(properties.length - 1, 0, title.value)
-  properties.value.splice(properties.value.length - 1, 0, title.value);
-  title.value = '';
- };
+
  const trashProperty = (index) => {
-  properties.value.splice(index, 1);
-  multiArray.value.forEach((realestate) => {
+  properties.splice(index, 1);
+  multiArray.forEach((realestate) => {
    realestate.splice(index, 1);
   });
  };
- // const spliceComparisons = (index) => {
- //   multiArray.value[0].splice(index, 1)
- // }
+ const x = ref('');
 </script>
 <template>
- <AddAttributeModal v-model="isAddPropertyModalActive" :params="{ id: null, title: '' }" />
- <!-- <CardBoxModal v-model="isAddPropertyModalActive" button="info" button-label="اضافة" :submit-function="pushToComparisons">
-        <MultipleInputs v-model="title" placeholder="ادخل البيان لهذا العنصر" type="text" />
-    </CardBoxModal> -->
- <!-- <CardBoxModal v-model="isModalActive" title="النتيجة">
-    <p>
-      قيمة المتر <b>{{ result ? result : 0 }} ريال</b>
-    </p>
-  </CardBoxModal> -->
+ <AddAttributeModal v-model="isAddPropertyModalActive" />
  <form ref="form" action="" @submit.prevent="onSubmit">
   <AddingBar :clicked-function="pushToRealestates" title="اضافة عقار" class="mt-3" />
   <table>
@@ -198,14 +76,6 @@
        :inputOnePlaceholder="index === 0 ? 'السعر' : index === properties.length - 1 ? 'لايوجد' : 'التسوية'"
        required
       />
-      <!-- <MultipleInputs
-                            v-if="index !== 0 && RealestateIndex !== 0 && index !== multiArray[0].length - 1"
-                            v-model="multiArray[RealestateIndex][index].value"
-                            :name="`compairson_value_${index}`"
-                            placeholder="القيمة"
-                            :value="index !== 0 && RealestateIndex !== 0 && index !== multiArray[0].length - 1 ? 'لايوجد' : ''"
-                            required
-                        /> -->
       <MultipleInputs
        v-if="RealestateIndex !== 0"
        v-model="multiArray[RealestateIndex][index].percentage"
@@ -222,7 +92,6 @@
    </tbody>
   </table>
   <AddingBar :clickedFunction="() => (isAddPropertyModalActive = true)" title="اضافة عامل" class="mt-3" />
-
   <div class="flex items-center justify-between">
    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">تقييم</button>
   </div>

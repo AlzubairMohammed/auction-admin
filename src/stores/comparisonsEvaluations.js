@@ -6,7 +6,87 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
    url: '/comparisonsEvaluations',
    comparisonsEvaluations: [],
    comparisonsEvaluation: {
-    properties: [],
+    properties: ['السعر', 'ظروف السوق', 'شروط التمويل', 'الاستخدام', 'عدد الشوارع', 'المرجح الموزون'],
+    comparisons: [
+     [
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+     ],
+     [
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+     ],
+     [
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+      {
+       value: '',
+       percentage: '',
+      },
+     ],
+    ],
    },
   };
  },
@@ -25,9 +105,15 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
    return request.get(`${this.url}/${id}`);
   },
   addComparisonsEvaluation(comparisonsEvaluation) {
-   request.post(this.url, comparisonsEvaluation).then((response) => {
-    this.comparisonsEvaluation = response.data;
-   });
+   request
+    .post(this.url, comparisonsEvaluation, {
+     headers: {
+      'Content-Type': 'application/json',
+     },
+    })
+    .then((response) => {
+     this.comparisonsEvaluation = response.data;
+    });
   },
   removeComparisonsEvaluation(id) {
    request.delete(this.url, id).then(() => {

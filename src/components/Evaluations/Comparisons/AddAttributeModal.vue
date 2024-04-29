@@ -1,3 +1,67 @@
+<script setup>
+ import { Dialog, DialogOverlay, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
+ import { computed, ref } from 'vue';
+ import { defineProps } from 'vue';
+ import { useComparisonsEvaluationsStore } from '@/stores/comparisonsEvaluations';
+ const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
+ let properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
+ let comparisons = comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
+ let propertyName = ref('');
+ const props = defineProps({
+  title: {
+   type: String,
+   required: true,
+  },
+  button: {
+   type: String,
+   default: 'info',
+  },
+  buttonLabel: {
+   type: String,
+   default: '',
+  },
+  hasCancel: Boolean,
+  modelValue: {
+   type: [String, Number, Boolean],
+   default: null,
+  },
+  submitFunction: '',
+  params: '',
+ });
+
+ const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
+
+ const value = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value),
+ });
+
+ const confirmCancel = (mode) => {
+  value.value = false;
+  emit(mode);
+ };
+
+ const confirm = () => {
+  confirmCancel('confirm');
+  properties.splice(properties.length - 1, 0, propertyName.value);
+  console.log('this comparisons 1', comparisons);
+  comparisons.forEach((comparison) => {
+   comparison.splice(comparison.length - 1, 0, {
+    value: '',
+    percentage: '',
+   });
+  });
+  console.log('this comparisons 2', comparisons);
+ };
+
+ const cancel = () => confirmCancel('cancel');
+
+ window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && value.value) {
+   cancel();
+  }
+ });
+</script>
 <template>
  <TransitionRoot appear :show="value || false" as="template">
   <Dialog as="div" @close="!value" class="relative z-[51]">
@@ -33,17 +97,17 @@
         <icon-x />
        </button>
        <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]">
-        {{ params.id ? 'تعديل معامل' : 'اضافة معامل' }}
+        {{ params?.id ? 'تعديل معامل' : 'اضافة معامل' }}
        </div>
        <div class="p-5">
-        <form @submit.prevent="saveAttribute">
+        <form @submit.prevent="confirm">
          <div class="mb-5">
-          <input id="title" type="text" placeholder="ادخل اسم المعامل" class="form-input" v-model="params.title" />
+          <input id="title" type="text" placeholder="ادخل اسم المعامل" class="form-input" v-model="propertyName" />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
           <button type="button" class="btn btn-outline-danger" @click="cancel">الغاء</button>
           <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4">
-           {{ params.id ? 'تعديل' : 'اضافة' }}
+           {{ params?.id ? 'تعديل' : 'اضافة' }}
           </button>
          </div>
         </form>
@@ -55,62 +119,3 @@
   </Dialog>
  </TransitionRoot>
 </template>
-
-<script setup>
- import { Dialog, DialogOverlay, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
- import { computed, ref } from 'vue';
- import { defineProps } from 'vue';
-
- const props = defineProps({
-  title: {
-   type: String,
-   required: true,
-  },
-  button: {
-   type: String,
-   default: 'info',
-  },
-  buttonLabel: {
-   type: String,
-   default: '',
-  },
-  hasCancel: Boolean,
-  modelValue: {
-   type: [String, Number, Boolean],
-   default: null,
-  },
-  submitFunction: {
-   type: Function, // Add the new prop for the submit function
-   required: true,
-  },
-  params: {
-   id: null,
-   title: '',
-  },
- });
-
- const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
-
- const value = computed({
-  get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value),
- });
-
- const confirmCancel = (mode) => {
-  value.value = false;
-  emit(mode);
- };
-
- const confirm = () => {
-  confirmCancel('confirm');
-  props.submitFunction(); // Call the submit function when confirming
- };
-
- const cancel = () => confirmCancel('cancel');
-
- window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && value.value) {
-   cancel();
-  }
- });
-</script>
