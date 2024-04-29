@@ -46,7 +46,7 @@
           <router-link to="/evaluations/comparisons" @click="toggleMobileMenu">{{ $t('comparisons_evaluation') }}</router-link>
          </li>
          <li>
-          <router-link to="/analytics" @click="toggleMobileMenu">{{ $t('direct_capitlization_evaluation') }}</router-link>
+          <router-link to="/evaluations/direct-capitlization" @click="toggleMobileMenu">{{ $t('direct_capitlization_evaluation') }}</router-link>
          </li>
          <li>
           <router-link to="/evaluations/cost" @click="toggleMobileMenu">{{ $t('cost_evaluation') }}</router-link>
