@@ -54,7 +54,41 @@
         </ul>
        </vue-collapsible>
       </li>
+      <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
+       <icon-minus class="w-4 h-5 flex-none hidden" />
+       <span>{{ $t('evaluation') }}</span>
+      </h2>
 
+      <li class="nav-item">
+       <ul>
+        <li class="nav-item">
+         <router-link to="/evaluations/comparisons" @click="toggleMobileMenu">
+          <div class="flex items-center">
+           <icon-menu-mailbox class="group-hover:!text-primary shrink-0" />
+
+           <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('comparisons_evaluation') }}</span>
+          </div>
+         </router-link>
+        </li>
+        <li class="nav-item">
+         <router-link to="/evaluations/direct-capitlization" @click="toggleMobileMenu">
+          <div class="flex items-center">
+           <icon-menu-todo class="group-hover:!text-primary shrink-0" />
+           <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('direct_capitlization_evaluation') }}</span>
+          </div>
+         </router-link>
+        </li>
+        <li class="nav-item">
+         <router-link to="/evaluations/cost" @click="toggleMobileMenu">
+          <div class="flex items-center">
+           <icon-menu-chat class="group-hover:!text-primary shrink-0" />
+
+           <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('cost_evaluation') }}</span>
+          </div>
+         </router-link>
+        </li>
+       </ul>
+      </li>
       <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
        <icon-minus class="w-4 h-5 flex-none hidden" />
        <span>{{ $t('evaluation') }}</span>
@@ -93,7 +127,7 @@
 
       <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
        <icon-minus class="w-4 h-5 flex-none hidden" />
-       <span>{{ $t('user_and_pages') }}</span>
+       <span>{{ $t('user_and_permissions') }}</span>
       </h2>
 
       <li class="menu nav-item">
@@ -134,7 +168,7 @@
         <div class="flex items-center">
          <icon-menu-pages class="group-hover:!text-primary shrink-0" />
 
-         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('pages') }}</span>
+         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('permissions') }}</span>
         </div>
         <div :class="{ 'rtl:rotate-90 -rotate-90': activeDropdown !== 'pages' }">
          <icon-caret-down />
@@ -203,7 +237,7 @@
         <div class="flex items-center">
          <icon-menu-authentication class="group-hover:!text-primary shrink-0" />
 
-         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('authentication') }}</span>
+         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('roles') }}</span>
         </div>
         <div :class="{ 'rtl:rotate-90 -rotate-90': activeDropdown !== 'authentication' }">
          <icon-caret-down />

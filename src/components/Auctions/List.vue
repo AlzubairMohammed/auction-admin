@@ -1,90 +1,130 @@
 <script setup>
  import { ref, onMounted } from 'vue';
- import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
+ import Vue3Datatable from '@bhplugin/vue3-datatable';
  import IconPencil from '@/components/icon/icon-pencil.vue';
  import { useAuctionsStore } from '@/stores/auctions';
  import { useAppStore } from '@/stores/index';
+ import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
+ import IconPlus from '@/components/icon/icon-plus.vue';
+ import IconEdit from '@/components/icon/icon-edit.vue';
+ import IconEye from '@/components/icon/icon-eye.vue';
  const store = useAppStore();
  const useAuctions = useAuctionsStore();
  const tableData = ref([]);
+ const cols = ref([
+  { field: 'assignment_number', title: 'رقم التكليف' },
+  { field: 'name', title: 'اسم المزاد' },
+  { field: 'actions', title: 'العمليات' },
+ ]);
+ const items = ref([
+  {
+   assignment_number: 1,
+   name: 'Calendar App Customization',
+  },
+ ]);
  onMounted(async () => {
   store.isShowMainLoader = true;
   await useAuctions.fetchAuctions();
   tableData.value = useAuctions.auctions;
   console.log(tableData.value);
  });
+ const searchText = ref('');
+ const columns = ref(['id', 'invoice', 'name', 'email', 'date', 'amount', 'status', 'actions']);
+ const tableOption = ref({
+  headings: {
+   id: (h, row, index) => {
+    return '#';
+   },
+  },
+  perPage: 10,
+  perPageValues: [10, 20, 30, 50, 100],
+  skin: 'table-hover',
+  columnsClasses: { actions: 'actions !text-center w-1' },
+  pagination: { show: true, nav: 'scroll', chunk: 10 },
+  texts: {
+   filter: '',
+   filterPlaceholder: 'بحث...',
+   limit: '',
+  },
+  resizableColumns: false,
+  sortable: ['invoice', 'name', 'email', 'date', 'amount', 'status'],
+  sortIcon: {
+   base: 'sort-icon-none',
+   up: 'sort-icon-asc',
+   down: 'sort-icon-desc',
+  },
+ });
+
+ const data = tableData.value;
 </script>
 <template>
- <div class="panel">
-  <div class="mb-5">
-   <div class="table-responsive">
-    <table>
-     <thead>
-      <tr>
-       <th>#</th>
-       <th>الاسم</th>
-       <th>رقم التكليف</th>
-       <!-- <th>الحالة</th> -->
-       <th>تاريخ البداية</th>
-       <th>تاريخ النهاية</th>
+ <div>
+  <div class="panel px-0 pb-1.5 border-[#e0e6ed] dark:border-[#1b2e4b]">
+   <div class="datatable invoice-table">
+    <div class="mb-4.5 px-5 flex md:items-center md:flex-row flex-col gap-5">
+     <div class="flex items-center gap-2">
+      <button type="button" class="btn btn-danger gap-2" @click="deleteRow()">
+       <icon-trash-lines />
+       Delete
+      </button>
+      <router-link to="/apps/invoice/add" class="btn btn-primary gap-2">
+       <icon-plus />
+       Add New
+      </router-link>
+     </div>
+     <div class="ltr:ml-auto rtl:mr-auto">
+      <input v-model="search" type="text" class="form-input" placeholder="بحث..." />
+     </div>
+    </div>
 
-       <th class="text-center">العمليات</th>
-      </tr>
-     </thead>
-     <tbody>
-      <template v-for="(data, index) in tableData" :key="data?.id">
-       <tr>
-        <td>{{ ++index }}</td>
-        <td class="whitespace-nowrap">{{ data?.name }}</td>
-        <td>{{ data?.start_date }}</td>
-        <td>{{ data?.end_date }}</td>
-        <td>{{ data?.assignment_number }}</td>
-        <!-- <td
-         class="whitespace-nowrap"
-         :class="{
-          'text-success': data?.status === 'Complete',
-          'text-secondary': data?.status === 'Pending',
-          'text-info': data?.status === 'In Progress',
-          'text-danger': data?.status === 'Canceled',
-         }"
-        >
-         {{ data?.name }}
-        </td> -->
-        <td class="pr-5 pl-0 border-b border-[#ebedf2] dark:border-[#191e3a] text-center">
-         <div class="flex items-center">
-          <div>
-           <button type="button" v-tippy:edit>
-            <icon-pencil class="ltr:mr-2 rtl:ml-2" />
-           </button>
-           <tippy target="edit">تعديل</tippy>
-          </div>
-          <div>
-           <button type="button" v-tippy:delete>
-            <icon-trash-lines />
-           </button>
-           <tippy target="delete">حذف</tippy>
-          </div>
-          <div>
-           <button type="button" class="pr-3" v-tippy:report>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 24 24">
-             <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
-              <path
-               d="M12.25 2.834c-.46-.078-1.088-.084-2.22-.084c-1.917 0-3.28.002-4.312.14c-1.012.135-1.593.39-2.016.812c-.423.423-.677 1.003-.812 2.009c-.138 1.028-.14 2.382-.14 4.29v4c0 1.906.002 3.26.14 4.288c.135 1.006.389 1.586.812 2.01c.423.422 1.003.676 2.009.811c1.028.139 2.382.14 4.289.14h4c1.907 0 3.262-.002 4.29-.14c1.005-.135 1.585-.389 2.008-.812c.423-.423.677-1.003.812-2.009c.138-1.027.14-2.382.14-4.289v-.437c0-1.536-.01-2.264-.174-2.813h-3.13c-1.133 0-2.058 0-2.79-.098c-.763-.103-1.425-.325-1.954-.854c-.529-.529-.751-1.19-.854-1.955c-.098-.73-.098-1.656-.098-2.79zm1.5.776V5c0 1.2.002 2.024.085 2.643c.08.598.224.891.428 1.094c.203.204.496.348 1.094.428c.619.083 1.443.085 2.643.085h2.02a45.815 45.815 0 0 0-1.17-1.076l-3.959-3.563A37.2 37.2 0 0 0 13.75 3.61m-3.575-2.36c1.385 0 2.28 0 3.103.315c.823.316 1.485.912 2.51 1.835l.107.096l3.958 3.563l.125.112c1.184 1.065 1.95 1.754 2.361 2.678c.412.924.412 1.954.411 3.546v.661c0 1.838 0 3.294-.153 4.433c-.158 1.172-.49 2.121-1.238 2.87c-.749.748-1.698 1.08-2.87 1.238c-1.14.153-2.595.153-4.433.153H9.944c-1.838 0-3.294 0-4.433-.153c-1.172-.158-2.121-.49-2.87-1.238c-.748-.749-1.08-1.698-1.238-2.87c-.153-1.14-.153-2.595-.153-4.433V9.945c0-1.838 0-3.294.153-4.433c.158-1.172.49-2.121 1.238-2.87c.75-.749 1.701-1.08 2.878-1.238c1.144-.153 2.607-.153 4.455-.153h.056z"
-              />
-              <path
-               d="M11.547 16.513a.75.75 0 0 0 0-1.026l-1.875-2a.75.75 0 1 0-1.094 1.026l.69.737H6a.75.75 0 1 0 0 1.5h3.269l-.691.737a.75.75 0 1 0 1.094 1.026z"
-              />
-             </g>
-            </svg>
-           </button>
-           <tippy target="report">تقرير</tippy>
-          </div>
-         </div>
-        </td>
-       </tr>
-      </template>
-     </tbody>
-    </table>
+    <vue3-datatable
+     ref="datatable"
+     :rows="items"
+     :columns="cols"
+     :totalRows="items?.length"
+     :hasCheckbox="true"
+     :sortable="true"
+     :search="search"
+     :paginationInfo="`عرض ${1} to {to} of {count} entries`"
+     skin="whitespace-nowrap bh-table-hover"
+     firstArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M13 19L7 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M16.9998 19L10.9998 12L16.9998 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+     lastArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg> '
+     previousArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+     nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+    >
+     <template #invoice="data">
+      <router-link to="/apps/invoice/preview" class="text-primary underline font-semibold hover:no-underline">#{{ data.assignment_number }}</router-link>
+     </template>
+     <template #name="data">
+      <div class="flex items-center font-semibold">
+       <div class="p-0.5 bg-white-dark/30 rounded-full w-max ltr:mr-2 rtl:ml-2">
+        <img class="h-8 w-8 rounded-full object-cover" :src="`/assets/images/profile-${data.assignment_number}.jpeg`" />
+       </div>
+       {{ data.value.name }}
+      </div>
+     </template>
+     <template #amount="data">
+      <div class="font-semibold ltr:text-right rtl:text-left">${{ data.name }}</div>
+     </template>
+     <!-- <template #status="data">
+      <span class="badge" :class="[data.value.status.toLowerCase() === 'paid' ? 'badge-outline-success' : 'badge-outline-danger']">{{
+       data.value.status
+      }}</span>
+     </template> -->
+     <template #actions="data">
+      <div class="flex gap-4 items-center justify-center">
+       <router-link to="/apps/invoice/edit" class="hover:text-info">
+        <icon-edit class="w-4.5 h-4.5" />
+       </router-link>
+       <router-link to="/apps/invoice/preview" class="hover:text-primary">
+        <icon-eye />
+       </router-link>
+       <button type="button" class="hover:text-danger" @click="deleteRow(`${data.assignment_number}`)">
+        <icon-trash-lines />
+       </button>
+      </div>
+     </template>
+    </vue3-datatable>
    </div>
   </div>
  </div>
