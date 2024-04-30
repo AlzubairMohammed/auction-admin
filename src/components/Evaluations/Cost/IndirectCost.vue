@@ -10,27 +10,11 @@
  let name = ref('');
  const totalIndirectCost = ref(0);
  const costEvaluationSotre = useCostEvaluationsStore();
- const itemsData = costEvaluationSotre.IndirectCostOperations;
-
- //  const indirectTotal = () => {
- //   console.log(directTotalCost);
- //   let sum = 0;
- //   for (const item of itemsData) {
- //    sum += (directTotalCost.value / 100) * item.precentage;
- //   }
- //   totalIndirectCost.value = sum;
- //   costEvaluationSotre.totalIndirectCost = totalIndirectCost.value + directTotalCost.value;
- //   isResultModalActive.value = true;
- //  };
-
- const pushItem = () => {
-  itemsData.push({ name: name.value, precentage: '' });
-  name.value = '';
- };
+ const itemsData = costEvaluationSotre.costEvaluation.indirectCostOperations;
 </script>
 <template>
  <form @submit.prevent="submit" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
-  <AddPropertyModal v-model="isModalActive" button="info" button-label="اضافة" :submit-function="pushItem" />
+  <AddPropertyModal v-model="isModalActive" button="info" button-label="اضافة" />
   <AddingBar :clicked-function="() => (isModalActive = true)" title="اضافة عنصر" class="mt-3" />
   <table>
    <thead>

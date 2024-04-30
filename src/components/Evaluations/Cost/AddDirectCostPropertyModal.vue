@@ -22,7 +22,7 @@
  //   isResultModalActive.value = true;
  //  };
  const pushItem = async () => {
-  await costEvaluationsSotre.directCostOperations.push(formData.value);
+  await costEvaluationsSotre.costEvaluation.directCostOperations.push(formData.value);
   formData.value = { id: null, name: '', area: 0, meter_price: 0 };
   confirmCancel('confirm');
  };

@@ -24,8 +24,8 @@
  //   isResultModalActive.value = true;
  //  };
  const pushItem = async () => {
-  await costEvaluationsSotre.IndirectCostOperations.push(formData.value);
-  formData.value = { id: null, name: '', area: 0, price: 0, percentage: 0, costType: '' };
+  await costEvaluationsSotre.costEvaluation.indirectCostOperations.push(formData.value);
+  formData.value = { id: null, name: '', price: 0, percentage: 0, costType: '' };
   confirmCancel('confirm');
  };
 

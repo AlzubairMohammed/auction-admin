@@ -1,29 +1,35 @@
 import { defineStore } from 'pinia';
+import request from '@/services/request';
 export const useCostEvaluationsStore = defineStore('costEvaluations', {
  state: () => {
   return {
+   url: '/costEvaluations',
    list: [],
    isLoading: false,
    searchQuery: '',
    total: 0,
    page: 1,
    perPage: 10,
-   directCostOperations: [],
-   IndirectCostOperations: [],
+   costEvaluation: {
+    realestate_id: 7,
+    directCostOperations: [],
+    indirectCostOperations: [],
+    depreciationRate: {},
+   },
   };
  },
  actions: {
-  reset() {
-   this.list = [];
-   this.total = 0;
-   this.page = 1;
-   this.perPage = 10;
-   this.isOpenFilter = false;
-   this.filter = {
-    status: null,
-    startDate: '',
-    endDate: '',
-   };
+  addCostEvaluation: async function () {
+   console.log(this.url);
+   await request
+    .post(this.url, this.costEvaluation, {
+     headers: {
+      'Content-Type': 'application/json',
+     },
+    })
+    .then((response) => {
+     this.list.push(response.data);
+    });
   },
  },
 });
