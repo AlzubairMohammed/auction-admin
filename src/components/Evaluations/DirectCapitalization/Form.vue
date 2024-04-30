@@ -11,7 +11,7 @@
  //  };
 </script>
 <template>
- <form @submit.prevent="directCapitalizationsStore.addDirectCapitalization">
+ <form @submit.prevent="directCapitalizationsStore.addDirectCapitalization" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
   <div class="flex flex-col space-y-4">
    <BasicInput v-model="form.cross_income" type="number" required placeholder="اجمالي الدخل للعقار" />
    <BasicInput v-model="form.operation_income_rate" placeholder="نسبة مصاريف التشغيل و الصيانة" type="number" />

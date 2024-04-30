@@ -36,26 +36,28 @@
  };
 </script>
 <template>
- <table>
-  <tbody>
-   <tr>
-    <td class="text-center">نوع الاهلاك</td>
-    <td>
-     <SingleSelectInput v-model="realestateAge" type="select" :options="[{ name: 'العمر المتدد' }, { name: 'الثابت' }]" />
-    </td>
-   </tr>
-   <tr>
-    <td class="text-center">عمر المبني</td>
-    <td>
-     <BasicInput v-model="realestateAge" type="number" class="text-center" />
-    </td>
-   </tr>
-   <tr>
-    <td class="text-center">العمر الافتراضي</td>
-    <td>
-     <BasicInput v-model="virsualRealestateAge" type="number" class="text-center" />
-    </td>
-   </tr>
-  </tbody>
- </table>
+ <form @submit.prevent="submit" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
+  <table>
+   <tbody>
+    <tr>
+     <td class="text-center">نوع الاهلاك</td>
+     <td>
+      <SingleSelectInput v-model="realestateAge" type="select" :options="[{ name: 'العمر المتدد' }, { name: 'الثابت' }]" />
+     </td>
+    </tr>
+    <tr>
+     <td class="text-center">عمر المبني</td>
+     <td>
+      <BasicInput v-model="realestateAge" type="number" class="text-center" />
+     </td>
+    </tr>
+    <tr>
+     <td class="text-center">العمر الافتراضي</td>
+     <td>
+      <BasicInput v-model="virsualRealestateAge" type="number" class="text-center" />
+     </td>
+    </tr>
+   </tbody>
+  </table>
+ </form>
 </template>

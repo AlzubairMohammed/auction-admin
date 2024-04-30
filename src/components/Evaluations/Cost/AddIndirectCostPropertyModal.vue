@@ -7,9 +7,11 @@
 
  const formData = ref({
   id: null,
-  title: '',
-  area: '',
-  price: '',
+  name: '',
+  area: 0,
+  price: 0,
+  percentage: 0,
+  costType: '',
  });
  const isModalActive = ref(false);
 
@@ -23,7 +25,7 @@
  //  };
  const pushItem = async () => {
   await costEvaluationsSotre.IndirectCostOperations.push(formData.value);
-  formData.value = { id: null, title: '', area: '', price: '' };
+  formData.value = { id: null, name: '', area: 0, price: 0, percentage: 0, costType: '' };
   confirmCancel('confirm');
  };
 
@@ -100,16 +102,18 @@
        <div class="p-5">
         <form @submit.prevent="pushItem">
          <div class="mb-5">
-          <input id="title" type="text" placeholder="ادخل اسم البيان" class="form-input" v-model="formData.title" />
+          <input id="name" type="text" placeholder="ادخل اسم البيان" class="form-input" v-model="formData.name" />
          </div>
          <div class="mb-5">
           <SingleSelectInput
-           :options="[{ name: 'نسبة' }, { name: 'ريال' }]"
+           :options="[
+            { name: 'نسبة', id: 'percentage' },
+            { name: 'ريال', id: 'price' },
+           ]"
+           @on-select="formData.costType = $event.id"
            id="type"
            type="text"
            placeholder="ادخل نوع البيان"
-           class="form-input"
-           v-model="formData.type"
           />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">

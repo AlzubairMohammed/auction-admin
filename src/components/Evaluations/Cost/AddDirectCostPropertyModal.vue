@@ -7,23 +7,23 @@
 
  const formData = ref({
   id: null,
-  title: '',
+  name: '',
   area: '',
-  price: '',
+  meter_price: '',
  });
  const isModalActive = ref(false);
 
  //   directTotal () => {
  //   let sum = 0;
  //   for (const item of items) {
- //    sum += item?.price * item?.area;
+ //    sum += item?.meter_price * item?.area;
  //   }
  //   costEvaluationsSotre?.directCostOperations?.directTotalCost = sum;
  //   isResultModalActive.value = true;
  //  };
  const pushItem = async () => {
   await costEvaluationsSotre.directCostOperations.push(formData.value);
-  formData.value = { id: null, title: '', area: '', price: '' };
+  formData.value = { id: null, name: '', area: 0, meter_price: 0 };
   confirmCancel('confirm');
  };
 
@@ -100,7 +100,7 @@
        <div class="p-5">
         <form @submit.prevent="pushItem">
          <div class="mb-5">
-          <input id="title" type="text" placeholder="ادخل اسم البيان" class="form-input" v-model="formData.title" />
+          <input id="name" type="text" placeholder="ادخل اسم البيان" class="form-input" v-model="formData.name" />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
           <button type="button" class="btn btn-outline-danger" @click="cancel">الغاء</button>
