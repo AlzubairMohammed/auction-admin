@@ -51,6 +51,12 @@ const routes = [
   component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/direct-capitlization.vue'),
   meta: { layout: 'app' },
  },
+ {
+  path: '/auctions/preview-page',
+  name: 'auctions/preview-page',
+  component: () => import(/* webpackChunkName: "preview-page */ '../views/auctions/preview-page.vue'),
+  meta: { layout: 'app' },
+ },
 ];
 
 const router = createRouter({
