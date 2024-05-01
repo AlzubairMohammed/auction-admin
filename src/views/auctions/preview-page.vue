@@ -10,18 +10,20 @@
     <icon-plus />
     اضافة
    </router-link>
-   <router-link to="/auctions/edit-page" class="btn btn-warning gap-2">
+   <router-link :to="`/auctions/edit-page/${auction?.data?.id}`" class="btn btn-warning gap-2">
     <icon-edit />
     تعديل
    </router-link>
   </div>
   <div id="report" class="panel">
+   <!-- title and logo -->
    <div class="flex justify-between flex-wrap gap-4 px-4">
     <div class="text-2xl font-semibold uppercase">تقرير مزاد</div>
     <div class="shrink-0">
      <img src="/assets/images/logo.svg" alt="" class="w-14 ltr:ml-auto rtl:mr-auto" />
     </div>
    </div>
+   <!-- Header -->
    <div class="ltr:text-right rtl:text-left px-4">
     <div class="space-y-1 mt-6 text-white-dark">
      <div>13 شركة اكشن, للمزدات والتقييم العقاري, 33884,</div>
@@ -29,11 +31,11 @@
      <div>966503553231</div>
     </div>
    </div>
-
    <hr class="border-[#e0e6ed] dark:border-[#1b2e4b] my-6" />
+   <!-- Auction Details -->
    <div class="flex justify-between lg:flex-row flex-col gap-6 flex-wrap">
-    <div class="flex justify-between sm:flex-row flex-col gap-6 lg:w-2/3">
-     <div class="xl:1/3 lg:w-2/5 sm:w-1/2">
+    <div class="flex justify-between sm:flex-row flex-col gap-6 lg:w-full">
+     <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">اسم المزاد :</div>
        <div>{{ auction?.data?.name }}</div>
@@ -42,84 +44,50 @@
        <div class="text-white-dark">تاريخ الإنشاء :</div>
        <div>{{ auction?.data?.created.substring(0, 10) }}</div>
       </div>
+     </div>
+     <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">تاريخ البداية :</div>
        <div>{{ auction?.data?.start_date }}</div>
       </div>
+     </div>
+     <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between">
        <div class="text-white-dark">تاريخ النهاية :</div>
        <div>{{ auction?.data?.end_date }}</div>
       </div>
      </div>
-     <div class="xl:1/3 lg:w-2/5 sm:w-1/2">
-      <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">Bank Name:</div>
-       <div class="whitespace-nowrap">Bank Of America</div>
-      </div>
-      <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">Account Number:</div>
-       <div>1234567890</div>
-      </div>
-      <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">SWIFT Code:</div>
-       <div>S58K796</div>
-      </div>
-      <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">IBAN:</div>
-       <div>L5698445485</div>
-      </div>
-      <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">Country:</div>
-       <div>United States</div>
-      </div>
-     </div>
     </div>
    </div>
-   <div class="table-responsive mt-6">
-    <table class="table-striped">
+
+   <!-- realestates details -->
+   <div v-for="(item, index) in auction?.data?.realestates" class="table-responsive mt-6">
+    <h1 class="text-2xl font-semibold text-center">{{ `عقار رقم ${index + 1}` }}</h1>
+    <table class="table table-bordered">
      <thead>
       <tr>
-       <template v-for="item in columns" :key="item.key">
-        <th :class="[item.class]">{{ item.label }}</th>
-       </template>
+       <th>اسم العميل</th>
+       <th>رقم العميل</th>
+       <th>اسم المالك</th>
+       <th>رقم المالك</th>
       </tr>
      </thead>
      <tbody>
-      <template v-for="item in items" :key="item.id">
-       <tr>
-        <td>{{ item.id }}</td>
-        <td>{{ item.title }}</td>
-        <td>{{ item.quantity }}</td>
-        <td class="ltr:text-right rtl:text-left">${{ item.price }}</td>
-        <td class="ltr:text-right rtl:text-left">${{ item.amount }}</td>
-       </tr>
-      </template>
+      <tr>
+       <td>{{ item.customer_name }}</td>
+       <td>{{ item.customer_number }}</td>
+       <td>{{ item.owner_name }}</td>
+       <td>{{ item.owner_number }}</td>
+      </tr>
      </tbody>
     </table>
-   </div>
-   <div class="grid sm:grid-cols-2 grid-cols-1 px-4 mt-6">
-    <div></div>
-    <div class="ltr:text-right rtl:text-left space-y-2">
-     <div class="flex items-center">
-      <div class="flex-1">Subtotal</div>
-      <div class="w-[37%]">$3255</div>
-     </div>
-     <div class="flex items-center">
-      <div class="flex-1">Tax</div>
-      <div class="w-[37%]">$700</div>
-     </div>
-     <div class="flex items-center">
-      <div class="flex-1">Shipping Rate</div>
-      <div class="w-[37%]">$0</div>
-     </div>
-     <div class="flex items-center">
-      <div class="flex-1">Discount</div>
-      <div class="w-[37%]">$10</div>
-     </div>
-     <div class="flex items-center font-semibold text-lg">
-      <div class="flex-1">Grand Total</div>
-      <div class="w-[37%]">$3945</div>
-     </div>
+    <div class="flex flex-wrap">
+     <img
+      v-for="image in item.realestate_images.slice(0, 5)"
+      :src="`http://localhost:7070/uploads/realestates/${image.path}`"
+      alt=""
+      class="w-1/5 p-2 rounded"
+     />
     </div>
    </div>
   </div>

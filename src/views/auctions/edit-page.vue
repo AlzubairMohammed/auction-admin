@@ -443,6 +443,7 @@
   },
   notes: 'It was a pleasure working with you and your team. We hope you will keep us in mind for future freelance projects. Thank You!',
  });
+ const number = ref(0);
  const currencyList = ref([
   'USD - US Dollar',
   'GBP - British Pound',

@@ -57,6 +57,12 @@ const routes = [
   component: () => import(/* webpackChunkName: "preview-page */ '../views/auctions/preview-page.vue'),
   meta: { layout: 'app' },
  },
+ {
+  path: '/auctions/edit-page/:id',
+  name: 'auctions/edit-page',
+  component: () => import(/* webpackChunkName: "edit-page */ '../views/auctions/edit-page.vue'),
+  meta: { layout: 'app' },
+ },
 ];
 
 const router = createRouter({
