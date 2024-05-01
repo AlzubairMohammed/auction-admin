@@ -52,7 +52,7 @@ const routes = [
   meta: { layout: 'app' },
  },
  {
-  path: '/auctions/preview-page',
+  path: '/auctions/preview-page/:id',
   name: 'auctions/preview-page',
   component: () => import(/* webpackChunkName: "preview-page */ '../views/auctions/preview-page.vue'),
   meta: { layout: 'app' },

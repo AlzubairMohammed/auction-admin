@@ -38,8 +38,8 @@ export const useAuctionsStore = defineStore('auctions', {
     }
    });
   },
-  getAuction(id) {
-   return request.get(`${this.url}/${id}`);
+  getAuction: async function (id) {
+   return await request.get(`${this.url}/${id}`);
   },
   addAuction: async function (auction) {
    this.auctionErrors.assignment_number = '';

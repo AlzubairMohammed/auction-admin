@@ -10,12 +10,12 @@
     <icon-plus />
     اضافة
    </router-link>
-   <router-link to="/apps/invoice/edit" class="btn btn-warning gap-2">
+   <router-link to="/auctions/edit-page" class="btn btn-warning gap-2">
     <icon-edit />
     تعديل
    </router-link>
   </div>
-  <div class="panel">
+  <div id="report" class="panel">
    <div class="flex justify-between flex-wrap gap-4 px-4">
     <div class="text-2xl font-semibold uppercase">تقرير مزاد</div>
     <div class="shrink-0">
@@ -32,32 +32,23 @@
 
    <hr class="border-[#e0e6ed] dark:border-[#1b2e4b] my-6" />
    <div class="flex justify-between lg:flex-row flex-col gap-6 flex-wrap">
-    <div class="flex-1">
-     <div class="space-y-1 text-white-dark">
-      <div>Issue For:</div>
-      <div class="text-black dark:text-white font-semibold">John Doe</div>
-      <div>405 Mulberry Rd. Mc Grady, NC, 28649</div>
-      <div>redq@company.com</div>
-      <div>(128) 666 070</div>
-     </div>
-    </div>
     <div class="flex justify-between sm:flex-row flex-col gap-6 lg:w-2/3">
      <div class="xl:1/3 lg:w-2/5 sm:w-1/2">
       <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">Invoice :</div>
-       <div>#8701</div>
+       <div class="text-white-dark">اسم المزاد :</div>
+       <div>{{ auction?.data?.name }}</div>
       </div>
       <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">Issue Date :</div>
-       <div>13 Sep 2022</div>
+       <div class="text-white-dark">تاريخ الإنشاء :</div>
+       <div>{{ auction?.data?.created.substring(0, 10) }}</div>
       </div>
       <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">Order ID :</div>
-       <div>#OD-85794</div>
+       <div class="text-white-dark">تاريخ البداية :</div>
+       <div>{{ auction?.data?.start_date }}</div>
       </div>
       <div class="flex items-center w-full justify-between">
-       <div class="text-white-dark">Shipment ID :</div>
-       <div>#SHP-8594</div>
+       <div class="text-white-dark">تاريخ النهاية :</div>
+       <div>{{ auction?.data?.end_date }}</div>
       </div>
      </div>
      <div class="xl:1/3 lg:w-2/5 sm:w-1/2">
@@ -135,16 +126,17 @@
  </div>
 </template>
 <script setup>
- import { ref } from 'vue';
+ import { ref, computed, onBeforeMount, onMounted, onUpdated } from 'vue';
+ import { useRoute } from 'vue-router';
  import { useMeta } from '@/composables/use-meta';
- import IconSend from '@/components/icon/icon-send.vue';
  import IconPrinter from '@/components/icon/icon-printer.vue';
- import IconDownload from '@/components/icon/icon-download.vue';
  import IconPlus from '@/components/icon/icon-plus.vue';
  import IconEdit from '@/components/icon/icon-edit.vue';
-
+ import { useAuctionsStore } from '@/stores/auctions';
+ const auctionsStore = useAuctionsStore();
+ const route = useRoute();
  useMeta({ title: 'Invoice Preview' });
-
+ const auction = ref({});
  const items = ref([
   {
    id: 1,
@@ -199,8 +191,17 @@
    class: 'ltr:text-right rtl:text-left',
   },
  ]);
-
+ onBeforeMount(async () => {
+  auction.value = await auctionsStore.getAuction(route.params.id);
+ });
  const print = () => {
+  let printContents = document.getElementById('report').innerHTML;
+  let originalContents = document.body.innerHTML;
+
+  document.body.innerHTML = printContents;
+
   window.print();
+  window.location.reload();
+  document.body.innerHTML = originalContents;
  };
 </script>
