@@ -8,26 +8,24 @@
  import IconPlus from '@/components/icon/icon-plus.vue';
  import IconEdit from '@/components/icon/icon-edit.vue';
  import IconEye from '@/components/icon/icon-eye.vue';
+ const items = ref([]);
  const store = useAppStore();
  const useAuctions = useAuctionsStore();
  const tableData = ref([]);
  const cols = ref([
   { field: 'assignment_number', title: 'رقم التكليف' },
   { field: 'name', title: 'اسم المزاد' },
+  { field: 'id', title: 'رقم المزاد' },
+  { field: 'start_date', title: 'تاريخ البداية' },
+  { field: 'end_date', title: 'تاريخ البداية' },
   { field: 'actions', title: 'العمليات' },
- ]);
- const items = ref([
-  {
-   assignment_number: 1,
-   name: 'Calendar App Customization',
-  },
  ]);
  onMounted(async () => {
   store.isShowMainLoader = true;
   await useAuctions.fetchAuctions();
-  tableData.value = useAuctions.auctions;
-  console.log(tableData.value);
+  items.value = useAuctions.auctions;
  });
+
  const searchText = ref('');
  const columns = ref(['id', 'invoice', 'name', 'email', 'date', 'amount', 'status', 'actions']);
  const tableOption = ref({
@@ -63,13 +61,9 @@
    <div class="datatable invoice-table">
     <div class="mb-4.5 px-5 flex md:items-center md:flex-row flex-col gap-5">
      <div class="flex items-center gap-2">
-      <button type="button" class="btn btn-danger gap-2" @click="deleteRow()">
-       <icon-trash-lines />
-       Delete
-      </button>
-      <router-link to="/apps/invoice/add" class="btn btn-primary gap-2">
+      <router-link to="/auctions/add-page" class="btn btn-primary gap-2">
        <icon-plus />
-       Add New
+       اضافة جديد
       </router-link>
      </div>
      <div class="ltr:ml-auto rtl:mr-auto">
@@ -97,20 +91,10 @@
      </template>
      <template #name="data">
       <div class="flex items-center font-semibold">
-       <div class="p-0.5 bg-white-dark/30 rounded-full w-max ltr:mr-2 rtl:ml-2">
-        <img class="h-8 w-8 rounded-full object-cover" :src="`/assets/images/profile-${data.assignment_number}.jpeg`" />
-       </div>
        {{ data.value.name }}
       </div>
      </template>
-     <template #amount="data">
-      <div class="font-semibold ltr:text-right rtl:text-left">${{ data.name }}</div>
-     </template>
-     <!-- <template #status="data">
-      <span class="badge" :class="[data.value.status.toLowerCase() === 'paid' ? 'badge-outline-success' : 'badge-outline-danger']">{{
-       data.value.status
-      }}</span>
-     </template> -->
+
      <template #actions="data">
       <div class="flex gap-4 items-center justify-center">
        <router-link to="/apps/invoice/edit" class="hover:text-info">
