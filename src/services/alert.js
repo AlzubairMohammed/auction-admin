@@ -12,7 +12,7 @@ const responseAlert = (icon, title, text) => {
   timer: 3000,
  });
  setTimeout(() => {
-  window.location.reload();
+  //   window.location.reload();
  }, 1500);
 };
 

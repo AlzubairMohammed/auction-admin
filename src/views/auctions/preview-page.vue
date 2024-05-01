@@ -82,12 +82,7 @@
      </tbody>
     </table>
     <div class="flex flex-wrap">
-     <img
-      v-for="image in item.realestate_images.slice(0, 5)"
-      :src="`http://localhost:7070/uploads/realestates/${image.path}`"
-      alt=""
-      class="w-1/5 p-2 rounded"
-     />
+     <img v-for="image in item.realestate_images.slice(0, 5)" :src="`http://localhost:7070/${image.path}`" alt="" class="w-1/5 p-2 rounded" />
     </div>
    </div>
   </div>

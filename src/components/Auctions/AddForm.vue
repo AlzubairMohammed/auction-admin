@@ -4,6 +4,8 @@
  import DateInput from '@/components/Inputs/DateInput.vue';
  import { useAuctionsStore } from '@/stores/auctions';
  import { ref } from 'vue';
+ import { useRouter } from 'vue-router';
+ const router = useRouter();
  const auctionsStore = useAuctionsStore();
  const auctionErrors = auctionsStore.auctionErrors;
  let isAddPropertyModalActive = ref(false);
@@ -17,7 +19,7 @@
  });
  const submit = async () => {
   const data = await auctionsStore.addAuction(auctionData.value);
-  console.log(auctionData.value);
+  router.push({ name: 'realestates/add-page', params: { id: auctionsStore.auction.id } });
  };
 </script>
 <template>

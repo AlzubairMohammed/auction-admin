@@ -12,8 +12,10 @@
  import License from '@/components/Realestate/License.vue';
  import FileUpload from '@/components/Realestate/FileUpload.vue';
  import { ref, onMounted } from 'vue';
+ import { useRoute } from 'vue-router';
  import { useRealestatesStore } from '@/stores/realestates';
  const useStore = useRealestatesStore();
+ const router = useRoute();
  const customerData = useStore.realestate;
  const wizardRef = ref(null);
  useMeta({ title: 'Wizards' });
@@ -21,6 +23,7 @@
  const { codeArr, toggleCode } = codePreview();
 
  const onSubmit = () => {
+  customerData.auction_id = router.params.id;
   useStore.addRealestate(customerData, wizardRef.value);
  };
  const beforeChange = () => {

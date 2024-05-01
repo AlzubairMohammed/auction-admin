@@ -33,7 +33,7 @@ export const useRealestatesStore = defineStore('realestates', {
    files: '',
   },
   realestate: {
-   auction_id: 4,
+   auction_id: '',
    customer_name: '',
    customer_number: '',
    owner_name: '',
