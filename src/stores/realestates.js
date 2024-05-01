@@ -76,8 +76,8 @@ export const useRealestatesStore = defineStore('realestates', {
   },
  },
  actions: {
-  fetchRealestates() {
-   request.get(this.url).then((response) => {
+  fetchRealestates: async function () {
+   await request.get(this.url).then((response) => {
     this.realestates = response.data;
    });
   },

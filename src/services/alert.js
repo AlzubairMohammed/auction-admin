@@ -1,7 +1,7 @@
 import swal from 'sweetalert2';
 window.Swal = swal;
 
-const responseAlert = (icon, title, text) => {
+const responseAlert = (icon, title, text, isReload = true) => {
  swal.fire({
   title: title,
   text: text,
@@ -12,7 +12,7 @@ const responseAlert = (icon, title, text) => {
   timer: 3000,
  });
  setTimeout(() => {
-  //   window.location.reload();
+  isReload ? window.location.reload() : null;
  }, 1500);
 };
 

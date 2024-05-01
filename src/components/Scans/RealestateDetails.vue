@@ -12,16 +12,16 @@
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
  };
- const formData = ref([]);
+ const formData = useScans.scan.properties.filter((item) => !item.is_feature);
  const logTest = () => {
   console.log(test.value);
  };
  const removeProperty = async (id) => {
   await useScans.removeProperty(id);
  };
- onMounted(() => {
-  formData.value = useScans.scan.properties.filter((item) => !item.is_feature);
- });
+ //  onMounted(() => {
+ //   formData.value = ;
+ //  });
 </script>
 <template>
  <PropertiesModal v-model="isAddPropertyModalActive" />

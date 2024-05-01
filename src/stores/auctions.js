@@ -56,7 +56,7 @@ export const useAuctionsStore = defineStore('auctions', {
    if (Object.values(this.auctionErrors).some((r) => r !== '')) {
     return;
    }
-   await request.post(this.url, auction).then((response) => {
+   await request.post(this.url, auction, null, false).then((response) => {
     this.auction = response.data;
    });
   },

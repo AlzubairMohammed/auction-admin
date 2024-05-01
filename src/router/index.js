@@ -40,6 +40,12 @@ const routes = [
   meta: { layout: 'app' },
  },
  {
+  path: '/realestates/list-page',
+  name: 'realestates/list-page',
+  component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/realestates/list-page.vue'),
+  meta: { layout: 'app' },
+ },
+ {
   path: '/evaluations/cost',
   name: 'evaluations/cost',
   component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/cost.vue'),
