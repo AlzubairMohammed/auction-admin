@@ -14,10 +14,12 @@
  import { ref, onMounted } from 'vue';
  import { useRoute } from 'vue-router';
  import { useRealestatesStore } from '@/stores/realestates';
+ import SelectAucationModal from '@/components/Realestate/SelectAucationModal.vue';
  const useStore = useRealestatesStore();
  const router = useRoute();
  const customerData = useStore.realestate;
  const wizardRef = ref(null);
+ const isModalActive = ref(false);
  useMeta({ title: 'Wizards' });
 
  const { codeArr, toggleCode } = codePreview();
@@ -33,11 +35,15 @@
  };
  onMounted(() => {
   wizardRef.value.maxStep = 1;
+  if (!router.params.id) {
+   isModalActive.value = true;
+  }
  });
 </script>
 
 <template>
  <div>
+  <SelectAucationModal v-model="isModalActive" />
   <div class="pt-5 space-y-8">
    <div class="panel">
     <div class="mb-5">
