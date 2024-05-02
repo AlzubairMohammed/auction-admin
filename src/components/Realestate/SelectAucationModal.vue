@@ -1,24 +1,27 @@
 <script setup>
  import { Dialog, DialogOverlay, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
  import { computed, ref, onMounted } from 'vue';
+ import { useRouter } from 'vue-router';
  import { useAuctionsStore } from '@/stores/auctions';
+ import { useRealestatesStore } from '@/stores/realestates';
  import BasicInput from '@/components/inputs/BasicInput.vue';
  import SingleSelectInput from '@/components/inputs/SingleSelectInput.vue';
 
  const auctionsStore = useAuctionsStore();
-
- const formData = ref({
-  id: null,
-  name: '',
-  area: '',
-  meter_price: '',
- });
+ const realestateStore = useRealestatesStore();
+ const router = useRouter();
+ const realestate = realestateStore.realestate;
+ const options = ref([]);
+ const auction = auctionsStore.auction;
  const isModalActive = ref(false);
-
+ const formData = ref({
+  id: '',
+ });
  const props = defineProps({
   modelValue: '',
  });
-
+ const errorMessage = ref('');
+ const auctionId = ref('');
  const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
 
  const value = computed({
@@ -38,9 +41,43 @@
    cancel();
   }
  });
- onMounted(() => {
-  auctionsStore.fetchAuctions();
+ onMounted(async () => {
+  await auctionsStore.fetchAuctions();
+  auctionsStore.auctions.forEach((item) => {
+   options.value.push({ name: `${item[`${auction.key}`]}`, id: item.id });
+  });
+  console.log(options.value);
  });
+ const onSelectSearchMethod = (event) => {
+  auction.key = event.id;
+  options.value = [];
+  auctionsStore.auctions.forEach((item) => {
+   options.value.push({ name: `${item[`${event?.id}`]}`, id: item.id });
+  });
+ };
+ const searchAuctions = async () => {
+  await auctionsStore.fetchAuctions();
+  options.value = [];
+  auctionsStore.auctions.forEach((item) => {
+   options.value.push({ name: `${item[`${auction.key}`]}`, id: item.id });
+  });
+ };
+ const onSubmit = () => {
+  if (!auctionId.value) {
+   errorMessage.value = 'يجب اختيار المزاد';
+   return;
+  }
+  realestate.auction_id = auctionId.value;
+  value.value = false;
+ };
+ const onSelectAuction = (event) => {
+  auctionId.value = event.id;
+  errorMessage.value = '';
+ };
+ const goToAddAuction = () => {
+  value.value = false;
+  router.push({ name: 'auctions/add-page' });
+ };
 </script>
 <template>
  <TransitionRoot appear :show="value || false" as="template">
@@ -80,7 +117,7 @@
         {{ formData.id ? 'تعديل' : 'اختيار المزاد' }}
        </div>
        <div class="p-5">
-        <form @submit.prevent="pushItem">
+        <form @submit.prevent="onSubmit">
          <div class="mb-5 flex flex-wrap">
           <SingleSelectInput
            placeholder="اختر طريقة البحث"
@@ -89,20 +126,23 @@
             { name: 'رقم التكليف', id: 'assignment_number' },
             { name: 'اسم المزاد', id: 'name' },
            ]"
+           @on-select="onSelectSearchMethod"
            class="w-1/3 pr-2"
           />
-          <BasicInput id="name" type="text" placeholder="بحث" class="w-2/3 px-2" v-model="formData.name" />
+          <BasicInput id="name" type="text" placeholder="بحث" class="w-2/3 px-2" v-model="auction.value" @input="searchAuctions" />
           <SingleSelectInput
            id="auction_id"
            label="المزاد"
            placeholder="اختر المزاد"
-           class="w-full mt-2 px-2 mb-8"
+           class="w-full mt-2 px-2 mb-[50px]"
            v-model="formData.id"
-           :options="auctionsStore.auctions"
+           :options="options"
+           @on-select="onSelectAuction"
+           :error-message="errorMessage"
           />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
-          <button type="button" class="btn btn-outline-info" @click="cancel">إضافة مزاد جديد</button>
+          <button type="button" class="btn btn-outline-info" @click="goToAddAuction">إضافة مزاد جديد</button>
           <button type="submit" class="btn btn-info ltr:ml-4 rtl:mr-4">
            {{ formData.id ? 'تعديل' : 'اختيار' }}
           </button>

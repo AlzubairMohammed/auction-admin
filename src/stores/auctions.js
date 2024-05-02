@@ -14,6 +14,8 @@ export const useAuctionsStore = defineStore('auctions', {
     end_date: '',
     user_id: 2,
     name: '',
+    key: 'name',
+    value: '',
    },
    auctionErrors: {
     assignment_number: '',
@@ -31,7 +33,7 @@ export const useAuctionsStore = defineStore('auctions', {
  },
  actions: {
   fetchAuctions: async function () {
-   await request.get(this.url).then((response) => {
+   await request.get(`${this.url}?key=${this.auction.key}&value=${this.auction.value}`).then((response) => {
     this.auctions = response.data;
     if (this.auctions) {
      useApp.isShowMainLoader = false;
