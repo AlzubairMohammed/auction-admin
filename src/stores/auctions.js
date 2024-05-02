@@ -1,6 +1,6 @@
 import request from '@/services/request';
 import { defineStore } from 'pinia';
-import { useAppStore } from '.';
+import { useAppStore } from '@/stores/index';
 const useApp = useAppStore();
 export const useAuctionsStore = defineStore('auctions', {
  state: () => {

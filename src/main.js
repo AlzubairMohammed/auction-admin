@@ -1,14 +1,13 @@
 import { createApp } from 'vue';
 import App from '@/App.vue';
 
-import 'primevue/resources/themes/aura-light-green/theme.css'
+import 'primevue/resources/themes/aura-light-green/theme.css';
 
 const app = createApp(App);
 
 // pinia store
-import { createPinia } from 'pinia';
-const pinia = createPinia();
-app.use(pinia);
+import { piniaInstance } from '@/services/piniaInstance';
+app.use(piniaInstance);
 
 import router from '@/router';
 app.use(router);
@@ -54,8 +53,8 @@ app.component('Popper', Popper);
 import vue3JsonExcel from 'vue3-json-excel';
 app.use(vue3JsonExcel);
 
-import PrimeVue from 'primevue/config'
+import PrimeVue from 'primevue/config';
 
-app.use(PrimeVue)
+app.use(PrimeVue);
 
 app.mount('#app');

@@ -55,6 +55,15 @@
           </div>
          </router-link>
         </li>
+        <li class="nav-item">
+         <router-link to="/scans" class="group" @click="toggleMobileMenu">
+          <div class="flex items-center">
+           <icon-menu-chat class="group-hover:!text-primary shrink-0" />
+
+           <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('scan') }}</span>
+          </div>
+         </router-link>
+        </li>
        </ul>
       </li>
       <!-- Evaluations section -->
@@ -113,15 +122,6 @@
           <div class="flex items-center">
            <icon-menu-todo class="group-hover:!text-primary shrink-0" />
            <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('add_auction') }}</span>
-          </div>
-         </router-link>
-        </li>
-        <li class="nav-item">
-         <router-link to="/scans" class="group" @click="toggleMobileMenu">
-          <div class="flex items-center">
-           <icon-menu-chat class="group-hover:!text-primary shrink-0" />
-
-           <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('scan') }}</span>
           </div>
          </router-link>
         </li>

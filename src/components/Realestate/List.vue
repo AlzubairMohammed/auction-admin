@@ -24,6 +24,9 @@
   store.isShowMainLoader = true;
   await useRealestates.fetchRealestates();
   items.value = useRealestates?.realestates;
+  if (items.value) {
+   store.isShowMainLoader = false;
+  }
   console.log('items', items?.value);
  });
 
