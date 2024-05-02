@@ -34,7 +34,7 @@ const routes = [
   meta: { layout: 'app' },
  },
  {
-  path: '/realestates/add-page/:id',
+  path: '/realestates/add-page/:id?',
   name: 'realestates/add-page',
   component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/realestates/add-page.vue'),
   meta: { layout: 'app' },

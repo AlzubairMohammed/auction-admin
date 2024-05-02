@@ -23,42 +23,45 @@
      class="h-[calc(100vh-80px)] relative"
     >
      <ul class="relative font-semibold space-y-0.5 p-4 py-0">
+      <!-- Home section -->
       <li class="menu nav-item">
-       <button
-        type="button"
-        class="nav-link group w-full"
-        :class="{ active: activeDropdown === 'dashboard' }"
-        @click="activeDropdown === 'dashboard' ? (activeDropdown = null) : (activeDropdown = 'dashboard')"
-       >
+       <router-link to="/" @click="toggleMobileMenu">
         <div class="flex items-center">
          <icon-menu-dashboard class="group-hover:!text-primary shrink-0" />
-         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">
-          {{ $t('dashboard') }}
-         </span>
+         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">الرئيسية</span>
         </div>
-        <div :class="{ 'rtl:rotate-90 -rotate-90': activeDropdown !== 'dashboard' }">
-         <icon-caret-down />
-        </div>
-       </button>
-       <vue-collapsible :isOpen="activeDropdown === 'dashboard'">
-        <ul class="sub-menu text-gray-500">
-         <li>
-          <router-link to="/evaluations/comparisons" @click="toggleMobileMenu">{{ $t('comparisons_evaluation') }}</router-link>
-         </li>
-         <li>
-          <router-link to="/evaluations/direct-capitlization" @click="toggleMobileMenu">{{ $t('direct_capitlization_evaluation') }}</router-link>
-         </li>
-         <li>
-          <router-link to="/evaluations/cost" @click="toggleMobileMenu">{{ $t('cost_evaluation') }}</router-link>
-         </li>
-        </ul>
-       </vue-collapsible>
+       </router-link>
       </li>
+      <!-- Realestates section -->
       <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
        <icon-minus class="w-4 h-5 flex-none hidden" />
-       <span>{{ $t('evaluation') }}</span>
+       <span>العقارات</span>
       </h2>
-
+      <li class="nav-item">
+       <ul>
+        <li class="nav-item">
+         <router-link to="/realestates/list-page" @click="toggleMobileMenu">
+          <div class="flex items-center">
+           <icon-menu-mailbox class="group-hover:!text-primary shrink-0" />
+           <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">قائمة العقارات</span>
+          </div>
+         </router-link>
+        </li>
+        <li class="nav-item">
+         <router-link to="/realestates/add-page" @click="toggleMobileMenu">
+          <div class="flex items-center">
+           <icon-menu-todo class="group-hover:!text-primary shrink-0" />
+           <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">إضافة عقار</span>
+          </div>
+         </router-link>
+        </li>
+       </ul>
+      </li>
+      <!-- Evaluations section -->
+      <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
+       <icon-minus class="w-4 h-5 flex-none hidden" />
+       <span>التقييم</span>
+      </h2>
       <li class="nav-item">
        <ul>
         <li class="nav-item">
@@ -89,11 +92,11 @@
         </li>
        </ul>
       </li>
+      <!-- Auctions section -->
       <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
        <icon-minus class="w-4 h-5 flex-none hidden" />
-       <span>{{ $t('evaluation') }}</span>
+       <span>المزاد</span>
       </h2>
-
       <li class="nav-item">
        <ul>
         <li class="nav-item">
@@ -124,12 +127,11 @@
         </li>
        </ul>
       </li>
-
+      <!-- Roles and permissions section -->
       <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
        <icon-minus class="w-4 h-5 flex-none hidden" />
-       <span>{{ $t('user_and_permissions') }}</span>
+       <span>المستخدمين و الصلاحيات</span>
       </h2>
-
       <li class="menu nav-item">
        <button
         type="button"
@@ -140,7 +142,7 @@
         <div class="flex items-center">
          <icon-menu-users class="group-hover:!text-primary shrink-0" />
 
-         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('users') }}</span>
+         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">المستخدمين</span>
         </div>
         <div :class="{ 'rtl:rotate-90 -rotate-90': activeDropdown !== 'users' }">
          <icon-caret-down />
@@ -149,84 +151,14 @@
        <vue-collapsible :isOpen="activeDropdown === 'users'">
         <ul class="sub-menu text-gray-500">
          <li>
-          <router-link to="/users/profile" @click="toggleMobileMenu">{{ $t('profile') }}</router-link>
+          <router-link to="/users/profile" @click="toggleMobileMenu">قائمة المستخدمين</router-link>
          </li>
          <li>
-          <router-link to="/users/user-account-settings" @click="toggleMobileMenu">{{ $t('account_settings') }}</router-link>
+          <router-link to="/users/user-account-settings" @click="toggleMobileMenu">إنشاء حساب</router-link>
          </li>
         </ul>
        </vue-collapsible>
       </li>
-
-      <li class="menu nav-item">
-       <button
-        type="button"
-        class="nav-link group w-full"
-        :class="{ active: activeDropdown === 'pages' }"
-        @click="activeDropdown === 'pages' ? (activeDropdown = null) : (activeDropdown = 'pages')"
-       >
-        <div class="flex items-center">
-         <icon-menu-pages class="group-hover:!text-primary shrink-0" />
-
-         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('permissions') }}</span>
-        </div>
-        <div :class="{ 'rtl:rotate-90 -rotate-90': activeDropdown !== 'pages' }">
-         <icon-caret-down />
-        </div>
-       </button>
-       <vue-collapsible :isOpen="activeDropdown === 'pages'">
-        <ul class="sub-menu text-gray-500">
-         <li>
-          <router-link to="/pages/knowledge-base" @click="toggleMobileMenu">{{ $t('knowledge_base') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/pages/contact-us-boxed" target="_blank">{{ $t('contact_us_boxed') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/pages/contact-us-cover" target="_blank">{{ $t('contact_us_cover') }}</router-link>
-         </li>
-         <li>
-          <router-link to="/pages/faq" @click="toggleMobileMenu">{{ $t('faq') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/pages/coming-soon-boxed" target="_blank">{{ $t('coming_soon_boxed') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/pages/coming-soon-cover" target="_blank">{{ $t('coming_soon_cover') }}</router-link>
-         </li>
-         <li class="menu nav-item">
-          <button
-           type="button"
-           class="w-full before:bg-gray-300 before:w-[5px] before:h-[5px] before:rounded ltr:before:mr-2 rtl:before:ml-2 dark:text-[#888ea8] hover:bg-gray-100 dark:hover:bg-gray-900"
-           @click="subActive === 'error' ? (subActive = null) : (subActive = 'error')"
-          >
-           {{ $t('error') }}
-           <div class="ltr:ml-auto rtl:mr-auto" :class="{ 'rtl:rotate-90 -rotate-90': subActive !== 'error' }">
-            <icon-carets-down :fill="true" class="w-4 h-4" />
-           </div>
-          </button>
-
-          <vue-collapsible :isOpen="subActive === 'error'">
-           <ul :unmount="false" class="sub-menu text-gray-500">
-            <li @click="toggleMobileMenu">
-             <router-link to="/pages/error404" target="_blank">{{ $t('404') }}</router-link>
-            </li>
-            <li @click="toggleMobileMenu">
-             <router-link to="/pages/error500" target="_blank">{{ $t('500') }}</router-link>
-            </li>
-            <li @click="toggleMobileMenu">
-             <router-link to="/pages/error503" target="_blank">{{ $t('503') }}</router-link>
-            </li>
-           </ul>
-          </vue-collapsible>
-         </li>
-         <li>
-          <router-link to="/pages/maintenence" target="_blank">{{ $t('maintenence') }}</router-link>
-         </li>
-        </ul>
-       </vue-collapsible>
-      </li>
-
       <li class="menu nav-item">
        <button
         type="button"
@@ -246,46 +178,13 @@
        <vue-collapsible :isOpen="activeDropdown === 'authentication'">
         <ul class="sub-menu text-gray-500">
          <li @click="toggleMobileMenu">
-          <router-link to="/auth/boxed-signin" target="_blank">{{ $t('login_boxed') }}</router-link>
+          <router-link to="/auth/boxed-signin" target="_blank">قائمة الادوار</router-link>
          </li>
          <li @click="toggleMobileMenu">
-          <router-link to="/auth/boxed-signup" target="_blank">{{ $t('register_boxed') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/auth/boxed-lockscreen" target="_blank">{{ $t('unlock_boxed') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/auth/boxed-password-reset" target="_blank">{{ $t('recover_id_boxed') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/auth/cover-login" target="_blank">{{ $t('login_cover') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/auth/cover-register" target="_blank">{{ $t('register_cover') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/auth/cover-lockscreen" target="_blank">{{ $t('unlock_cover') }}</router-link>
-         </li>
-         <li @click="toggleMobileMenu">
-          <router-link to="/auth/cover-password-reset" target="_blank">{{ $t('recover_id_cover') }}</router-link>
+          <router-link to="/auth/boxed-signup" target="_blank">إنشاء دور</router-link>
          </li>
         </ul>
        </vue-collapsible>
-      </li>
-
-      <h2 class="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
-       <icon-minus class="w-4 h-5 flex-none hidden" />
-       <span>{{ $t('supports') }}</span>
-      </h2>
-
-      <li class="menu nav-item">
-       <a href="https://vristo.sbthemes.com" target="_blank" class="nav-link group">
-        <div class="flex items-center">
-         <icon-menu-documentation class="group-hover:!text-primary shrink-0" />
-
-         <span class="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{{ $t('documentation') }}</span>
-        </div>
-       </a>
       </li>
      </ul>
     </perfect-scrollbar>
@@ -293,7 +192,6 @@
   </nav>
  </div>
 </template>
-
 <script setup>
  import { ref, onMounted } from 'vue';
 
