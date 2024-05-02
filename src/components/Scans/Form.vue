@@ -11,10 +11,12 @@
  import IconBell from '@/components/icon/icon-bell.vue';
  import IconCode from '@/components/icon/icon-code.vue';
  import RealestateFeatures from '@/components/Scans/RealestateFeatures.vue';
+ import SelectRealestateModal from './SelectRealestateModal.vue';
  import { ref } from 'vue';
  import { useScansStore } from '@/stores/scans';
  const useStore = useScansStore();
  const formData = useStore.scan;
+ const isModalActive = ref(true);
 
  useMeta({ title: 'Wizards' });
 
@@ -27,6 +29,7 @@
 
 <template>
  <div>
+  <SelectRealestateModal v-model="isModalActive" />
   <div class="pt-5 space-y-8">
    <div class="panel">
     <div class="mb-5">
