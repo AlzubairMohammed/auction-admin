@@ -1,3 +1,62 @@
+<script setup>
+ import { Dialog, DialogOverlay, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
+ import { computed, ref } from 'vue';
+ import { defineProps } from 'vue';
+ import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
+
+ const props = defineProps({
+  title: {
+   type: String,
+   required: true,
+  },
+  button: {
+   type: String,
+   default: 'info',
+  },
+  buttonLabel: {
+   type: String,
+   default: '',
+  },
+  hasCancel: Boolean,
+  modelValue: {
+   type: [String, Number, Boolean],
+   default: null,
+  },
+  submitFunction: {
+   type: Function, // Add the new prop for the submit function
+   required: true,
+  },
+  params: {
+   id: null,
+   title: '',
+  },
+ });
+
+ const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
+
+ const value = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value),
+ });
+
+ const confirmCancel = (mode) => {
+  value.value = false;
+  emit(mode);
+ };
+
+ const confirm = () => {
+  confirmCancel('confirm');
+  props.submitFunction(); // Call the submit function when confirming
+ };
+
+ const cancel = () => confirmCancel('cancel');
+
+ window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && value.value) {
+   cancel();
+  }
+ });
+</script>
 <template>
  <TransitionRoot appear :show="value || false" as="template">
   <Dialog as="div" @close="!value" class="relative z-[51]">
@@ -59,62 +118,4 @@
  </TransitionRoot>
 </template>
 
-<script setup>
- import { Dialog, DialogOverlay, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
- import { computed, ref } from 'vue';
- import { defineProps } from 'vue';
- import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
 
- const props = defineProps({
-  title: {
-   type: String,
-   required: true,
-  },
-  button: {
-   type: String,
-   default: 'info',
-  },
-  buttonLabel: {
-   type: String,
-   default: '',
-  },
-  hasCancel: Boolean,
-  modelValue: {
-   type: [String, Number, Boolean],
-   default: null,
-  },
-  submitFunction: {
-   type: Function, // Add the new prop for the submit function
-   required: true,
-  },
-  params: {
-   id: null,
-   title: '',
-  },
- });
-
- const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
-
- const value = computed({
-  get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value),
- });
-
- const confirmCancel = (mode) => {
-  value.value = false;
-  emit(mode);
- };
-
- const confirm = () => {
-  confirmCancel('confirm');
-  props.submitFunction(); // Call the submit function when confirming
- };
-
- const cancel = () => confirmCancel('cancel');
-
- window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && value.value) {
-   cancel();
-  }
- });
-</script>

@@ -1,5 +1,5 @@
 <script setup>
- import MultiselectInput from '@/components/Inputs/MultiselectInput.vue';
+ import MultiselectInput from '@/components/Inputs/MultiSelectInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';

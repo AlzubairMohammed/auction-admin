@@ -5,7 +5,7 @@
  import TextAreaInput from '@/components/Inputs/TextAreaInput.vue';
  import { useRealestatesStore } from '@/stores/realestates';
  import { useAreasCitiesQuartersStore } from '@/stores/areasCitiesQuarters';
- import { ref, computed } from 'vue';
+ import { ref } from 'vue';
  const useRealestateStore = useRealestatesStore();
  const useAreasCitiesQuarters = useAreasCitiesQuartersStore();
  const areas = useAreasCitiesQuarters.areas;

@@ -1,9 +1,7 @@
 <script setup>
  import { useAppStore } from '@/stores/index';
  import { useScansStore } from '@/stores/scans';
- import IconCaretDown from '@/components/icon/icon-caret-down.vue';
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
- import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import { ref, onMounted } from 'vue';
  const store = useAppStore();

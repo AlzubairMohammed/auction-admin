@@ -1,7 +1,7 @@
 <script setup>
  import { useCostEvaluationsStore } from '@/stores/costEvaluations';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
- import AddPropertyModal from './AddIndirectCostPropertyModal.vue';
+ import AddIndirectCostPropertyModal from '@/components/Evaluations/Cost/AddIndirectCostPropertyModal.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import { ref } from 'vue';
 
@@ -14,7 +14,7 @@
 </script>
 <template>
  <form @submit.prevent="submit" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
-  <AddPropertyModal v-model="isModalActive" button="info" button-label="اضافة" />
+  <AddIndirectCostPropertyModal v-model="isModalActive" button="info" button-label="اضافة" />
   <AddingBar :clicked-function="() => (isModalActive = true)" title="اضافة عنصر" class="mt-3" />
   <table>
    <thead>

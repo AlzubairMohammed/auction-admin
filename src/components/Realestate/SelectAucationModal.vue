@@ -4,8 +4,8 @@
  import { useRouter } from 'vue-router';
  import { useAuctionsStore } from '@/stores/auctions';
  import { useRealestatesStore } from '@/stores/realestates';
- import BasicInput from '@/components/inputs/BasicInput.vue';
- import SingleSelectInput from '@/components/inputs/SingleSelectInput.vue';
+ import BasicInput from '@/components/Inputs/BasicInput.vue';
+ import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
 
  const auctionsStore = useAuctionsStore();
  const realestateStore = useRealestatesStore();

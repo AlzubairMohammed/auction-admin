@@ -1,7 +1,6 @@
 <script setup>
  import { ref, onMounted } from 'vue';
  import Vue3Datatable from '@bhplugin/vue3-datatable';
- import IconPencil from '@/components/icon/icon-pencil.vue';
  import { useRealestatesStore } from '@/stores/realestates';
  import { useAppStore } from '@/stores/index';
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';

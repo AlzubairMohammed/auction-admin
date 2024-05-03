@@ -1,13 +1,8 @@
 <script setup>
- import highlight from '@/components/plugins/highlight.vue';
- import codePreview from '@/composables/codePreview';
  import { FormWizard, TabContent } from 'vue3-form-wizard';
  import 'vue3-form-wizard/dist/style.css';
  import { useMeta } from '@/composables/use-meta';
- import CustomerInfo from '@/components/Realestate/CustomerInfo.vue';
- import RealestateComponents from '@/components/Scans/RealestateComponents.vue';
- import IconBell from '@/components/icon/icon-bell.vue';
- import IconCode from '@/components/icon/icon-code.vue';
+ import CustomerInfo from '@/components/Realestate/CustomerInfo.vue'
  import DocumentInfo from '@/components/Realestate/DocumentInfo.vue';
  import License from '@/components/Realestate/License.vue';
  import FileUpload from '@/components/Realestate/FileUpload.vue';
@@ -21,8 +16,6 @@
  const wizardRef = ref(null);
  const isModalActive = ref(false);
  useMeta({ title: 'Wizards' });
-
- const { codeArr, toggleCode } = codePreview();
 
  const onSubmit = () => {
   customerData.auction_id = router.params.id;

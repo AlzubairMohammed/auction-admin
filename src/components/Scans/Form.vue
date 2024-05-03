@@ -1,6 +1,4 @@
 <script setup>
- import highlight from '@/components/plugins/highlight.vue';
- import codePreview from '@/composables/codePreview';
  import { FormWizard, TabContent } from 'vue3-form-wizard';
  import 'vue3-form-wizard/dist/style.css';
  import { useMeta } from '@/composables/use-meta';
@@ -8,10 +6,8 @@
  import RealestateDetails from '@/components/Scans/RealestateDetails.vue';
  import RealestateComponents from '@/components/Scans/RealestateComponents.vue';
  import ImagesUpload from '@/components/Scans/ImagesUpload.vue';
- import IconBell from '@/components/icon/icon-bell.vue';
- import IconCode from '@/components/icon/icon-code.vue';
  import RealestateFeatures from '@/components/Scans/RealestateFeatures.vue';
- import SelectRealestateModal from './SelectRealestateModal.vue';
+ import SelectRealestateModal from '@/components/Scans/SelectRealestateModal.vue';
  import { ref } from 'vue';
  import { useScansStore } from '@/stores/scans';
  const useStore = useScansStore();
@@ -19,8 +15,6 @@
  const isModalActive = ref(true);
 
  useMeta({ title: 'Wizards' });
-
- const { codeArr, toggleCode } = codePreview();
 
  const onComplete = async () => {
   await useStore.addScan(formData);

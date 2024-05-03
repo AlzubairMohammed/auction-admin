@@ -1,6 +1,6 @@
 <script setup>
- import MultiselectInput from '@/components/Inputs/MultiselectInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
+ import MultiselectInput from '@/components/Inputs/MultiSelectInput.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import PropertiesModal from '@/components/Scans/PropertiesModal.vue';

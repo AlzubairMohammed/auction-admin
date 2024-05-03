@@ -48,7 +48,7 @@ const routes = [
  {
   path: '/evaluations/cost',
   name: 'evaluations/cost',
-  component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/cost.vue'),
+  component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/cost-page.vue'),
   meta: { layout: 'app' },
  },
  {
