@@ -1,6 +1,6 @@
 <script setup>
  import { FormWizard, TabContent } from 'vue3-form-wizard';
- import 'vue3-form-wizard/dist/style.css';
+ //  import 'vue3-form-wizard/dist/style.css';
  import { useMeta } from '@/composables/use-meta';
  import CustomerInfo from '@/components/Realestate/CustomerInfo.vue';
  import DocumentInfo from '@/components/Realestate/DocumentInfo.vue';
