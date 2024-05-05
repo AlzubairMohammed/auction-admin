@@ -1,5 +1,5 @@
 <script setup>
- import MultipleInputs from '@/components/Inputs/MultipleInputs.vue';
+ import MultiSelectInput from '@/components/Inputs/MultiSelectInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
@@ -30,7 +30,7 @@
   <div class="flex flex-wrap" :key="index">
    <div v-for="(item, index) in formData" class="w-1/5 p-2">
     <div v-if="item.type === 'multiple'" class="flex flex-wrap">
-     <MultipleInputs
+     <MultiSelectInput
       v-model="item.value"
       :options="item.properties_options"
       :placeholder="item.name"

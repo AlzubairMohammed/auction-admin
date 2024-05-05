@@ -1,6 +1,7 @@
 <script setup>
  import { ref } from 'vue';
  import MultiSelect from 'primevue/multiselect';
+
  const selectedCities = ref();
  const props = defineProps({
   options: [],
