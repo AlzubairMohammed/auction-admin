@@ -14,7 +14,7 @@
  let result = ref(0.0);
  let properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
  const multiArray = comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
- let form = ref();
+
  const onSubmit = async () => {
   const data = {
    comparisons: multiArray,
@@ -47,7 +47,7 @@
 </script>
 <template>
  <!-- <AddAttributeModal v-model="isAddPropertyModalActive" /> -->
- <form ref="form" action="" @submit.prevent="onSubmit">
+ <form action="" @submit.prevent="onSubmit">
   <AddingBar :clicked-function="pushToRealestates" title="اضافة عقار" class="mt-3" />
   <table>
    <thead>
