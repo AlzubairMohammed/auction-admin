@@ -1,6 +1,6 @@
-<script setup>
+<!-- <script setup>
  import { ref, onMounted } from 'vue';
- //  import Vue3Datatable from '@bhplugin/vue3-datatable';
+ import Vue3Datatable from '@bhplugin/vue3-datatable';
  import { useRealestatesStore } from '@/stores/realestates';
  import { useAppStore } from '@/stores/index';
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
@@ -42,7 +42,7 @@
      </div>
     </div>
 
-    <!-- <vue3-datatable
+    <vue3-datatable
      ref="datatable"
      :rows="items"
      :columns="cols"
@@ -79,9 +79,12 @@
        </button>
       </div>
      </template>
-    </vue3-datatable> -->
-    <h1>Realestate List</h1>
+    </vue3-datatable>
    </div>
   </div>
  </div>
+</template> -->
+
+<template>
+ <h1>Realestate List</h1>
 </template>
