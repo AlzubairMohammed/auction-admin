@@ -8,23 +8,11 @@
  let comparisons = comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
  let propertyName = ref('');
  const props = defineProps({
-  title: {
-   type: String,
-   required: true,
-  },
-  button: {
-   type: String,
-   default: 'info',
-  },
-  buttonLabel: {
-   type: String,
-   default: '',
-  },
-  hasCancel: Boolean,
-  modelValue: {
-   type: [String, Number, Boolean],
-   default: null,
-  },
+  title: '',
+  button: 'info',
+  buttonLabel: '',
+  hasCancel: '',
+  modelValue: '',
   submitFunction: '',
   params: '',
  });
