@@ -1,11 +1,11 @@
 <script setup>
  import { ref } from 'vue';
  import MultipleInputs from '@/components/Inputs/MultipleInputs.vue';
- //  import AddingBar from '@/components/AddingBar/AddingBar.vue';
+ import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import { useComparisonsEvaluationsStore } from '@/stores/comparisonsEvaluations';
- //  import AddAttributeModal from './AddAttributeModal.vue';
- //  import IconXCircle from '@/components/icon/icon-x-circle.vue';
- //  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
+ import AddAttributeModal from './AddAttributeModal.vue';
+ import IconXCircle from '@/components/icon/icon-x-circle.vue';
+ import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
 
  const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
  const isAddPropertyModalActive = ref(false);
@@ -57,14 +57,14 @@
     </tr>
    </thead>
    <tbody>
-    <tr v-for="(variation, index) in properties" :key="index">
+    <tr v-for="(, index) in properties" :key="index">
      <td class="text-right">
       <div class="flex">
        <IconXCircle @click="trashProperty(index)" class="w-1/4" />
        <span class="w-3/4">{{ properties[index] }}</span>
       </div>
      </td>
-     <td v-for="(attribute, RealestateIndex) in multiArray" :key="RealestateIndex">
+     <td v-for="(, RealestateIndex) in multiArray" :key="RealestateIndex">
       <MultipleInputs
        v-if="RealestateIndex === 0"
        v-model="multiArray[RealestateIndex][index].value"
