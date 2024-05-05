@@ -1,4 +1,4 @@
-<!-- <script setup>
+<script setup>
  import { ref, onMounted } from 'vue';
  import Vue3Datatable from '@bhplugin/vue3-datatable';
  import { useRealestatesStore } from '@/stores/realestates';
@@ -83,8 +83,4 @@
    </div>
   </div>
  </div>
-</template> -->
-
-<template>
- <h1>Realestate List</h1>
 </template>

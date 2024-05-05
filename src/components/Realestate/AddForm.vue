@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
  import { FormWizard, TabContent } from 'vue3-form-wizard';
  import 'vue3-form-wizard/dist/style.css';
  import { useMeta } from '@/composables/use-meta';
@@ -9,7 +9,7 @@
  import { ref, onMounted } from 'vue';
  import { useRoute } from 'vue-router';
  import { useRealestatesStore } from '@/stores/realestates';
- //  import SelectAucationModal from '@/components/Realestate/SelectAucationModal.vue';
+  import SelectAucationModal from '@/components/Realestate/SelectAucationModal.vue';
  const useStore = useRealestatesStore();
  const router = useRoute();
  const customerData = useStore.realestate;
@@ -77,4 +77,8 @@
    </div>
   </div>
  </div>
+</template> -->
+
+<template>
+ <h1>hello</h1>
 </template>
