@@ -104,8 +104,8 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
   getComparisonsEvaluation(id) {
    return request.get(`${this.url}/${id}`);
   },
-  addComparisonsEvaluation(comparisonsEvaluation) {
-   request
+  addComparisonsEvaluation: async function (comparisonsEvaluation) {
+   await request
     .post(this.url, comparisonsEvaluation, {
      headers: {
       'Content-Type': 'application/json',

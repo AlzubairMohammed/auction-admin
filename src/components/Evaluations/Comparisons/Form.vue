@@ -1,15 +1,15 @@
 <script setup>
- import { ref } from 'vue';
  import MultipleInputs from '@/components/Inputs/MultipleInputs.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import { useComparisonsEvaluationsStore } from '@/stores/comparisonsEvaluations';
  import AddAttributeModal from './AddAttributeModal.vue';
  import IconXCircle from '@/components/icon/icon-x-circle.vue';
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
+ import { ref } from 'vue';
 
  const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
  const isAddPropertyModalActive = ref(false);
- let result = ref(0.0);
+ let result = ref(0);
  let properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
  const multiArray = comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
 
@@ -86,7 +86,7 @@
     </tr>
    </tbody>
   </table>
-  <AddingBar title="اضافة عامل" class="mt-3" />
+  <AddingBar :clickedFunction="() => (isAddPropertyModalActive = true)" title="اضافة عامل" class="mt-3" />
   <div class="flex items-center justify-between">
    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">تقييم</button>
   </div>
