@@ -1,6 +1,6 @@
 <script setup>
  import { ref, onMounted } from 'vue';
- import Vue3Datatable from '@bhplugin/vue3-datatable';
+ //  import Vue3Datatable from '@bhplugin/vue3-datatable';
  import { useRealestatesStore } from '@/stores/realestates';
  import { useAppStore } from '@/stores/index';
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
@@ -42,7 +42,7 @@
      </div>
     </div>
 
-    <vue3-datatable
+    <!-- <vue3-datatable
      ref="datatable"
      :rows="items"
      :columns="cols"
@@ -57,16 +57,16 @@
      previousArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
      nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
     >
-     <!-- <template #invoice="data">
+     <template #invoice="data">
       <router-link to="/auctions/preview-page" class="text-primary underline font-semibold hover:no-underline">#{{ data.assignment_number }}</router-link>
      </template>
      <template #name="data">
       <div class="flex items-center font-semibold">
        {{ data?.value?.name }}
       </div>
-     </template> -->
+     </template>
 
-     <!-- <template #actions="data">
+     <template #actions="data">
       <div class="flex gap-4 items-center justify-center">
        <router-link to="/apps/invoice/edit" class="hover:text-info">
         <icon-edit class="w-4.5 h-4.5" />
@@ -78,8 +78,9 @@
         <icon-trash-lines />
        </button>
       </div>
-     </template> -->
-    </vue3-datatable>
+     </template>
+    </vue3-datatable> -->
+    <h1>Realestate List</h1>
    </div>
   </div>
  </div>
