@@ -43,11 +43,10 @@
    realestate.splice(index, 1);
   });
  };
- const x = ref('');
 </script>
 <template>
  <!-- <AddAttributeModal v-model="isAddPropertyModalActive" /> -->
- <form action="" @submit.prevent="onSubmit">
+ <form @submit.prevent="onSubmit">
   <AddingBar :clicked-function="pushToRealestates" title="اضافة عقار" class="mt-3" />
   <table>
    <thead>
