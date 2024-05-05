@@ -1,11 +1,11 @@
 <script setup>
  import { ref } from 'vue';
  import MultipleInputs from '@/components/Inputs/MultipleInputs.vue';
- import AddingBar from '@/components/AddingBar/AddingBar.vue';
+ //  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import { useComparisonsEvaluationsStore } from '@/stores/comparisonsEvaluations';
- import AddAttributeModal from './AddAttributeModal.vue';
- import IconXCircle from '@/components/icon/icon-x-circle.vue';
- import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
+ //  import AddAttributeModal from './AddAttributeModal.vue';
+ //  import IconXCircle from '@/components/icon/icon-x-circle.vue';
+ //  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
 
  const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
  const isAddPropertyModalActive = ref(false);
