@@ -22,7 +22,7 @@
   useStore.addRealestate(customerData, wizardRef.value);
  };
  const beforeChange = () => {
-  return false;
+  return true;
  };
  onMounted(() => {
   wizardRef.value.maxStep = 1;

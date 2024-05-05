@@ -43,7 +43,7 @@
 <template>
  <AddAttributeModal v-model="isAddPropertyModalActive" />
  <form @submit.prevent="onSubmit">
-  <AddingBar :clicked-function="pushToRealestates" title="اضافة عقار" class="mt-3" />
+  <AddingBar :clickedFunction="pushToRealestates" title="اضافة عقار" class="mt-3" />
   <table>
    <thead>
     <tr>
@@ -80,7 +80,7 @@
        class="pt-2"
        :inputOnePlaceholder="index === 0 ? 'السعر' : 'التسوية'"
        inputTwoPlaceholder="القيمة"
-       :input-one-value="multiArray[RealestateIndex][index].value"
+       :inputOneValue="multiArray[RealestateIndex][index].value"
       />
      </td>
     </tr>
