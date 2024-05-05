@@ -13,7 +13,6 @@
  const realestate = realestateStore.realestate;
  const options = ref([]);
  const auction = auctionsStore.auction;
- const isModalActive = ref(false);
  const formData = ref({
   id: '',
  });
@@ -46,7 +45,6 @@
   auctionsStore.auctions.forEach((item) => {
    options.value.push({ name: `${item[`${auction.key}`]}`, id: item.id });
   });
-  console.log(options.value);
  });
  const onSelectSearchMethod = (event) => {
   auction.key = event.id;
