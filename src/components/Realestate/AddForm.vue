@@ -19,13 +19,12 @@
 
  const onSubmit = () => {
   customerData.auction_id = router.params.id;
-  useStore.addRealestate(customerData, wizardRef.value);
+  useStore.addRealestate(customerData);
  };
  const beforeChange = () => {
   return false;
  };
  onMounted(() => {
-  wizardRef.value.maxStep = 1;
   if (!router.params.id) {
    isModalActive.value = true;
   }
@@ -39,7 +38,6 @@
    <div class="panel">
     <div class="mb-5">
      <form-wizard
-      ref="wizardRef"
       @on-complete="onSubmit"
       :beforeChange="beforeChange"
       color="#4361ee"
