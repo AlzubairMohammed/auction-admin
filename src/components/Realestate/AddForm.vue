@@ -9,7 +9,7 @@
  import { ref, onMounted } from 'vue';
  import { useRoute } from 'vue-router';
  import { useRealestatesStore } from '@/stores/realestates';
- import SelectAucationModal from '@/components/Realestate/SelectAucationModal.vue';
+//  import SelectAucationModal from '@/components/Realestate/SelectAucationModal.vue';
  const useStore = useRealestatesStore();
  const router = useRoute();
  const customerData = useStore.realestate;
