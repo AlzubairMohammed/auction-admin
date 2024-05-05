@@ -7,7 +7,7 @@
  const fileItems = useRealestateStore.realestate;
 </script>
 <template>
- <AddingBar :clickedFunction="() => fileItems.filesNames.push('')" title="اضافة حقل لتحميل مزيد من الملفات" class="mt-3" />
+ <AddingBar :clicked-function="() => fileItems.filesNames.push('')" title="اضافة حقل لتحميل مزيد من الملفات" class="mt-3" />
  <div
   class="mb-5 border border-gray-200 p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
   v-for="(item, index) in fileItems.filesNames"
