@@ -25,28 +25,12 @@
  import { defineProps, ref, computed } from 'vue';
 
  const props = defineProps({
-  inputOnePlaceholder: {
-   type: String,
-  },
-  inputTwoPlaceholder: {
-   type: String,
-  },
-  inputOneValue: {
-   type: String,
-   default: '',
-  },
-  inputTwoValue: {
-   type: String,
-   default: '',
-  },
-  required: {
-   type: Boolean,
-   default: false,
-  },
-  modelValue: {
-   type: [String, Number, Boolean, Array, Object],
-   default: '',
-  },
+  inputOnePlaceholder: '',
+  inputTwoPlaceholder: '',
+  inputOneValue: '',
+  inputTwoValue: '',
+  required: false,
+  modelValue: '',
  });
 
  const inputEl = (ref < HTMLInputElement) | (null > null);

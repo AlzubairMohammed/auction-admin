@@ -14,14 +14,14 @@
   auction_type: '',
   start_date: '',
   end_date: '',
-  user_id: 2,
+  user_id: 1,
   name: '',
  });
  const submit = async () => {
   const data = await auctionsStore.addAuction(auctionData.value);
-  router.push({ name: 'realestates/add-page', params: { id: auctionsStore.auction.id } });
+  if (data) router.push({ name: 'realestates/add-page', params: { id: data.id } });
  };
-</script>
+</script>   
 <template>
  <form @submit.prevent="submit" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
   <SingleSelectInput

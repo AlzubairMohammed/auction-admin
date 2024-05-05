@@ -12,7 +12,7 @@ export const useAuctionsStore = defineStore('auctions', {
     auction_type: '',
     start_date: '',
     end_date: '',
-    user_id: 2,
+    user_id: 1,
     name: '',
     key: 'name',
     value: '',
@@ -58,9 +58,10 @@ export const useAuctionsStore = defineStore('auctions', {
    if (Object.values(this.auctionErrors).some((r) => r !== '')) {
     return;
    }
-   await request.post(this.url, auction, null, false).then((response) => {
-    this.auction = response.data;
+   const data = await request.post(this.url, auction, null, false).then((response) => {
+    return response.data;
    });
+   return data;
   },
   removeAuction(id) {
    request.delete(this.url, id).then(() => {

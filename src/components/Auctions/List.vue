@@ -10,8 +10,8 @@
  import IconEye from '@/components/icon/icon-eye.vue';
  const items = ref([]);
  const store = useAppStore();
- const useAuctions = useAuctionsStore();
- const tableData = ref([]);
+ const useAuctions = useAuctionsStore();    
+ const tableData = ref([]); 
  const cols = ref([
   { field: 'assignment_number', title: 'رقم التكليف' },
   { field: 'name', title: 'اسم المزاد' },

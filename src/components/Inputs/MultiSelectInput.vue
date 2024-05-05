@@ -1,3 +1,15 @@
+<script setup>
+ import { ref } from 'vue';
+ import MultiSelect from 'primevue/multiselect';
+ const selectedCities = ref();
+ const props = defineProps({
+  options: [],
+  placeholder: '',
+  classValue: '',
+  errorMessage: '',
+ });
+</script>
+
 <template>
  <div class="card flex justify-content-center custom-multiselect">
   <p v-if="errorMessage" class="error-msg text-red-300">{{ errorMessage }}</p>
@@ -14,18 +26,6 @@
   />
  </div>
 </template>
-
-<script setup>
- import { ref } from 'vue';
- import MultiSelect from 'primevue/multiselect';
- const selectedCities = ref();
- const props = defineProps({
-  options: [],
-  placeholder: '',
-  classValue: '',
-  errorMessage: '',
- });
-</script>
 
 <style scoped>
  .custom-multiselect .p-multiselect .p-inputtext .p-component:focus {
