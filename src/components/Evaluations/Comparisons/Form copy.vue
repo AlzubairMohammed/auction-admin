@@ -86,7 +86,7 @@
     </tr>
    </tbody>
   </table>
-  <AddingBar :clickedFunction="" title="اضافة عامل" class="mt-3" />
+  <AddingBar :clickedFunction="() => (isAddPropertyModalActive = true)" title="اضافة عامل" class="mt-3" />
   <div class="flex items-center justify-between">
    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">تقييم</button>
   </div>
