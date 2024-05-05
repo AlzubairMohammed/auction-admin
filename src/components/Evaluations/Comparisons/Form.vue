@@ -3,13 +3,11 @@
  import MultipleInputs from '@/components/Inputs/MultipleInputs.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import { useComparisonsEvaluationsStore } from '@/stores/comparisonsEvaluations';
- //  import AddAttributeModal from './AddAttributeModal.vue';
+ import AddAttributeModal from './AddAttributeModal.vue';
  import IconXCircle from '@/components/icon/icon-x-circle.vue';
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
 
  const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
-
- const isModalActive = ref(false);
  const isAddPropertyModalActive = ref(false);
  let result = ref(0.0);
  let properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
@@ -26,10 +24,8 @@
   };
   comparisonsEvaluationsStore.addComparisonsEvaluation(data);
   result.value = comparisonsEvaluationsStore.comparisonsEvaluation;
-  isModalActive.value = true;
  };
  const pushToRealestates = () => {
-  const counter = properties.length;
   const length = multiArray.length;
   multiArray.push([]);
   for (let i = 0; i < properties.length; i++) {
@@ -45,7 +41,7 @@
  };
 </script>
 <template>
- <!-- <AddAttributeModal v-model="isAddPropertyModalActive" /> -->
+ <AddAttributeModal v-model="isAddPropertyModalActive" />
  <form @submit.prevent="onSubmit">
   <AddingBar :clicked-function="pushToRealestates" title="اضافة عقار" class="mt-3" />
   <table>
