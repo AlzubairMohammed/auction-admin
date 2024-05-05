@@ -44,14 +44,12 @@
  const confirm = () => {
   confirmCancel('confirm');
   properties.splice(properties.length - 1, 0, propertyName.value);
-  console.log('this comparisons 1', comparisons);
   comparisons.forEach((comparison) => {
    comparison.splice(comparison.length - 1, 0, {
     value: '',
     percentage: '',
    });
   });
-  console.log('this comparisons 2', comparisons);
  };
 
  const cancel = () => confirmCancel('cancel');
