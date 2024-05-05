@@ -24,12 +24,6 @@
  const beforeChange = () => {
   return true;
  };
- onMounted(() => {
-  wizardRef.value.maxStep = 1;
-  if (!router.params.id) {
-   isModalActive.value = true;
-  }
- });
 </script>
 
 <template>
@@ -41,7 +35,6 @@
      <form-wizard
       ref="wizardRef"
       @on-complete="onSubmit"
-      :beforeChange="beforeChange"
       color="#4361ee"
       class="circle"
       nextButtonText="التالي"
