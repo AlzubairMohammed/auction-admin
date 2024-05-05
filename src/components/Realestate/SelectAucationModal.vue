@@ -1,6 +1,6 @@
 <script setup>
  import { Dialog, DialogOverlay, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
- import { computed, ref, onMounted } from 'vue';
+ import { computed, ref } from 'vue';
  import { useRouter } from 'vue-router';
  import { useAuctionsStore } from '@/stores/auctions';
  import { useRealestatesStore } from '@/stores/realestates';
@@ -23,7 +23,7 @@
  const auctionId = ref('');
  const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
 
- const value = computed({
+ const value = ref({
   get: () => props.modelValue,
   set: (value) => emit('update:modelValue', value),
  });
