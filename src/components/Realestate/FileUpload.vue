@@ -1,6 +1,6 @@
 <script setup>
  import BasicInput from '@/components/Inputs/BasicInput.vue';
- import FlexibleFileUpload from '@/components/FileUpload/FlexibleFileUpload.vue';
+ //  import FlexibleFileUpload from '@/components/FileUpload/FlexibleFileUpload.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import { useRealestatesStore } from '@/stores/realestates';
  const useRealestateStore = useRealestatesStore();
