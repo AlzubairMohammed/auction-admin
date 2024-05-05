@@ -1,7 +1,6 @@
 <script setup>
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
- import AttributeModal from '@/components/Scans/PropertiesModal.vue';
  import DateInput from '@/components/Inputs/DateInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import TextAreaInput from '@/components/Inputs/TextAreaInput.vue';
@@ -33,7 +32,6 @@
  };
 </script>
 <template>
- <AttributeModal v-model="isAddPropertyModalActive" :params="{ id: null, title: '' }" />
  <form>
   <div class="mb-5">
    <div class="flex flex-wrap justify-between items-center">
