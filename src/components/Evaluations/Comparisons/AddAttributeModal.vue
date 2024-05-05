@@ -9,8 +9,6 @@
  let propertyName = ref('');
  const props = defineProps({
   title: '',
-  button: 'info',
-  buttonLabel: '',
   hasCancel: '',
   modelValue: '',
   submitFunction: '',
