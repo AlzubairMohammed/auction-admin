@@ -10,8 +10,8 @@
  const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
  const isAddPropertyModalActive = ref(false);
  let result = ref(0);
- let properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
- const multiArray = comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
+ let properties = await comparisonsEvaluationsStore.comparisonsEvaluation.properties;
+ const multiArray = await comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
 
  const onSubmit = async () => {
   const data = {
