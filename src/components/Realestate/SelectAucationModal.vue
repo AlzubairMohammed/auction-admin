@@ -40,12 +40,12 @@
    cancel();
   }
  });
- onMounted(async () => {
-  await auctionsStore.fetchAuctions();
-  auctionsStore.auctions.forEach((item) => {
-   options.value.push({ name: `${item[`${auction.key}`]}`, id: item.id });
-  });
+
+ await auctionsStore.fetchAuctions();
+ auctionsStore.auctions.forEach((item) => {
+  options.value.push({ name: `${item[`${auction.key}`]}`, id: item.id });
  });
+
  const onSelectSearchMethod = (event) => {
   auction.key = event.id;
   options.value = [];
