@@ -7,7 +7,7 @@
  const fileItems = useRealestateStore.realestate;
 </script>
 <template>
- <AddingBar :clicked-function="" title="اضافة حقل لتحميل مزيد من الملفات" class="mt-3" />
+ <AddingBar title="اضافة حقل لتحميل مزيد من الملفات" class="mt-3" />
  <div
   class="mb-5 border border-gray-200 p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
   v-for="(item, index) in fileItems.filesNames"
@@ -18,6 +18,6 @@
    <BasicInput v-else v-model="fileItems.filesNames[index].name" placeholder="الوصف" type="text" class="w-1/8 p-2" />
    <a href="javascript:;" @click="fileItems.filesNames.splice(index, 1)" class="font-size-14">×</a>
   </div>
-  <FlexibleFileUpload @file-selected="" :index="index" class="m-3" error-message="الحقل مطلوب" required />
+  <FlexibleFileUpload :index="index" class="m-3" error-message="الحقل مطلوب" required />
  </div>
 </template>
