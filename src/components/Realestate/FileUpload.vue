@@ -3,12 +3,8 @@
  import FlexibleFileUpload from '@/components/FileUpload/FlexibleFileUpload.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import { useRealestatesStore } from '@/stores/realestates';
- import { ref } from 'vue';
  const useRealestateStore = useRealestatesStore();
  const fileItems = useRealestateStore.realestate;
- const fileValidatonError = useRealestateStore.realestateErrors.files;
- let isAddFileModalActive = ref(false);
- const fileInput = ref(null);
 </script>
 <template>
  <AddingBar :clickedFunction="() => fileItems.filesNames.push('')" title="اضافة حقل لتحميل مزيد من الملفات" class="mt-3" />
