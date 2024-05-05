@@ -46,7 +46,7 @@
  const x = ref('');
 </script>
 <template>
- <AddAttributeModal v-model="isAddPropertyModalActive" />
+ <!-- <AddAttributeModal v-model="isAddPropertyModalActive" /> -->
  <form ref="form" action="" @submit.prevent="onSubmit">
   <AddingBar :clicked-function="pushToRealestates" title="اضافة عقار" class="mt-3" />
   <table>
