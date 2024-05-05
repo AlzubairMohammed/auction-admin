@@ -17,16 +17,10 @@
  const quarters = ref([]);
  const logDate = (date) => {
   licenseData.date = date;
-  console.log(areas);
  };
  const getCities = async (event) => {
-  await useAreasCitiesQuarters.getAreaCities(event?.id);
+  await useAreasCitiesQuarters.getAreaCities(event.id);
   cities.value = useAreasCitiesQuarters.cities;
-  console.log(cities.value);
- };
- const getQuarters = async (event) => {
-  await useAreasCitiesQuarters.getCityQuarters(event?.id);
-  quarters.value = useAreasCitiesQuarters.quarters;
  };
 </script>
 <template>

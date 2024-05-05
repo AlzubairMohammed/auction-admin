@@ -10,53 +10,21 @@
  const items = ref([]);
  const store = useAppStore();
  const useRealestates = useRealestatesStore();
- const tableData = ref([]);
  const cols = ref([
   { field: 'id', title: 'رقم العقار' },
   { field: 'name', title: 'اسم المزاد' },
   { field: 'customer_name', title: 'اسم العميل' },
   { field: 'owner_number', title: 'اسم المالك' },
-  //   { field: 'auction_name', title: 'تاريخ البداية' },
   { field: 'actions', title: 'العمليات' },
  ]);
  onMounted(async () => {
   store.isShowMainLoader = true;
   await useRealestates.fetchRealestates();
-  items.value = useRealestates?.realestates;
+  items.value = useRealestates.realestates;
   if (items.value) {
    store.isShowMainLoader = false;
   }
-  console.log('items', items?.value);
  });
-
- const searchText = ref('');
- const columns = ref(['id', 'invoice', 'name', 'email', 'date', 'amount', 'status', 'actions']);
- const tableOption = ref({
-  headings: {
-   id: (h, row, index) => {
-    return '#';
-   },
-  },
-  perPage: 10,
-  perPageValues: [10, 20, 30, 50, 100],
-  skin: 'table-hover',
-  columnsClasses: { actions: 'actions !text-center w-1' },
-  pagination: { show: true, nav: 'scroll', chunk: 10 },
-  texts: {
-   filter: '',
-   filterPlaceholder: 'بحث...',
-   limit: '',
-  },
-  resizableColumns: false,
-  sortable: ['invoice', 'name', 'email', 'date', 'amount', 'status'],
-  sortIcon: {
-   base: 'sort-icon-none',
-   up: 'sort-icon-asc',
-   down: 'sort-icon-desc',
-  },
- });
-
- const data = tableData.value;
 </script>
 <template>
  <div>

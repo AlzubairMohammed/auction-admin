@@ -24,7 +24,6 @@
  const getCities = async (event) => {
   await useAreasCitiesQuarters.getAreaCities(event?.id);
   cities.value = useAreasCitiesQuarters.cities;
-  console.log(cities.value);
  };
  const getQuarters = async (event) => {
   await useAreasCitiesQuarters.getCityQuarters(event?.id);

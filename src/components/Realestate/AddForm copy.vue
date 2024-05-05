@@ -2,7 +2,7 @@
  import { FormWizard, TabContent } from 'vue3-form-wizard';
  import 'vue3-form-wizard/dist/style.css';
  import { useMeta } from '@/composables/use-meta';
- import CustomerInfo from '@/components/Realestate/CustomerInfo.vue'
+ import CustomerInfo from '@/components/Realestate/CustomerInfo.vue';
  import DocumentInfo from '@/components/Realestate/DocumentInfo.vue';
  import License from '@/components/Realestate/License.vue';
  import FileUpload from '@/components/Realestate/FileUpload.vue';
@@ -22,8 +22,6 @@
   useStore.addRealestate(customerData, wizardRef.value);
  };
  const beforeChange = () => {
-  //   console.log('beforeChange', tab, newIndex, oldIndex);
-  console.log('beforeChange');
   return true;
  };
  onMounted(() => {
