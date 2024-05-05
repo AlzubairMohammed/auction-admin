@@ -21,10 +21,16 @@
   customerData.auction_id = router.params.id;
   useStore.addRealestate(customerData, wizardRef.value);
  };
-
- if (!router.params.id) {
-  isModalActive.value = true;
- }
+ const beforeChange = () => {
+  return true;
+ };
+ onMounted(() => {
+  wizardRef.value.maxStep = 1;
+  if (!router.params.id) {
+   isModalActive.value = true;
+  }
+  console.log('his');
+ });
 </script>
 
 <template>
