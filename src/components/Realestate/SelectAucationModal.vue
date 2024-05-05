@@ -23,7 +23,7 @@
  const auctionId = ref('');
  const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
 
- const value = ref({
+ const value = computed({
   get: () => props.modelValue,
   set: (value) => emit('update:modelValue', value),
  });
