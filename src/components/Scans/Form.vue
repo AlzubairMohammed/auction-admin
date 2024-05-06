@@ -42,7 +42,7 @@
       </tab-content>
       <tab-content
        title="مميزات العقار"
-       customIcon='<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m10.5 9.44l5.32 1.99c1.24.46 2.21 1.41 2.74 2.57H19V7.5L14 4L9 7.5V9h.33zm4-2.44h1v1h-1zm0 2h1v1h-1zm-2-2h1v1h-1zm0 2h1v1h-1zM3 13h2v7H3zm16.9 5.57l-5.93 1.84L7 18.48V13h1.61l5.82 2.17c.34.13.57.46.57.83c0 0-1.99-.05-2.3-.15l-2.38-.79l-.63 1.9l2.38.79c.51.17 1.04.26 1.58.26H19c.39 0 .74.23.9.56" opacity="0.3"/><path fill="currentColor" d="M15.5 7h-1v1h1zm-2 0h-1v1h1zm2 2h-1v1h1zm-2 0h-1v1h1zM21 6.5V14h-2V7.5L14 4L9 7.5V9H7V6.5l7-5zM19 16h-2c0-1.2-.75-2.28-1.87-2.7L8.97 11H1v11h6v-1.44l7 1.94l8-2.5v-1c0-1.66-1.34-3-3-3M3 20v-7h2v7zm10.97.41L7 18.48V13h1.61l5.82 2.17c.34.13.57.46.57.83c0 0-1.99-.05-2.3-.15l-2.38-.79l-.63 1.9l2.38.79c.51.17 1.04.26 1.58.26H19c.39 0 .74.23.9.56z"/></svg>'
+       customIcon='<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M19 14V7.5L14 4L9 7.5V9H7V6.5l7-5l7 5V14zm-4.5-6h1V7h-1zm-2 0h1V7h-1zm2 2h1V9h-1zm-2 0h1V9h-1zM7 18.5l6.95 1.9l5.95-1.85q-.125-.225-.363-.388T19 18h-5.05q-.675 0-1.075-.05t-.825-.2l-2.325-.775l.55-1.95l2.025.675q.425.125 1 .2t1.7.1q0-.275-.162-.525t-.388-.325L8.6 13H7zM1 22V11h7.6q.175 0 .35.038t.325.087L15.15 13.3q.825.3 1.338 1.05T17 16h2q1.25 0 2.125.825T22 19v1l-8 2.5l-7-1.95V22zm2-2h2v-7H3z"/></svg>'
       >
        <RealestateFeatures />
       </tab-content>
