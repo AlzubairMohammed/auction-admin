@@ -13,13 +13,12 @@
  const useStore = useRealestatesStore();
  const router = useRoute();
  const customerData = useStore.realestate;
- const wizardRef = ref(null);
+
  const isModalActive = ref(false);
  useMeta({ title: 'Wizards' });
 
  const onComplete = () => {
   customerData.auction_id = router.params.id;
-  useStore.addRealestate(customerData, wizardRef.value);
  };
 </script>
 
