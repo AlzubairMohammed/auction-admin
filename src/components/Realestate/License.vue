@@ -26,22 +26,6 @@
   <div class="mb-5">
    <div class="flex flex-wrap justify-between items-center">
     <BasicInput v-model="licenseData.number" placeholder="رقم الرخصة" type="number" class="w-1/5 p-2" :error-message="licenseErrors.number" />
-    <SingleSelectInput @on-select="getCities" placeholder="المنطقة" :options="areas" class="w-1/5 p-2" :error-message="licenseErrors.area" />
-    <SingleSelectInput
-     @on-select="(event) => (licenseData.issuance_place_id = event.id)"
-     placeholder="المدينة"
-     :options="cities"
-     class="w-1/5 p-2"
-     :error-message="licenseErrors.issuance_place_id"
-    />
-    <SingleSelectInput
-     @on-select="(event) => (licenseData.realestate_type_id = event.id)"
-     placeholder="نوع العقار"
-     :options="realestateTypes"
-     class="w-1/5 p-2"
-     :error-message="licenseErrors.realestate_type_id"
-    />
-    <TextAreaInput v-model="licenseData.note" class="w-full p-2" label="الملاحظات" />
    </div>
   </div>
  </form>
