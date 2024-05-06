@@ -17,18 +17,10 @@
  const isModalActive = ref(false);
  useMeta({ title: 'Wizards' });
 
- const onSubmit = () => {
+ const onComplete = () => {
   customerData.auction_id = router.params.id;
+  useStore.addRealestate(customerData, wizardRef.value);
  };
- const beforeChange = () => {
-  return false;
- };
- onMounted(() => {
-  wizardRef.value.maxStep = 1;
-  if (!router.params.id) {
-   isModalActive.value = true;
-  }
- });
 </script>
 
 <template>
@@ -38,8 +30,7 @@
    <div class="panel">
     <div class="mb-5">
      <form-wizard
-      ref="wizardRef"
-      @on-complete="onSubmit"
+      @on-complete="onComplete"
       :beforeChange="beforeChange"
       color="#4361ee"
       class="circle"
