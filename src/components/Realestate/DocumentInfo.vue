@@ -1,7 +1,6 @@
 <script setup>
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
- import DateInput from '@/components/Inputs/DateInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import TextAreaInput from '@/components/Inputs/TextAreaInput.vue';
  import { ref } from 'vue';
