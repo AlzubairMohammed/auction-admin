@@ -24,6 +24,9 @@
 </script>
 <template>
  <form @submit.prevent="submit" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
+  <h1 class="text-2xl font-bold mb-5 text-center">
+   <span class="underline">الاهلاك</span>
+  </h1>
   <table>
    <tbody>
     <tr>
@@ -59,6 +62,6 @@
     </tr>
    </tbody>
   </table>
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5" type="submit">تقييم</button>
+  <button class="bg-blue-500 hover:bg-blue-700 w-1/6 mt-6 text-white font-bold py-2 px-4 rounded mt-5" type="submit">تقييم</button>
  </form>
 </template>
