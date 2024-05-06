@@ -18,7 +18,9 @@
  useMeta({ title: 'Wizards' });
 
  const onSubmit = () => {
-  customerData.auction_id = router.params.id;
+  if (router.params.id) {
+   customerData.auction_id = router.params.id;
+  }
   useStore.addRealestate(customerData, wizardRef.value);
  };
  const beforeChange = () => {
