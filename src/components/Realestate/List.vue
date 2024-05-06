@@ -71,7 +71,7 @@
        <router-link to="/apps/invoice/edit" class="hover:text-info">
         <icon-edit class="w-4.5 h-4.5" />
        </router-link>
-       <router-link :to="`/auctions/preview-page/${data?.value?.id}`" class="hover:text-primary">
+       <router-link :to="`/realestates/preview-page/${data?.value?.id}`" class="hover:text-primary">
         <icon-eye />
        </router-link>
        <button type="button" class="hover:text-danger" @click="deleteRow(`${data?.assignment_number}`)">

@@ -39,6 +39,12 @@ const routes = [
   meta: { layout: 'app' },
  },
  {
+  path: '/realestates/preview-page/:id',
+  name: 'realestates/preview-page',
+  component: () => import(/* webpackChunkName: "preview-page */ '../views/realestates/preview-page.vue'),
+  meta: { layout: 'app' },
+ },
+ {
   path: '/evaluations/comparisons/:id?',
   name: 'comparisons',
   component: () => import(/* webpackChunkName: "evaluations-comparisons" */ '../views/evaluations/comparisons.vue'),

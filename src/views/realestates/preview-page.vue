@@ -6,11 +6,11 @@
 
     طباعة
    </button>
-   <router-link to="/auctions/add-page" class="btn btn-secondary gap-2">
+   <router-link to="/realestates/add-page" class="btn btn-secondary gap-2">
     <icon-plus />
     اضافة
    </router-link>
-   <router-link :to="`/auctions/edit-page/${auction?.data?.id}`" class="btn btn-warning gap-2">
+   <router-link :to="`/realestates/edit-page/${realestate?.data?.id}`" class="btn btn-warning gap-2">
     <icon-edit />
     تعديل
    </router-link>
@@ -18,7 +18,7 @@
   <div id="report" class="panel">
    <!-- title and logo -->
    <div class="flex justify-between flex-wrap gap-4 px-4">
-    <div class="text-2xl font-semibold uppercase">تقرير مزاد</div>
+    <div class="text-2xl font-semibold uppercase">تقرير عقار</div>
     <div class="shrink-0">
      <img src="/assets/images/logo.svg" alt="" class="w-14 ltr:ml-auto rtl:mr-auto" />
     </div>
@@ -37,31 +37,39 @@
     <div class="flex justify-between sm:flex-row flex-col gap-6 lg:w-full">
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">اسم المزاد :</div>
-       <div>{{ auction?.data?.name }}</div>
+       <div class="text-white-dark">رقم المزاد :</div>
+       <div>{{ realestate?.data?.auction_id }}</div>
       </div>
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">تاريخ الإنشاء :</div>
-       <div>{{ auction?.data?.created.substring(0, 10) }}</div>
+       <div>{{ realestate?.data?.created.substring(0, 10) }}</div>
       </div>
+     </div>
+     <div class="flex items-center w-full justify-between mb-2">
+      <div class="text-white-dark">اسم العميل :</div>
+      <div>{{ realestate?.data?.customer_name }}</div>
+     </div>
+     <div class="flex items-center w-full justify-between mb-2">
+      <div class="text-white-dark">رقم جوال العميل :</div>
+      <div>{{ realestate?.data?.customer_number }}</div>    
      </div>
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">تاريخ البداية :</div>
-       <div>{{ auction?.data?.start_date }}</div>
+       <div class="text-white-dark">اسم المالك :</div>
+       <div>{{ realestate?.data?.owner_name }}</div>
       </div>
      </div>
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between">
-       <div class="text-white-dark">تاريخ النهاية :</div>
-       <div>{{ auction?.data?.end_date }}</div>
+       <div class="text-white-dark">رقم جوال المالك :</div>
+       <div>{{ realestate?.data?.owner_number }}</div>
       </div>
      </div>
     </div>
    </div>
 
    <!-- realestates details -->
-   <div v-for="(item, index) in auction?.data?.realestates" class="table-responsive mt-6">
+   <div v-for="(item, index) in realestate?.data?.realestates" class="table-responsive mt-6">
     <h1 class="text-2xl font-semibold text-center">{{ `عقار رقم ${index + 1}` }}</h1>
     <table class="table table-bordered">
      <thead>
@@ -95,11 +103,11 @@
  import IconPrinter from '@/components/icon/icon-printer.vue';
  import IconPlus from '@/components/icon/icon-plus.vue';
  import IconEdit from '@/components/icon/icon-edit.vue';
- import { useAuctionsStore } from '@/stores/auctions';
- const auctionsStore = useAuctionsStore();
+ import { useRealestatesStore } from '@/stores/realestates';
+ const realestatesSotre = useRealestatesStore();
  const route = useRoute();
  useMeta({ title: 'Invoice Preview' });
- const auction = ref({});
+ const realestate = ref({});
  const items = ref([
   {
    id: 1,
@@ -155,7 +163,7 @@
   },
  ]);
  onBeforeMount(async () => {
-  auction.value = await auctionsStore.getAuction(route.params.id);
+  realestate.value = await realestatesSotre.getRealestate(route.params.id);
  });
  const print = () => {
   let printContents = document.getElementById('report').innerHTML;
