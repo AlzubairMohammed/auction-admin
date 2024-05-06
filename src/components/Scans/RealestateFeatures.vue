@@ -9,7 +9,6 @@
  import { ref, onMounted } from 'vue';
  const useScans = useScansStore();
  let isAddPropertyModalActive = ref(false);
- const formData = ref([]);
  const activeModal = () => {
   isAddPropertyModalActive.value = !isAddPropertyModalActive.value;
  };
@@ -19,16 +18,13 @@
  const removeProperty = async (id) => {
   await useScans.removeProperty(id);
  };
- onMounted(() => {
-  formData.value = useScans.scan.properties.filter((item) => item.is_feature);
- });
 </script>
 <template>
  <PropertiesModal v-model="isAddPropertyModalActive" :isFeature="true" />
  <form @submit.prevent="logTest">
   <AddingBar :clicked-function="activeModal" title="اضافة خاصية" />
   <div class="flex flex-wrap" :key="index">
-   <div v-for="(item, index) in formData" class="w-1/5 p-2">
+   <div v-for="(item, index) in useScans.scan.properties.filter((item) => item.is_feature)" class="w-1/5 p-2">
     <div v-if="item.type === 'multiple'" class="flex flex-wrap">
      <MultiSelectInput
       v-model="item.value"

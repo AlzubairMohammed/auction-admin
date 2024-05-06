@@ -1,7 +1,5 @@
 import request from '@/services/request';
 import { defineStore } from 'pinia';
-// import { useAppStore } from '.';
-// const useApp = useAppStore();
 export const useScansStore = defineStore('scans', {
  state: () => {
   return {
@@ -46,7 +44,7 @@ export const useScansStore = defineStore('scans', {
    });
   },
   addProperty: async function (property) {
-   await request.post(this.properties_url, property).then((response) => {
+   await request.post(this.properties_url, property, '', false).then((response) => {
     this.scan.properties.push(response.data);
    });
   },

@@ -45,6 +45,7 @@
  const addProperty = async () => {
   formData.value.is_feature = props.isFeature;
   await useScans.addProperty(formData.value);
+  await useScans.fetchProperties();
   cancel();
  };
  window.addEventListener('keydown', (e) => {
