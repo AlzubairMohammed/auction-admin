@@ -2,8 +2,11 @@
  import { ref } from 'vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import { useDirecCapitlizationsStore } from '@/stores/directCapitlizations';
+ import SelectRealestateModal from '@/components/Evaluations/DirectCapitalization/SelectRealestateModal.vue';
  const directCapitalizationsStore = useDirecCapitlizationsStore();
  const form = directCapitalizationsStore.directCapitlization;
+ const isSelectRealestateModalActive = ref(true);
+
  //  const goToAddBuilding = () => {
  //   form.value.operationCost = (form.value.operationIncomeRate / 100) * form.value.crossIncome;
  //   form.value.netIncome = form.value.crossIncome - form.value.operationCost;
@@ -11,6 +14,7 @@
  //  };
 </script>
 <template>
+ <SelectRealestateModal v-model="isSelectRealestateModalActive" />
  <form @submit.prevent="directCapitalizationsStore.addDirectCapitalization" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
   <div class="flex flex-col space-y-4">
    <BasicInput v-model="form.cross_income" type="number" required placeholder="اجمالي الدخل للعقار" />

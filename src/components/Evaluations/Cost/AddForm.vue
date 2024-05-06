@@ -4,10 +4,10 @@
  import DepreciationRate from '@/components/Evaluations/Cost/DepreciationRate.vue';
  import SelectRealestateModal from '@/components/Evaluations/Cost/SelectRealestateModal.vue';
  import { ref } from 'vue';
- const isAddPropertyModalActive = ref(true);
+ const isSelectRealestateModalActive = ref(true);
 </script>
 <template>
- <SelectRealestateModal v-model="isAddPropertyModalActive" />
+ <SelectRealestateModal v-model="isSelectRealestateModalActive" />
  <DirectCost />
  <IndirectCost />
  <DepreciationRate />

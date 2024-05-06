@@ -11,7 +11,7 @@ export const useDirecCapitlizationsStore = defineStore('directCapitlizations', {
     capitalization_rate: '',
     operation_income_rate: '',
     cross_income: '',
-    realestate_id: 7,
+    realestate_id: '',
    },
   };
  },
