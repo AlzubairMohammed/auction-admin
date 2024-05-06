@@ -7,13 +7,6 @@ import HomeView from '../views/index.vue';
 const routes = [
  // dashboard
  { path: '/', name: 'home', component: HomeView },
- // New adding
- {
-  path: '/evaluations/comparisons',
-  name: 'comparisons',
-  component: () => import(/* webpackChunkName: "evaluations-comparisons" */ '../views/evaluations/comparisons.vue'),
-  meta: { layout: 'app' },
- },
  // New scan
  {
   path: '/scans',
@@ -43,6 +36,12 @@ const routes = [
   path: '/realestates/list-page',
   name: 'realestates/list-page',
   component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/realestates/list-page.vue'),
+  meta: { layout: 'app' },
+ },
+ {
+  path: '/evaluations/comparisons/:id?',
+  name: 'comparisons',
+  component: () => import(/* webpackChunkName: "evaluations-comparisons" */ '../views/evaluations/comparisons.vue'),
   meta: { layout: 'app' },
  },
  {

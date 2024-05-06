@@ -5,20 +5,26 @@
  import AddAttributeModal from './AddAttributeModal.vue';
  import IconXCircle from '@/components/icon/icon-x-circle.vue';
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
- import { ref } from 'vue';
-
+ import SelectRealestateModal from '@/components/Scans/SelectRealestateModal.vue';
+ import { useScansStore } from '@/stores/scans';
+ import { ref, onMounted } from 'vue';
+ import { useRouter } from 'vue-router';
+ const router = useRouter();
  const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
+ const scansStore = useScansStore();
+ const scan = scansStore.scan;
  const isAddPropertyModalActive = ref(false);
  let result = ref(0);
  let properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
  let multiArray = comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
+ let isSelectRealestateModalActive = ref(false);
 
  const onSubmit = async () => {
   const data = {
    comparisons: multiArray,
    properties: properties,
    realestate: {
-    id: 7,
+    id: scan.realestate_id,
     meters: 2250,
    },
   };
@@ -39,8 +45,14 @@
    realestate.splice(index, 1);
   });
  };
+ onMounted(() => {
+  if (!router.params?.id) {
+   isSelectRealestateModalActive.value = true;
+  }
+ });
 </script>
 <template>
+ <SelectRealestateModal v-model="isSelectRealestateModalActive" />
  <AddAttributeModal v-model="isAddPropertyModalActive" />
  <form @submit.prevent="onSubmit">
   <AddingBar :clickedFunction="pushToRealestates" title="اضافة عقار" class="mt-3" />
