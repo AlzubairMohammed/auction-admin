@@ -34,6 +34,13 @@
      class="w-1/5 p-2"
      :error-message="licenseErrors.issuance_place_id"
     />
+    <SingleSelectInput
+     @on-select="(event) => (licenseData.realestate_type_id = event.id)"
+     placeholder="نوع العقار"
+     :options="realestateTypes"
+     class="w-1/5 p-2"
+     :error-message="licenseErrors.realestate_type_id"
+    />
    </div>
   </div>
  </form>
