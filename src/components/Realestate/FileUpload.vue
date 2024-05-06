@@ -1,6 +1,6 @@
 <script setup>
  import BasicInput from '@/components/Inputs/BasicInput.vue';
- //  import FlexibleFileUpload from '@/components/FileUpload/FlexibleFileUpload.vue';
+ import FlexibleFileUpload from '@/components/FileUpload/FlexibleFileUpload.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import { useRealestatesStore } from '@/stores/realestates';
  const useRealestateStore = useRealestatesStore();
@@ -18,6 +18,6 @@
    <BasicInput v-else v-model="fileItems.filesNames[index].name" placeholder="الوصف" type="text" class="w-1/8 p-2" />
    <a href="javascript:;" @click="fileItems.filesNames.splice(index, 1)" class="font-size-14">×</a>
   </div>
-  <!-- <FlexibleFileUpload @file-selected="(file) => (fileItems.files[file.index] = file.value)" :index="index" class="m-3" error-message="الحقل مطلوب" required /> -->
+  <FlexibleFileUpload @file-selected="(file) => (fileItems.files[file.index] = file.value)" :index="index" class="m-3" error-message="الحقل مطلوب" required />
  </div>
 </template>
