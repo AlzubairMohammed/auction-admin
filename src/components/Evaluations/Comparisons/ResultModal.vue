@@ -55,7 +55,7 @@
   router.push({
    name: 'realestates/preview-page',
    params: {
-    id: props.result.id,
+    id: props.result.realestate_id,
    },
   });
  };
