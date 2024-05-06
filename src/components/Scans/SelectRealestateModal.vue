@@ -6,6 +6,7 @@
  import { useScansStore } from '@/stores/scans';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
+ import iconX from '@/components/icon/icon-x.vue';
 
  const realestateStore = useRealestatesStore();
  const scansStore = useScansStore();
@@ -31,6 +32,7 @@
 
  const confirmCancel = (mode) => {
   value.value = false;
+  router.push({ name: 'home' });
   emit(mode);
  };
 
@@ -145,7 +147,7 @@
           />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
-          <button type="button" class="btn btn-outline-info" @click="goToAddAuction">إضافة عقار  جديد</button>
+          <button type="button" class="btn btn-outline-info" @click="goToAddAuction">إضافة عقار جديد</button>
           <button type="submit" class="btn btn-info ltr:ml-4 rtl:mr-4">
            {{ formData.id ? 'تعديل' : 'اختيار' }}
           </button>

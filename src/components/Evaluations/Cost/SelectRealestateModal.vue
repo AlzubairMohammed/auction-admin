@@ -6,6 +6,7 @@
  import { useCostEvaluationsStore } from '@/stores/costEvaluations';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
+ import iconX from '@/components/icon/icon-x.vue';
 
  const realestateStore = useRealestatesStore();
  const useCostEvaluationStore = useCostEvaluationsStore();
@@ -31,6 +32,7 @@
  const confirmCancel = (mode) => {
   value.value = false;
   emit(mode);
+  router.push({ name: 'home' });
  };
 
  const cancel = () => confirmCancel('cancel');

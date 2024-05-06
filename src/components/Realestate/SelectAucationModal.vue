@@ -6,6 +6,7 @@
  import { useRealestatesStore } from '@/stores/realestates';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
+ import iconX from '@/components/icon/icon-x.vue';
 
  const auctionsStore = useAuctionsStore();
  const realestateStore = useRealestatesStore();
@@ -31,6 +32,7 @@
 
  const confirmCancel = (mode) => {
   value.value = false;
+  router.push({ name: 'home' });
   emit(mode);
  };
 
