@@ -1,6 +1,6 @@
 <script setup>
  import { Dialog, DialogOverlay, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
- import { computed, ref } from 'vue';
+ import { computed, ref, onMounted } from 'vue';
  import { useRouter } from 'vue-router';
  import { useAuctionsStore } from '@/stores/auctions';
  import { useRealestatesStore } from '@/stores/realestates';
@@ -13,6 +13,7 @@
  const realestate = realestateStore.realestate;
  const options = ref([]);
  const auction = auctionsStore.auction;
+ const isModalActive = ref(false);
  const formData = ref({
   id: '',
  });
@@ -40,12 +41,13 @@
    cancel();
   }
  });
-
- await auctionsStore.fetchAuctions();
- auctionsStore.auctions.forEach((item) => {
-  options.value.push({ name: `${item[`${auction.key}`]}`, id: item.id });
+ onMounted(async () => {
+  await auctionsStore.fetchAuctions();
+  auctionsStore.auctions.forEach((item) => {
+   options.value.push({ name: `${item[`${auction.key}`]}`, id: item.id });
+  });
+  console.log(options.value);
  });
-
  const onSelectSearchMethod = (event) => {
   auction.key = event.id;
   options.value = [];

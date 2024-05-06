@@ -1,6 +1,7 @@
 <script setup>
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
+ import DateInput from '@/components/Inputs/DateInput.vue';
  import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import TextAreaInput from '@/components/Inputs/TextAreaInput.vue';
  import { ref } from 'vue';
@@ -77,6 +78,7 @@
       <BasicInput v-model="doumentData.south_space" placeholder="الطول" type="number" class="w-full p-2" :error-message="doumentErrors.south_space" />
      </div>
     </div>
+    <TextAreaInput v-model="doumentData.note" class="w-full p-2" label="الملاحظات" />
    </div>
   </div>
  </form>

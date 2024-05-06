@@ -28,7 +28,7 @@
   errorMessage: '',
  });
 
- const inputEl = (ref < HTMLInputElement) | (null > null);
+ const inputEl = ref(null);
  const emit = defineEmits(['update:modelValue', 'setRef']);
 
  const computedValue = computed({
