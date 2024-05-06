@@ -127,14 +127,14 @@
             { name: 'اسم المزاد', id: 'name' },
            ]"
            @on-select="onSelectSearchMethod"
-           class="w-1/3 pr-2"
+           class="w-1/2 pr-2"
           />
-          <BasicInput id="name" type="text" placeholder="بحث" class="w-2/3 px-2" v-model="auction.value" @input="searchAuctions" />
+          <BasicInput id="name" type="text" placeholder="بحث" class="w-1/2 pr-2 pl-2" v-model="auction.value" @input="searchAuctions" />
           <SingleSelectInput
            id="auction_id"
            label="المزاد"
            placeholder="اختر المزاد"
-           class="w-full mt-2 px-2 mb-[50px]"
+           class="w-full mt-2 pl-2 mb-[50px]"
            v-model="formData.id"
            :options="options"
            @on-select="onSelectAuction"
