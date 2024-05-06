@@ -11,7 +11,7 @@ export const useCostEvaluationsStore = defineStore('costEvaluations', {
    page: 1,
    perPage: 10,
    costEvaluation: {
-    realestate_id: 7,
+    realestate_id: '',
     directCostOperations: [],
     indirectCostOperations: [],
     depreciationRate: {},
