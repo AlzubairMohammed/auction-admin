@@ -145,7 +145,7 @@
           />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
-          <button type="button" class="btn btn-outline-info" @click="goToAddAuction">إضافة عقار جديد</button>
+          <button type="button" class="btn btn-outline-info" @click="goToAddAuction">إضافة عقار  جديد</button>
           <button type="submit" class="btn btn-info ltr:ml-4 rtl:mr-4">
            {{ formData.id ? 'تعديل' : 'اختيار' }}
           </button>
