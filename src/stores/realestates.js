@@ -33,6 +33,8 @@ export const useRealestatesStore = defineStore('realestates', {
    files: '',
   },
   realestate: {
+   key: 'id',
+   value: '',
    auction_id: '',
    customer_name: '',
    customer_number: '',
@@ -77,7 +79,7 @@ export const useRealestatesStore = defineStore('realestates', {
  },
  actions: {
   fetchRealestates: async function () {
-   await request.get(this.url).then((response) => {
+   await request.get(`${this.url}?key=${this.realestate.key}&value=${this.realestate.value}`).then((response) => {
     this.realestates = response.data;
    });
   },

@@ -11,7 +11,7 @@ export const useAuctionsStore = defineStore('auctions', {
     assignment_number: '',
     auction_type: '',
     start_date: '',
-    end_date: '',
+    end_date: '',       
     user_id: 1,
     name: '',
     key: 'name',

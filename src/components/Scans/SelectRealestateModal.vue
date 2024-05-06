@@ -2,17 +2,17 @@
  import { Dialog, DialogOverlay, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
  import { computed, ref, onMounted } from 'vue';
  import { useRouter } from 'vue-router';
- import { useAuctionsStore } from '@/stores/auctions';
  import { useRealestatesStore } from '@/stores/realestates';
+ import { useScansStore } from '@/stores/scans';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
 
- const auctionsStore = useAuctionsStore();
  const realestateStore = useRealestatesStore();
+ const scansStore = useScansStore();
+ const scan = scansStore.scan;
  const router = useRouter();
  const realestate = realestateStore.realestate;
  const options = ref([]);
- const auction = auctionsStore.auction;
  const isModalActive = ref(false);
  const formData = ref({
   id: '',
@@ -21,7 +21,7 @@
   modelValue: '',
  });
  const errorMessage = ref('');
- const auctionId = ref('');
+ const realestateId = ref('');
  const emit = defineEmits(['update:modelValue', 'cancel', 'confirm']);
 
  const value = computed({
@@ -42,41 +42,42 @@
   }
  });
  onMounted(async () => {
-  await auctionsStore.fetchAuctions();
-  auctionsStore.auctions.forEach((item) => {
-   options.value.push({ name: `${item[`${auction.key}`]}`, id: item.id });
+  await realestateStore.fetchRealestates();
+  realestateStore.realestates.forEach((item) => {
+   options.value.push({ name: `${item[`${realestate.key}`]}`, id: item.id });
   });
   console.log(options.value);
  });
  const onSelectSearchMethod = (event) => {
-  auction.key = event.id;
+  realestate.key = event.id;
   options.value = [];
-  auctionsStore.auctions.forEach((item) => {
+  realestateStore.realestates.forEach((item) => {
    options.value.push({ name: `${item[`${event?.id}`]}`, id: item.id });
   });
  };
- const searchAuctions = async () => {
-  await auctionsStore.fetchAuctions();
+ const searchRealestates = async () => {
+  await realestateStore.fetchRealestates();
   options.value = [];
-  auctionsStore.auctions.forEach((item) => {
-   options.value.push({ name: `${item[`${auction.key}`]}`, id: item.id });
+  realestateStore.realestates.forEach((item) => {
+   console.log(item);
+   options.value.push({ name: `${item[`${realestate.key}`]}`, id: item.id });
   });
  };
  const onSubmit = () => {
-  if (!auctionId.value) {
+  if (!realestateId.value) {
    errorMessage.value = 'يجب اختيار العقار';
    return;
   }
-  realestate.auction_id = auctionId.value;
+  scan.realestate_id = realestateId.value;
   value.value = false;
  };
  const onSelectAuction = (event) => {
-  auctionId.value = event.id;
+  realestateId.value = event.id;
   errorMessage.value = '';
  };
  const goToAddAuction = () => {
   value.value = false;
-  router.push({ name: 'auctions/add-page' });
+  router.push({ name: 'realestates/add-page' });
  };
 </script>
 <template>
@@ -86,6 +87,8 @@
     as="template"
     enter="duration-300 ease-out"
     enter-from="opacity-0"
+    const
+    realestates="realestateStore.realestates;"
     enter-to="opacity-100"
     leave="duration-200 ease-in"
     leave-from="opacity-100"
@@ -122,19 +125,19 @@
           <SingleSelectInput
            placeholder="اختر طريقة البحث"
            :options="[
-            { name: 'رقم العقار', id: 'id' },
-            { name: 'رقم التكليف', id: 'assignment_number' },
-            { name: 'اسم العقار', id: 'name' },
+            { name: 'رقم المزاد', id: 'auction_id' },
+            { name: 'رقم جوال العميل', id: 'customer_number' },
+            { name: 'رقم جوال المالك', id: 'owner_number' },
            ]"
            @on-select="onSelectSearchMethod"
            class="w-1/2 pr-2 pl-2"
           />
-          <BasicInput id="name" type="text" placeholder="بحث" class="w-1/2 pl-2" v-model="auction.value" @input="searchAuctions" />
+          <BasicInput id="name" type="text" placeholder="بحث" class="w-1/2 pl-2" v-model="realestate.value" @input="searchRealestates" />
           <SingleSelectInput
            id="auction_id"
            label="العقار"
            placeholder="اختر العقار"
-           class="w-full mt-2 px-2 mb-[50px]"
+           class="w-full mt-2 px-2 mb-[60px]"
            v-model="formData.id"
            :options="options"
            @on-select="onSelectAuction"

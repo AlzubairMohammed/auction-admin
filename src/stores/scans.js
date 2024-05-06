@@ -16,7 +16,7 @@ export const useScansStore = defineStore('scans', {
    },
    scan: {
     user_id: 2,
-    realestate_id: 98,
+    realestate_id: '',
     lat: '5.2323',
     lng: '4.2333',
     properties: [],
