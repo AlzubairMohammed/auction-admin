@@ -51,7 +51,7 @@
      </div>
      <div class="flex items-center w-full justify-between mb-2">
       <div class="text-white-dark">رقم جوال العميل :</div>
-      <div>{{ realestate?.data?.customer_number }}</div>    
+      <div>{{ realestate?.data?.customer_number }}</div>
      </div>
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">

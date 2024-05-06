@@ -106,11 +106,16 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
   },
   addComparisonsEvaluation: async function (comparisonsEvaluation) {
    await request
-    .post(this.url, comparisonsEvaluation, {
-     headers: {
-      'Content-Type': 'application/json',
+    .post(
+     this.url,
+     comparisonsEvaluation,
+     {
+      headers: {
+       'Content-Type': 'application/json',
+      },
      },
-    })
+     false
+    )
     .then((response) => {
      this.comparisonsEvaluation = response.data;
     });

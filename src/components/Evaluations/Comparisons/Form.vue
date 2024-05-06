@@ -9,11 +9,13 @@
  import { useScansStore } from '@/stores/scans';
  import { ref, onMounted } from 'vue';
  import { useRouter } from 'vue-router';
+ import ResultModal from '@/components/Evaluations/Comparisons/ResultModal.vue';
  const router = useRouter();
  const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
  const scansStore = useScansStore();
  const scan = scansStore.scan;
  const isAddPropertyModalActive = ref(false);
+ const isResultModalActive = ref(false);
  let result = ref(0);
  let properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
  let multiArray = comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
@@ -28,8 +30,9 @@
     meters: 2250,
    },
   };
-  comparisonsEvaluationsStore.addComparisonsEvaluation(data);
+  await comparisonsEvaluationsStore.addComparisonsEvaluation(data);
   result.value = comparisonsEvaluationsStore.comparisonsEvaluation;
+  isResultModalActive.value = true;
  };
  const pushToRealestates = () => {
   const length = multiArray.length;
@@ -54,6 +57,7 @@
 <template>
  <SelectRealestateModal v-model="isSelectRealestateModalActive" />
  <AddAttributeModal v-model="isAddPropertyModalActive" />
+ <ResultModal v-model="isResultModalActive" :result="result" />
  <form @submit.prevent="onSubmit">
   <AddingBar :clickedFunction="pushToRealestates" title="اضافة عقار" class="mt-3" />
   <table>
