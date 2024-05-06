@@ -77,7 +77,6 @@
       <BasicInput v-model="doumentData.south_space" placeholder="الطول" type="number" class="w-full p-2" :error-message="doumentErrors.south_space" />
      </div>
     </div>
-    <TextAreaInput v-model="doumentData.note" class="w-full p-2" label="الملاحظات" />
    </div>
   </div>
  </form>
