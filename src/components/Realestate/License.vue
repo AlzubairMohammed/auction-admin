@@ -13,7 +13,6 @@
  const realestateTypes = useRealestateStore.realestateTypes;
 
  const cities = ref([]);
- const quarters = ref([]);
  const logDate = (date) => {
   licenseData.date = date;
  };
@@ -27,7 +26,6 @@
   <div class="mb-5">
    <div class="flex flex-wrap justify-between items-center">
     <BasicInput v-model="licenseData.number" placeholder="رقم الرخصة" type="number" class="w-1/5 p-2" :error-message="licenseErrors.number" />
-    <DateInput @getDate="logDate" placeholder=" تاريخ الرخصة" class="w-1/5 p-2" :error-message="licenseErrors.date" />
     <SingleSelectInput @on-select="getCities" placeholder="المنطقة" :options="areas" class="w-1/5 p-2" :error-message="licenseErrors.area" />
     <SingleSelectInput
      @on-select="(event) => (licenseData.issuance_place_id = event.id)"
