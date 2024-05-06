@@ -24,12 +24,12 @@
  const beforeChange = () => {
   return true;
  };
- onMounted(() => {
-  wizardRef.value.maxStep = 1;
-  if (!router.params.id) {
-   isModalActive.value = true;
-  }
- });
+//  onMounted(() => {
+//   wizardRef.value.maxStep = 1;
+//   if (!router.params.id) {
+//    isModalActive.value = true;
+//   }
+//  });
 </script>
 
 <template>
