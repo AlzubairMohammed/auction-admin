@@ -32,7 +32,7 @@
    <div class="datatable invoice-table">
     <div class="mb-4.5 px-5 flex md:items-center md:flex-row flex-col gap-5">
      <div class="flex items-center gap-2">
-      <router-link to="/auctions/add-page" class="btn btn-primary gap-2">
+      <router-link to="/realestates/add-page" class="btn btn-primary gap-2">
        <icon-plus />
        اضافة جديد
       </router-link>
