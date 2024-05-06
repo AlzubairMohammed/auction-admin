@@ -19,7 +19,7 @@ export const useScansStore = defineStore('scans', {
     lng: '4.2333',
     properties: [],
     files: [],
-    imagesNames: [{ name: 'الصك' }, { name: 'الرخصة' }, { name: 'المخطط' }],
+    imagesNames: [{ name: 'صور خارجية' }, { name: 'صور داخلية' }],
     realestateComponents: [],
    },
   };
