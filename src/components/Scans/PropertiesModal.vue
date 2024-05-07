@@ -9,6 +9,7 @@
  const useScans = useScansStore();
  const formData = ref({ type: '', name: '', options: [] });
  const notce = ref('');
+ const errorMessage = ref('');
  const props = defineProps({
   title: {
    type: String,
@@ -50,6 +51,7 @@
    }
   }
   if (!formData.value.name && !formData.value.type) {
+   errorMessage.value = 'الحقل مطلوب';
    return;
   }
   formData.value.is_feature = props.isFeature;
@@ -117,13 +119,15 @@
             { name: 'اختيار واحد من بين متعدد', value: 'single' },
             { name: 'اختيار متعدد من بين متعدد', value: 'multiple' },
            ]"
-           error-message="الحقل مطلوب"
+           :error-message="errorMessage"
           />
          </div>
          <div class="mb-5">
-          <input id="title" type="text" placeholder="ادخل اسم الخاصية" class="form-input" v-model="formData.name" error-message="الحقل مطلوب" />
+          <lable v-if="errorMessage" class="text-red-300">{{ errorMessage }}</lable>
+          <input id="title" type="text" placeholder="ادخل اسم الخاصية" class="form-input" v-model="formData.name" required />
          </div>
          <div v-for="(item, index) in formData.options" class="mb-5">
+          <lable v-if="errorMessage" class="text-red-300">{{ errorMessage }}</lable>
           <input
            v-if="formData.type === 'multiple'"
            id="title"
@@ -131,10 +135,10 @@
            :placeholder="`ادخل الخيار${index + 1}`"
            class="form-input"
            v-model="formData.options[index].name"
-           error-message="الحقل مطلوب"
+           required
+           title="الحقل مطلوب"
           />
-
-          <input v-else id="title" type="text" :placeholder="`ادخل الخيار${index + 1}`" class="form-input" v-model="item.name" error-message="الحقل مطلوب" />
+          <input v-else id="title" type="text" :placeholder="`ادخل الخيار${index + 1}`" class="form-input" v-model="item.name" required title="الحقل مطلو" />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
           <button type="button" class="btn btn-outline-danger" @click="cancel">الغاء</button>
