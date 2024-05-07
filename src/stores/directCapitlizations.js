@@ -35,7 +35,7 @@ export const useDirecCapitlizationsStore = defineStore('directCapitlizations', {
    });
   },
   addDirectCapitalization: async function () {
-   await request.post(this.url, this.directCapitlization).then((response) => {
+   await request.post(this.url, this.directCapitlization, '', false).then((response) => {
     this.scan.properties.push(response.data);
    });
   },

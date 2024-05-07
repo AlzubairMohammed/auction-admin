@@ -20,16 +20,21 @@ export const useCostEvaluationsStore = defineStore('costEvaluations', {
  },
  actions: {
   addCostEvaluation: async function () {
-   console.log(this.url);
-   await request
-    .post(this.url, this.costEvaluation, {
-     headers: {
-      'Content-Type': 'application/json',
+   const responseData = await request
+    .post(
+     this.url,
+     this.costEvaluation,
+     {
+      headers: {
+       'Content-Type': 'application/json',
+      },
      },
-    })
+     false
+    )
     .then((response) => {
-     this.list.push(response.data);
+     return response.depreciationData;
     });
+   return responseData;
   },
  },
 });

@@ -1,28 +1,23 @@
 <script setup>
  import { computed, ref } from 'vue';
  import { useCostEvaluationsStore } from '@/stores/costEvaluations';
- import AddingBar from '@/components/AddingBar/AddingBar.vue';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import SingleSelectInput from '@/components/Inputs/SingleSelectInput.vue';
+ import ResultModal from '@/components/Evaluations/Cost/ResultModal.vue';
 
  const costEvaluationSotre = useCostEvaluationsStore();
  const depreciationRate = costEvaluationSotre.costEvaluation.depreciationRate;
- const isModalActive = ref(false);
- let title = ref('');
- let realestateAge = ref(0);
- let virsualRealestateAge = ref(0);
  const isResultModalActive = ref(false);
- let depreciationCost = ref(0);
- let realestateValueAfterDepreciation = ref(0);
- let totalIndirectCost = computed(() => {
-  return costEvaluationSotre.totalIndirectCost;
- });
-
+ let result = ref(0);
  const submit = async () => {
-  await costEvaluationSotre.addCostEvaluation();
+  result.value = await costEvaluationSotre.addCostEvaluation();
+  result.value.realestate_id = costEvaluationSotre.costEvaluation.realestate_id;
+  isResultModalActive.value = true;
+  console.log('result', result.value);
  };
 </script>
 <template>
+ <ResultModal v-model="isResultModalActive" :result="result" />
  <form @submit.prevent="submit" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
   <h1 class="text-2xl font-bold mb-5 text-center">
    <span class="underline">الاهلاك</span>
