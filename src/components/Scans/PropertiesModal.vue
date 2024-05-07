@@ -8,7 +8,7 @@
 
  const useScans = useScansStore();
  const formData = ref({ type: '', name: '', options: [] });
-
+ const notce = ref('');
  const props = defineProps({
   title: {
    type: String,
@@ -43,6 +43,10 @@
  const cancel = () => confirmCancel('cancel');
 
  const addProperty = async () => {
+  if (formData.value.type === 'single' || formData.value.type === 'multiple') {
+   notce.value = 'الرجاء اضافة خيار واحد علي الاقل';
+   return;
+  }
   formData.value.is_feature = props.isFeature;
   await useScans.addProperty(formData.value);
   await useScans.fetchProperties();
@@ -92,6 +96,7 @@
         {{ formData.id ? 'تعديل خاصية' : 'اضافة خاصية' }}
        </div>
        <div class="p-5">
+        <h1 v-if="notce" class="text-center text-red-300">{{ notce }}</h1>
         <AddingBar :clicked-function="() => formData.options.push({ name: '' })" title="اضافة  خيار" class="mt-3" />
         <form @submit.prevent="addProperty">
          <div class="mb-5">
