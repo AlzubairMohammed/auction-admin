@@ -99,8 +99,9 @@
          <div class="mb-5">
           <div>
            <h2 class="text-xl font-semibold mb-4">النتيجة</h2>
-           <p class="text-gray-600 dark:text-gray-400">سعر المتر : {{ result.meter_price }}</p>
-           <p class="text-gray-600 dark:text-gray-400">السعر الاتجمالي : {{ result.total_price }}</p>
+           <p class="text-gray-600 dark:text-gray-400">اجمالي قيمة العقار : {{ result.realestate_total_value }}</p>
+           <p class="text-gray-600 dark:text-gray-400">صافي الدخل : {{ result.net_income }}</p>
+           <p class="text-gray-600 dark:text-gray-400">قيمة التشغيل والصيانة : {{ result.operation_cost }}</p>
           </div>
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
