@@ -3,7 +3,6 @@
   <div class="flex items-center lg:justify-end justify-center flex-wrap gap-4 mb-6">
    <button type="button" class="btn btn-primary gap-2" @click="print">
     <icon-printer />
-
     طباعة
    </button>
    <router-link to="/auctions/add-page" class="btn btn-secondary gap-2">
@@ -100,60 +99,6 @@
  const route = useRoute();
  useMeta({ title: 'Invoice Preview' });
  const auction = ref({});
- const items = ref([
-  {
-   id: 1,
-   title: 'Calendar App Customization',
-   quantity: 1,
-   price: '120',
-   amount: '120',
-  },
-  {
-   id: 2,
-   title: 'Chat App Customization',
-   quantity: 1,
-   price: '230',
-   amount: '230',
-  },
-  {
-   id: 3,
-   title: 'Laravel Integration',
-   quantity: 1,
-   price: '405',
-   amount: '405',
-  },
-  {
-   id: 4,
-   title: 'Backend UI Design',
-   quantity: 1,
-   price: '2500',
-   amount: '2500',
-  },
- ]);
- const columns = ref([
-  {
-   key: 'id',
-   label: 'S.NO',
-  },
-  {
-   key: 'title',
-   label: 'ITEMS',
-  },
-  {
-   key: 'quantity',
-   label: 'QTY',
-  },
-  {
-   key: 'price',
-   label: 'PRICE',
-   class: 'ltr:text-right rtl:text-left',
-  },
-  {
-   key: 'amount',
-   label: 'AMOUNT',
-   class: 'ltr:text-right rtl:text-left',
-  },
- ]);
  onBeforeMount(async () => {
   auction.value = await auctionsStore.getAuction(route.params.id);
  });

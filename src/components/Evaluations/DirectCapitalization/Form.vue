@@ -28,7 +28,6 @@
    <BasicInput v-model="form.operation_income_rate" placeholder="نسبة مصاريف التشغيل و الصيانة" type="number" />
    <BasicInput v-model="form.capitalization_rate" placeholder="معدل الرسملة (%)" type="number" />
   </div>
-
   <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5 w-1/6" type="submit">تقييم</button>
  </form>
 </template>
