@@ -32,34 +32,34 @@
     </div>
    </div>
    <hr class="border-[#e0e6ed] dark:border-[#1b2e4b] my-6" />
-   <!-- Auction Details -->
+   <!-- Realestate Details -->
    <div class="flex justify-between lg:flex-row flex-col gap-6 flex-wrap">
     <div class="flex justify-between sm:flex-row flex-col gap-6 lg:w-full">
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">
-       <div class="text-white-dark">رقم المزاد :</div>
-       <div>{{ realestate?.data?.auction_id }}</div>
+       <div class="text-white-dark">رقم العقار :</div>
+       <div>{{ realestate?.data?.id }}</div>
       </div>
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">تاريخ الإنشاء :</div>
        <div>{{ realestate?.data?.created.substring(0, 10) }}</div>
       </div>
      </div>
-     <div class="flex items-center w-full justify-between mb-2">
-      <div class="text-white-dark">اسم العميل :</div>
-      <div>{{ realestate?.data?.customer_name }}</div>
-     </div>
-     <div class="flex items-center w-full justify-between mb-2">
-      <div class="text-white-dark">رقم جوال العميل :</div>
-      <div>{{ realestate?.data?.customer_number }}</div>
+     <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
+      <div class="flex items-center w-full justify-between mb-2">
+       <div class="text-white-dark">اسم العميل :</div>
+       <div>{{ realestate?.data?.customer_name }}</div>
+      </div>
+      <div class="flex items-center w-full justify-between mb-2">
+       <div class="text-white-dark">رقم جوال العميل :</div>
+       <div>{{ realestate?.data?.customer_number }}</div>
+      </div>
      </div>
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">اسم المالك :</div>
        <div>{{ realestate?.data?.owner_name }}</div>
       </div>
-     </div>
-     <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between">
        <div class="text-white-dark">رقم جوال المالك :</div>
        <div>{{ realestate?.data?.owner_number }}</div>
@@ -69,7 +69,7 @@
    </div>
 
    <!-- realestates details -->
-   <div v-for="(item, index) in realestate?.data?.realestates" class="table-responsive mt-6">
+   <div v-for="(item, index) in realestate?.data?.comparisons_evaluations[0].comparisons_evaluation_realestates" class="table-responsive mt-6">
     <h1 class="text-2xl font-semibold text-center">{{ `عقار رقم ${index + 1}` }}</h1>
     <table class="table table-bordered">
      <thead>
@@ -90,7 +90,7 @@
      </tbody>
     </table>
     <div class="flex flex-wrap">
-     <img v-for="image in item.realestate_images.slice(0, 5)" :src="`http://localhost:7070/${image.path}`" alt="" class="w-1/5 p-2 rounded" />
+     <!-- <img v-for="image in item.realestate_images.slice(0, 5)" :src="`http://localhost:7070/${image.path}`" alt="" class="w-1/5 p-2 rounded" /> -->
     </div>
    </div>
   </div>
