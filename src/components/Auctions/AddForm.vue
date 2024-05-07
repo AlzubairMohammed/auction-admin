@@ -24,6 +24,9 @@
 </script>
 <template>
  <form @submit.prevent="submit" class="mb-5 grid grid-cols-1 p-[100px] gap-5 p-5 bg-white shadow-md rounded-md">
+  <h1 class="text-2xl font-bold mb-5 text-center">
+   <span class="underline">اضافة مزاد</span>
+  </h1>
   <SingleSelectInput
    :isRequired="true"
    @on-select="(event) => (auctionData.auction_type = event.id)"
