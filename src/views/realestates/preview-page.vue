@@ -69,7 +69,7 @@
    </div>
 
    <!-- realestates details -->
-   <div v-for="(item, index) in realestate?.data?.comparisons_evaluations[0].comparisons_evaluation_realestates" class="table-responsive mt-6">
+   <div v-for="(item, index) in realestate?.data?.comparisons_evaluations[0]?.comparisons_evaluation_realestates" class="table-responsive mt-6">
     <h1 class="text-2xl font-semibold text-center">{{ `عقار رقم ${index + 1}` }}</h1>
     <table class="table table-bordered">
      <thead>
