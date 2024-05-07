@@ -44,7 +44,12 @@
 
  const addProperty = async () => {
   if (formData.value.type === 'single' || formData.value.type === 'multiple') {
-   notce.value = 'الرجاء اضافة خيار واحد علي الاقل';
+   if (formData.value.options.length < 1) {
+    notce.value = 'الرجاء اضافة خيار واحد علي الاقل';
+    return;
+   }
+  }
+  if (!formData.value.name && !formData.value.type) {
    return;
   }
   formData.value.is_feature = props.isFeature;
@@ -112,10 +117,11 @@
             { name: 'اختيار واحد من بين متعدد', value: 'single' },
             { name: 'اختيار متعدد من بين متعدد', value: 'multiple' },
            ]"
+           error-message="الحقل مطلوب"
           />
          </div>
          <div class="mb-5">
-          <input id="title" type="text" placeholder="ادخل اسم الخاصية" class="form-input" v-model="formData.name" />
+          <input id="title" type="text" placeholder="ادخل اسم الخاصية" class="form-input" v-model="formData.name" error-message="الحقل مطلوب" />
          </div>
          <div v-for="(item, index) in formData.options" class="mb-5">
           <input
@@ -125,8 +131,10 @@
            :placeholder="`ادخل الخيار${index + 1}`"
            class="form-input"
            v-model="formData.options[index].name"
+           error-message="الحقل مطلوب"
           />
-          <input v-else id="title" type="text" :placeholder="`ادخل الخيار${index + 1}`" class="form-input" v-model="item.name" />
+
+          <input v-else id="title" type="text" :placeholder="`ادخل الخيار${index + 1}`" class="form-input" v-model="item.name" error-message="الحقل مطلوب" />
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
           <button type="button" class="btn btn-outline-danger" @click="cancel">الغاء</button>
