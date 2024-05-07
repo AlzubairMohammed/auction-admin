@@ -67,7 +67,7 @@
  };
  const onSubmit = () => {
   if (!realestateId.value) {
-   errorMessage.value = 'يجب اختيار العقار';
+   errorMessage.value = 'يجب اختار العقار';
    return;
   }
   directCapitlization.realestate_id = realestateId.value;

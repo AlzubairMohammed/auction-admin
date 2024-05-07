@@ -116,7 +116,7 @@
         <icon-x />
        </button>
        <div class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]">
-        {{ formData.id ? 'تعديل' : 'اختيار المزاد' }}
+        {{ formData.id ? 'تعديل' : 'اختار المزاد' }}
        </div>
        <div class="p-5">
         <form @submit.prevent="onSubmit">
