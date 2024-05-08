@@ -79,7 +79,7 @@
        <td>{{ item.owner_name }}</td>
        <td>{{ item.owner_number }}</td>
        <td class="flex gap-4" id="operations">
-        <router-link :to="`/auctions/preview-page/${item.id}`" class="text-primary"> تقييم </router-link>
+        <button class="text-primary">تقييم</button>
         <router-link :to="`/scans/${item.id}`" class="text-success"> مسح ميداني </router-link>
        </td>
       </tr>
