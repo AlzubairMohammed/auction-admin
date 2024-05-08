@@ -83,8 +83,10 @@ export const useRealestatesStore = defineStore('realestates', {
     this.realestates = response.data;
    });
   },
-  getRealestate(id) {
-   return request.get(`${this.url}/${id}`);
+  getRealestate: async function (id) {
+   return await request.get(`${this.url}/${id}`).then((response) => {
+    return response.data;
+   });
   },
   addRealestate: async function (realestate, tabControll) {
    // rest fields validation

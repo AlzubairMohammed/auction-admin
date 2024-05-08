@@ -57,8 +57,9 @@ export const useScansStore = defineStore('scans', {
    });
   },
   addScan: async function (scan) {
-   console.log(this.scan);
-   await request.post(this.url, scan).then((response) => {});
+   return await request.post(this.url, scan, '', false).then((response) => {
+    return response.data;
+   });
   },
  },
 });

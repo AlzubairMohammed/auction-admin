@@ -9,7 +9,7 @@ const routes = [
  { path: '/', name: 'home', component: HomeView },
  // New scan
  {
-  path: '/scans',
+  path: '/scans/:id?',
   name: 'scan',
   component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/scans/scans.vue'),
   meta: { layout: 'app' },

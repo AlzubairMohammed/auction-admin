@@ -69,6 +69,7 @@
        <th>رقم العميل</th>
        <th>اسم المالك</th>
        <th>رقم المالك</th>
+       <th id="operatons_title">العمليات</th>
       </tr>
      </thead>
      <tbody>
@@ -77,6 +78,10 @@
        <td>{{ item.customer_number }}</td>
        <td>{{ item.owner_name }}</td>
        <td>{{ item.owner_number }}</td>
+       <td class="flex gap-4" id="operations">
+        <router-link :to="`/auctions/preview-page/${item.id}`" class="text-primary"> تقييم </router-link>
+        <router-link :to="`/scans/${item.id}`" class="text-success"> مسح ميداني </router-link>
+       </td>
       </tr>
      </tbody>
     </table>
@@ -104,6 +109,8 @@
  });
  const print = () => {
   let printContents = document.getElementById('report').innerHTML;
+  printContents = printContents.replace(/<td class="flex gap-4" id="operations">.*?<\/td>/g, '');
+  printContents = printContents.replace(/<th id="operatons_title">.*?<\/th>/g, '');
   let originalContents = document.body.innerHTML;
 
   document.body.innerHTML = printContents;

@@ -8,17 +8,31 @@
  import ImagesUpload from '@/components/Scans/ImagesUpload.vue';
  import RealestateFeatures from '@/components/Scans/RealestateFeatures.vue';
  import SelectRealestateModal from '@/components/Scans/SelectRealestateModal.vue';
- import { ref } from 'vue';
+ import { ref, onMounted } from 'vue';
  import { useScansStore } from '@/stores/scans';
+ import { useRealestatesStore } from '@/stores/realestates';
+ import { useRoute, useRouter } from 'vue-router';
+ const realestatesStore = useRealestatesStore();
+ const route = useRoute();
+ const router = useRouter();
  const useStore = useScansStore();
  const formData = useStore.scan;
- const isModalActive = ref(true);
+ const isModalActive = ref(false);
 
  useMeta({ title: 'Wizards' });
 
  const onComplete = async () => {
-  await useStore.addScan(formData);
+  const data = await useStore.addScan(formData);
+  const realestateData = await realestatesStore.getRealestate(data.realestate_id);
+  if (data) router.push({ name: 'auctions/preview-page', params: { id: realestateData.auction_id } });
  };
+ onMounted(() => {
+  if (!route.params.id) {
+   isModalActive.value = true;
+  } else {
+   formData.realestate_id = route.params.id;
+  }
+ });
 </script>
 
 <template>
