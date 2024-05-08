@@ -5,9 +5,9 @@
     <icon-printer />
     طباعة
    </button>
-   <router-link to="/auctions/add-page" class="btn btn-secondary gap-2">
+   <router-link :to="`/realestates/add-page/${auction?.data?.id}`" class="btn btn-secondary gap-2">
     <icon-plus />
-    اضافة
+    اضافة عقار
    </router-link>
    <router-link :to="`/auctions/edit-page/${auction?.data?.id}`" class="btn btn-warning gap-2">
     <icon-edit />

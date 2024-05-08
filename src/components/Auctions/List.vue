@@ -10,8 +10,8 @@
  import IconEye from '@/components/icon/icon-eye.vue';
  const items = ref([]);
  const store = useAppStore();
- const useAuctions = useAuctionsStore();    
- const tableData = ref([]); 
+ const useAuctions = useAuctionsStore();
+ const tableData = ref([]);
  const cols = ref([
   { field: 'assignment_number', title: 'رقم التكليف' },
   { field: 'name', title: 'اسم المزاد' },
@@ -25,35 +25,6 @@
   await useAuctions.fetchAuctions();
   items.value = useAuctions.auctions;
  });
-
- const searchText = ref('');
- const columns = ref(['id', 'invoice', 'name', 'email', 'date', 'amount', 'status', 'actions']);
- const tableOption = ref({
-  headings: {
-   id: (h, row, index) => {
-    return '#';
-   },
-  },
-  perPage: 10,
-  perPageValues: [10, 20, 30, 50, 100],
-  skin: 'table-hover',
-  columnsClasses: { actions: 'actions !text-center w-1' },
-  pagination: { show: true, nav: 'scroll', chunk: 10 },
-  texts: {
-   filter: '',
-   filterPlaceholder: 'بحث...',
-   limit: '',
-  },
-  resizableColumns: false,
-  sortable: ['invoice', 'name', 'email', 'date', 'amount', 'status'],
-  sortIcon: {
-   base: 'sort-icon-none',
-   up: 'sort-icon-asc',
-   down: 'sort-icon-desc',
-  },
- });
-
- const data = tableData.value;
 </script>
 <template>
  <div>
@@ -96,16 +67,10 @@
      </template>
 
      <template #actions="data">
-      <div class="flex gap-4 items-center justify-center">
-       <router-link to="/apps/invoice/edit" class="hover:text-info">
-        <icon-edit class="w-4.5 h-4.5" />
-       </router-link>
-       <router-link :to="`/auctions/preview-page/${data.value.id}`" class="hover:text-primary">
-        <icon-eye />
-       </router-link>
-       <button type="button" class="hover:text-danger" @click="deleteRow(`${data.assignment_number}`)">
-        <icon-trash-lines />
-       </button>
+      <div class="flex gap-4">
+       <router-link :to="`/auctions/preview-page/${data.value.id}`" class="text-primary"> عرض </router-link>
+       <router-link to="/apps/invoice/edit" class="text-success"> تعديل </router-link>
+       <router-link :to="`/auctions/preview-page/${data.value.id}`" class="text-danger"> حذف </router-link>
       </div>
      </template>
     </vue3-datatable>
