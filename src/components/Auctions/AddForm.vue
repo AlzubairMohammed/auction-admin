@@ -14,12 +14,12 @@
   auction_type: '',
   start_date: '',
   end_date: '',
-  user_id: 3,
+  user_id: 2,
   name: '',
  });
  const submit = async () => {
   const data = await auctionsStore.addAuction(auctionData.value);
-  if (data) router.push({ name: 'realestates/add-page', params: { id: data.id } });
+  if (data) router.push({ name: 'auctions/preview-page', params: { id: data.id } });
  };
 </script>
 <template>
@@ -32,8 +32,8 @@
    @on-select="(event) => (auctionData.auction_type = event.id)"
    :placeholder="'اختار نوع المزاد'"
    :options="[
-    { name: 'type2', id: 1 },
-    { name: 'type1', id: 2 },
+    { name: 'الكتروني', id: 1 },
+    { name: 'هجين', id: 2 },
    ]"
    :errorMessage="auctionErrors.auction_type"
   />

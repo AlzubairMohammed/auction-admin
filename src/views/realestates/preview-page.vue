@@ -3,7 +3,6 @@
   <div class="flex items-center lg:justify-end justify-center flex-wrap gap-4 mb-6">
    <button type="button" class="btn btn-primary gap-2" @click="print">
     <icon-printer />
-
     طباعة
    </button>
    <router-link to="/realestates/add-page" class="btn btn-secondary gap-2">
