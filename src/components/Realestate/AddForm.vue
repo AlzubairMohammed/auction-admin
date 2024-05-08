@@ -7,28 +7,30 @@
  import License from '@/components/Realestate/License.vue';
  import FileUpload from '@/components/Realestate/FileUpload.vue';
  import { ref, onMounted } from 'vue';
- import { useRoute } from 'vue-router';
+ import { useRoute, useRouter } from 'vue-router';
  import { useRealestatesStore } from '@/stores/realestates';
  import SelectAucationModal from '@/components/Realestate/SelectAucationModal.vue';
  const useStore = useRealestatesStore();
- const router = useRoute();
+ const route = useRoute();
+ const router = useRouter();
  const customerData = useStore.realestate;
  const wizardRef = ref(null);
  const isModalActive = ref(false);
  useMeta({ title: 'Wizards' });
 
- const onSubmit = () => {
-  if (router.params.id) {
-   customerData.auction_id = router.params.id;
+ const onSubmit = async () => {
+  if (route.params.id) {
+   customerData.auction_id = route.params.id;
   }
-  useStore.addRealestate(customerData, wizardRef.value);
+  const data = await useStore.addRealestate(customerData, wizardRef.value);
+  if (data) router.push({ name: 'auctions/preview-page', params: { id: data.auction_id } });
  };
  const beforeChange = () => {
   return true;
  };
  onMounted(() => {
   wizardRef.value.maxStep = 1;
-  if (!router.params.id) {
+  if (!route.params.id) {
    isModalActive.value = true;
   }
  });

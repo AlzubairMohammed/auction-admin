@@ -163,8 +163,8 @@ export const useRealestatesStore = defineStore('realestates', {
    //     tabControll.navigateToTab(3);
    //     return;
    //    }
-   await request.post(this.url, realestate).then((response) => {
-    this.realestate = response.data;
+   return await request.post(this.url, realestate, '', false).then((response) => {
+    return response.data;
    });
   },
   removeRealestate(id) {

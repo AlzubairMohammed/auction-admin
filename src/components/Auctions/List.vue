@@ -1,17 +1,12 @@
 <script setup>
  import { ref, onMounted } from 'vue';
  import Vue3Datatable from '@bhplugin/vue3-datatable';
- import IconPencil from '@/components/icon/icon-pencil.vue';
  import { useAuctionsStore } from '@/stores/auctions';
  import { useAppStore } from '@/stores/index';
- import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
  import IconPlus from '@/components/icon/icon-plus.vue';
- import IconEdit from '@/components/icon/icon-edit.vue';
- import IconEye from '@/components/icon/icon-eye.vue';
  const items = ref([]);
  const store = useAppStore();
  const useAuctions = useAuctionsStore();
- const tableData = ref([]);
  const cols = ref([
   { field: 'assignment_number', title: 'رقم التكليف' },
   { field: 'name', title: 'اسم المزاد' },
@@ -34,20 +29,18 @@
      <div class="flex items-center gap-2">
       <router-link to="/auctions/add-page" class="btn btn-primary gap-2">
        <icon-plus />
-       اضافة جديد
+       اضافة مزاد جديد
       </router-link>
      </div>
      <div class="ltr:ml-auto rtl:mr-auto">
       <input v-model="search" type="text" class="form-input" placeholder="بحث..." />
      </div>
     </div>
-
     <vue3-datatable
      ref="datatable"
      :rows="items"
      :columns="cols"
      :totalRows="items?.length"
-     :hasCheckbox="true"
      :sortable="true"
      :search="search"
      :paginationInfo="`عرض ${1} to {to} of {count} entries`"
