@@ -21,6 +21,7 @@ export const useScansStore = defineStore('scans', {
     files: [],
     imagesNames: [{ name: 'صور خارجية' }, { name: 'صور داخلية' }],
     realestateComponents: [],
+    components: [],
    },
   };
  },

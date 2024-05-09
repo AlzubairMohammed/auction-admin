@@ -7,14 +7,12 @@
  const store = useAppStore();
  const useScans = useScansStore();
  const select = ref();
- const formData = ref([]);
- const realestateComponents = ref([]);
+ const formData = useScans.scan.components;
  const setStyle = () => {
   select.value.blur();
  };
  onMounted(async () => {
   await useScans.fetchRealestateComponents();
-  realestateComponents.value = useScans.scan.realestateComponents;
  });
 </script>
 <template>
@@ -37,7 +35,7 @@
       ref="select"
      >
       <option>اختار المكون</option>
-      <option v-for="component in realestateComponents" :value="component.id">{{ component.name }}</option>
+      <option v-for="component in useScans.scan.realestateComponents" :value="component.id">{{ component.name }}</option>
      </select>
      <div
       class="bg-info text-lg w-1/6 lg:w-1/5 text-white flex justify-center items-center ltr:rounded-r-md rtl:rounded-l-md px-3 font-semibold border ltr:border-l-0 rtl:border-r-0 border-info cursor-pointer"

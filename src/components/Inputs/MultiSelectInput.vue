@@ -23,7 +23,7 @@
    :maxSelectedLabels="3"
    class="w-full md:w-20rem border border-md"
    :class="{ 'ring-1 ring-red-300': errorMessage }"
-   @select="$emit('update:modelValue', $event)"
+   @change="$emit('on-select', $event)"
   />
  </div>
 </template>

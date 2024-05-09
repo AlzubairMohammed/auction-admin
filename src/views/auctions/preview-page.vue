@@ -88,6 +88,9 @@
     <div class="flex flex-wrap">
      <img v-for="image in item?.realestate_images?.slice(0, 5)" :src="`http://89.116.236.251:7070/${image.path}`" alt="" class="w-1/5 p-2 rounded" />
     </div>
+    <div class="pt-3">
+     <lable class="mr-3 underline">بيانات المسح الميداني</lable>
+    </div>
    </div>
   </div>
  </div>
