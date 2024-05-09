@@ -80,7 +80,8 @@
        <td>{{ item.owner_number }}</td>
        <td class="flex gap-4" id="operations">
         <button class="text-primary">تقييم</button>
-        <router-link :to="`/scans/${item.id}`" class="text-success"> مسح ميداني </router-link>
+        <router-link v-if="!item.scans.length" :to="`/scans/${item.id}`" class="text-success"> مسح ميداني </router-link>
+        <button v-else class="text-warning">تم المسح الميداني</button>
        </td>
       </tr>
      </tbody>
@@ -88,8 +89,48 @@
     <div class="flex flex-wrap">
      <img v-for="image in item?.realestate_images?.slice(0, 5)" :src="`http://89.116.236.251:7070/${image.path}`" alt="" class="w-1/5 p-2 rounded" />
     </div>
-    <div class="pt-3">
-     <lable class="mr-3 underline">بيانات المسح الميداني</lable>
+    <div class="pt-3 flex flex-wrap" v-if="item.scans.length">
+     <div class="mr-3 text-center text-lg underline w-full">بيانات المسح الميداني</div>
+     <div class="flex flex-wrap gap-4 pr-3 pt-3 w-full">
+      <div class="w-1/4">
+       <div class="flex items-center w-full justify-between mb-2">
+        <div class="text-white-dark">اسم الموظف :</div>
+        <div>{{ item.scans[0]?.user?.name }}</div>
+       </div>
+      </div>
+      <div class="w-1/4">
+       <div class="flex items-center w-full justify-between mb-2">
+        <div class="text-white-dark">تاريخ الانشاء :</div>
+        <div>{{ item.scans[0]?.user?.created?.substring(0, 10) }}</div>
+       </div>
+      </div>
+     </div>
+     <div class="flex flex-wrap gap-4 pr-3 pt-3 w-full">
+      <div class="text-center w-full underline">المميزات</div>
+      <table class="table table-bordered table-striped">
+       <tbody>
+        <tr v-for="(property, index) in item.realestate_properties" :key="index">
+         <td>{{ property.property?.name }} :</td>
+         <td v-if="property.property?.type == 'text'">{{ property.value }}</td>
+         <td v-else>{{ property.properties_option?.name }}</td>
+         <!-- <td v-if="property.property?.name === item.realestate_properties[index - 1]?.property.name">
+          <div v-for="(subPropertyOptionName, index) in [...property.properties_option.name]" :key="index">{{ subPropertyOptionName }}</div>
+         </td> -->
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div class="flex flex-wrap gap-4 pr-3 pt-3 w-full">
+      <div class="text-center w-full underline">التفاصيل</div>
+      <table class="table table-bordered">
+       <tbody>
+        <tr v-for="(component, index) in item.realestate_components" :key="index">
+         <td>{{ component.component?.name }}</td>
+         <td>{{ component.value }}</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
     </div>
    </div>
   </div>
@@ -109,6 +150,19 @@
  const auction = ref({});
  onBeforeMount(async () => {
   auction.value = await auctionsStore.getAuction(route.params.id);
+  console.log(auction.value);
+  auction.value.data.realestates?.map((realestate) => {
+   realestate?.realestate_properties?.map((property, index) => {
+    if (property.property?.name === realestate.realestate_properties[index - 1]?.property?.name) {
+     console.log('ho ho ho');
+     const container = property.properties_option;
+     property.properties_option = [];
+     property.properties_option?.push(container);
+     realestate?.realestate_properties?.slice(index, 1);
+    }
+   });
+  });
+  console.log(auction.value.data.realestates);
  });
  const print = () => {
   let printContents = document.getElementById('report').innerHTML;
