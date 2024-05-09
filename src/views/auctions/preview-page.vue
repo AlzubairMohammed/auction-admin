@@ -121,7 +121,7 @@
       </table>
      </div>
      <div class="flex flex-wrap gap-4 pr-3 pt-3 w-full">
-      <div class="text-center w-full underline">التفاصيل</div>
+      <div class="text-center w-full underline">المكونات</div>
       <table class="table table-bordered">
        <tbody>
         <tr v-for="(component, index) in item.realestate_components" :key="index">
