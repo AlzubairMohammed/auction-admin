@@ -79,7 +79,7 @@
        <td>{{ item.owner_name }}</td>
        <td>{{ item.owner_number }}</td>
        <td class="flex gap-4" id="operations">
-        <button class="text-primary">تقييم</button>
+        <router-link :to="`/evaluations/comparisons/${item.id}`" class="text-primary">تقييم</router-link>
         <router-link v-if="!item.scans.length" :to="`/scans/${item.id}`" class="text-success"> مسح ميداني </router-link>
         <button v-else class="text-warning">تم المسح الميداني</button>
        </td>
@@ -87,7 +87,7 @@
      </tbody>
     </table>
     <div class="flex flex-wrap">
-     <img v-for="image in item?.realestate_images?.slice(0, 5)" :src="`http://89.116.236.251:7070/${image.path}`" alt="" class="w-1/5 p-2 rounded" />
+     <img v-for="image in item?.realestate_images?.slice(0, 5)" :src="`http://89.116.236.251:7070/${image.name}`" alt="" class="w-1/5 p-2 rounded" />
     </div>
     <div class="pt-3 flex flex-wrap" v-if="item.scans.length">
      <div class="mr-3 text-center text-lg underline w-full">بيانات المسح الميداني</div>

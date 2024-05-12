@@ -8,9 +8,9 @@
  import SelectRealestateModal from '@/components/Scans/SelectRealestateModal.vue';
  import { useScansStore } from '@/stores/scans';
  import { ref, onMounted } from 'vue';
- import { useRouter } from 'vue-router';
+ import { useRoute } from 'vue-router';
  import ResultModal from '@/components/Evaluations/Comparisons/ResultModal.vue';
- const router = useRouter();
+ const routes = useRoute();
  const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
  const scansStore = useScansStore();
  const scan = scansStore.scan;
@@ -49,7 +49,7 @@
   });
  };
  onMounted(() => {
-  if (!router.params?.id) {
+  if (!routes.params?.id) {
    isSelectRealestateModalActive.value = true;
   }
  });
