@@ -79,7 +79,19 @@
        <td>{{ item.owner_name }}</td>
        <td>{{ item.owner_number }}</td>
        <td class="flex gap-4" id="operations">
-        <router-link :to="`/evaluations/comparisons/${item.id}`" class="text-primary">تقييم</router-link>
+        <div class="dropdown">
+         <Popper :placement="'bottom-start'" offsetDistance="0" class="align-middle">
+          <button class="text-primary">تقييم</button>
+          <template #content="{ close }">
+           <ul @click="close()" class="whitespace-nowrap">
+            <li><router-link :to="`/evaluations/comparisons/${item.id}`">المقارنات</router-link></li>
+            <li><router-link :to="`/evaluations/directEvaluation/${item.id}`">الرسملة المباشرة</router-link></li>
+            <li><router-link :to="`/evaluations/cost/${item.id}`">التكلفة</router-link></li>
+           </ul>
+          </template>
+         </Popper>
+        </div>
+
         <router-link v-if="!item.scans.length" :to="`/scans/${item.id}`" class="text-success"> مسح ميداني </router-link>
         <button v-else class="text-warning">تم المسح الميداني</button>
        </td>
@@ -154,7 +166,6 @@
   auction.value.data.realestates?.map((realestate) => {
    realestate?.realestate_properties?.map((property, index) => {
     if (property.property?.name === realestate.realestate_properties[index - 1]?.property?.name) {
-     console.log('ho ho ho');
      const container = property.properties_option;
      property.properties_option = [];
      property.properties_option?.push(container);

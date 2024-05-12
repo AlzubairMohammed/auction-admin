@@ -131,7 +131,7 @@
            ]"
            @on-select="onSelectSearchMethod"
            class="w-1/2 pr-2 pl-2"
-          />
+          />true
           <BasicInput id="name" type="text" placeholder="بحث" class="w-1/2 pl-2" v-model="realestate.value" @input="searchRealestates" />
           <SingleSelectInput
            id="auction_id"

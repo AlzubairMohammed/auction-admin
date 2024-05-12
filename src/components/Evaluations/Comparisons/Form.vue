@@ -26,7 +26,7 @@
    comparisons: multiArray,
    properties: properties,
    realestate: {
-    id: scan.realestate_id,
+    id: routes.params.id,
     meters: 2250,
    },
   };

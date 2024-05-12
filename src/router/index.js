@@ -51,13 +51,13 @@ const routes = [
   meta: { layout: 'app' },
  },
  {
-  path: '/evaluations/cost',
+  path: '/evaluations/cost/:id?',
   name: 'evaluations/cost',
   component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/cost-page.vue'),
   meta: { layout: 'app' },
  },
  {
-  path: '/evaluations/direct-capitlization',
+  path: '/evaluations/direct-capitlization/:id?',
   name: 'evaluations/direct-capitlization',
   component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/direct-capitlization.vue'),
   meta: { layout: 'app' },

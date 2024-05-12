@@ -52,12 +52,13 @@
   window.location.reload();
  };
  const goToRealestatePreview = () => {
-  router.push({
-   name: 'realestates/preview-page',
-   params: {
-    id: props.result.realestate_id,
-   },
-  });
+  router.go(-1);
+  //   router.push({
+  //    name: 'auctions/preview-page',
+  //    params: {
+  //     id: props.result.auction_id,
+  //    },
+  //   });
  };
 </script>
 <template>
