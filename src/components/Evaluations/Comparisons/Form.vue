@@ -95,7 +95,7 @@
        required
        class="pt-2"
        :inputOnePlaceholder="index === 0 ? 'السعر' : 'التسوية'"
-       inputTwoPlaceholder="القيمة"
+       :inputTwoPlaceholder="index !== 0 && index !== properties.length - 1 ? 'القيمة' : ''"
        :inputOneValue="multiArray[RealestateIndex][index].value"
       />
      </td>
