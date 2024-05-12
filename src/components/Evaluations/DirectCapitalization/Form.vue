@@ -1,12 +1,13 @@
 <script setup>
- import { ref } from 'vue';
+ import { onMounted, ref } from 'vue';
+ import { useRoute } from 'vue-router';
  import BasicInput from '@/components/Inputs/BasicInput.vue';
  import { useDirecCapitlizationsStore } from '@/stores/directCapitlizations';
  import SelectRealestateModal from '@/components/Evaluations/DirectCapitalization/SelectRealestateModal.vue';
  import ResultModal from '@/components/Evaluations/DirectCapitalization/ResultModal.vue';
  const directCapitalizationsStore = useDirecCapitlizationsStore();
  const form = directCapitalizationsStore.directCapitlization;
- const isSelectRealestateModalActive = ref(true);
+ const isSelectRealestateModalActive = ref(false);
  const isResultModalActive = ref(false);
  const result = ref({});
 
@@ -15,6 +16,13 @@
   console.log(result.value, 'result');
   isResultModalActive.value = true;
  };
+ onMounted(() => {
+  if (!useRoute().params?.id) {
+   isSelectRealestateModalActive.value = true;
+  } else {
+   form.realestate_id = useRoute().params?.id;
+  }
+ });
 </script>
 <template>
  <SelectRealestateModal v-model="isSelectRealestateModalActive" />

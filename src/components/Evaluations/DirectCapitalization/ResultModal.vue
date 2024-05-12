@@ -52,12 +52,13 @@
   window.location.reload();
  };
  const goToRealestatePreview = () => {
-  router.push({
-   name: 'realestates/preview-page',
-   params: {
-    id: props.result.realestate_id,
-   },
-  });
+  router.go(-1);
+  //   router.push({
+  //    name: 'auctions/preview-page',
+  //    params: {
+  //     id: props.result.auction_id,
+  //    },
+  //   });
  };
 </script>
 <template>
@@ -105,8 +106,7 @@
           </div>
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
-          <button type="button" class="btn btn-outline-info" @click="again">متابعة</button>
-          <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" @click="goToRealestatePreview">المزيد من التفاصيل</button>
+          <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" @click="goToRealestatePreview">تم</button>
          </div>
         </form>
        </div>

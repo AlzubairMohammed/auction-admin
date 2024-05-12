@@ -85,7 +85,7 @@
           <template #content="{ close }">
            <ul @click="close()" class="whitespace-nowrap">
             <li><router-link :to="`/evaluations/comparisons/${item.id}`">المقارنات</router-link></li>
-            <li><router-link :to="`/evaluations/directEvaluation/${item.id}`">الرسملة المباشرة</router-link></li>
+            <li><router-link :to="`/evaluations/direct-capitlization/${item.id}`">الرسملة المباشرة</router-link></li>
             <li><router-link :to="`/evaluations/cost/${item.id}`">التكلفة</router-link></li>
            </ul>
           </template>
