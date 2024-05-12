@@ -27,6 +27,12 @@
    <div v-for="(item, index) in useScans.scan.properties.filter((item) => item.is_feature)" class="w-1/5 p-2">
     <div v-if="item.type === 'multiple'" class="flex flex-wrap">
      <MultiSelectInput
+      @on-select="
+       (event) => {
+        item.value = event.value;
+        item.multiple = true;
+       }
+      "
       v-model="item.value"
       :options="item.properties_options"
       :placeholder="item.name"
@@ -37,9 +43,9 @@
     </div>
     <div v-else-if="item.type === 'single'" class="flex flex-wrap">
      <SingleSelectInput
+      @on-select="(event) => (item.value = event)"
       :options="item.properties_options"
       :placeholder="item.name"
-      v-model="item.value"
       class="w-5/6"
       classValue=" ltr:rounded-r-none rtl:rounded-l-none ltr:border-r-0 rtl:border-l-0"
      />

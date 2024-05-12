@@ -44,24 +44,24 @@ const routes = [
   component: () => import(/* webpackChunkName: "preview-page */ '../views/realestates/preview-page.vue'),
   meta: { layout: 'app' },
  },
- //  {
- //   path: '/evaluations/comparisons/:id?',
- //   name: 'comparisons',
- //   component: () => import(/* webpackChunkName: "evaluations-comparisons" */ '../views/evaluations/comparisons.vue'),
- //   meta: { layout: 'app' },
- //  },
- //  {
- //   path: '/evaluations/cost',
- //   name: 'evaluations/cost',
- //   component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/cost-page.vue'),
- //   meta: { layout: 'app' },
- //  },
- //  {
- //   path: '/evaluations/direct-capitlization',
- //   name: 'evaluations/direct-capitlization',
- //   component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/direct-capitlization.vue'),
- //   meta: { layout: 'app' },
- //  },
+ {
+  path: '/evaluations/comparisons/:id?',
+  name: 'comparisons',
+  component: () => import(/* webpackChunkName: "evaluations-comparisons" */ '../views/evaluations/comparisons.vue'),
+  meta: { layout: 'app' },
+ },
+ {
+  path: '/evaluations/cost',
+  name: 'evaluations/cost',
+  component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/cost-page.vue'),
+  meta: { layout: 'app' },
+ },
+ {
+  path: '/evaluations/direct-capitlization',
+  name: 'evaluations/direct-capitlization',
+  component: () => import(/* webpackChunkName: "evaluations-scan" */ '../views/evaluations/direct-capitlization.vue'),
+  meta: { layout: 'app' },
+ },
  {
   path: '/auctions/preview-page/:id',
   name: 'auctions/preview-page',
