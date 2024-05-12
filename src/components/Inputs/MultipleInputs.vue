@@ -2,21 +2,22 @@
  <div class="flex">
   <input
    v-if="inputOnePlaceholder"
-   type="text"
    :placeholder="inputOnePlaceholder"
    v-model="computedValue"
    class="form-input ltr:border-r-0 rtl:border-l-0 focus:!border-r focus:!border-l rounded-none flex-1"
    :class="{ 'ltr:!border-r rtl:!border-l': !inputTwoPlaceholder }"
    :required="required"
    ref="inputEl"
+   :type="typeInputOne"
+   :readonly="readOnly"
   />
   <input
    v-if="inputTwoPlaceholder"
-   type="text"
    :placeholder="inputTwoPlaceholder"
    v-model="inputTwoValue"
    class="form-input ltr:rounded-l-none rtl:rounded-r-none flex-1"
    :class="{ 'ltr:border-r rtl:border-l': !inputOnePlaceholder }"
+   :type="typeInputTwo"
   />
  </div>
 </template>
@@ -29,8 +30,11 @@
   inputTwoPlaceholder: '',
   inputOneValue: '',
   inputTwoValue: '',
+  typeInputOne: '',
+  typeInputTwo: '',
   required: false,
   modelValue: '',
+  readOnly: false,
  });
 
  const inputEl = ref(null);

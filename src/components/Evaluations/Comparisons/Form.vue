@@ -7,12 +7,14 @@
  import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
  import SelectRealestateModal from '@/components/Scans/SelectRealestateModal.vue';
  import { useScansStore } from '@/stores/scans';
+ import { useRealestatesStore } from '@/stores/realestates';
  import { ref, onMounted } from 'vue';
  import { useRoute } from 'vue-router';
  import ResultModal from '@/components/Evaluations/Comparisons/ResultModal.vue';
  const routes = useRoute();
  const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
  const scansStore = useScansStore();
+ const realestatesStore = useRealestatesStore();
  const scan = scansStore.scan;
  const isAddPropertyModalActive = ref(false);
  const isResultModalActive = ref(false);
@@ -20,6 +22,7 @@
  let properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
  let multiArray = comparisonsEvaluationsStore.comparisonsEvaluation.comparisons;
  let isSelectRealestateModalActive = ref(false);
+ const realestate = ref(null);
 
  const onSubmit = async () => {
   const data = {
@@ -48,10 +51,12 @@
    realestate.splice(index, 1);
   });
  };
- onMounted(() => {
+ onMounted(async () => {
   if (!routes.params?.id) {
    isSelectRealestateModalActive.value = true;
   }
+  realestate.value = await realestatesStore.getRealestate(routes.params.id);
+  console.log(realestate.value.document);
  });
 </script>
 <template>
@@ -82,10 +87,10 @@
      </td>
      <td v-for="(, RealestateIndex) in multiArray" :key="RealestateIndex">
       <MultipleInputs
-       v-if="RealestateIndex === 0"
-       v-model="multiArray[RealestateIndex][index].value"
-       :inputOnePlaceholder="index === 0 ? 'السعر' : index === properties.length - 1 ? 'لايوجد' : 'التسوية'"
+       v-if="(RealestateIndex === 0 && index === 3) || index === 4"
        required
+       read-only="true"
+       :inputOnePlaceholder="index === 3 ? realestate?.document?.space : ''"
       />
       <MultipleInputs
        v-if="RealestateIndex !== 0"
@@ -95,8 +100,10 @@
        required
        class="pt-2"
        :inputOnePlaceholder="index === 0 ? 'السعر' : 'التسوية'"
-       :inputTwoPlaceholder="index !== 0 && index !== properties.length - 1 ? 'القيمة' : ''"
+       :inputTwoPlaceholder="index !== 0 && index !== properties.length - 1 ? 'الوصف' : ''"
        :inputOneValue="multiArray[RealestateIndex][index].value"
+       typeInputOne="number"
+       typeInputTwo="text"
       />
      </td>
     </tr>

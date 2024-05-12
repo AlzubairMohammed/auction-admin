@@ -99,7 +99,7 @@
      </tbody>
     </table>
     <div class="flex flex-wrap">
-     <img v-for="image in item?.realestate_images?.slice(0, 5)" :src="`http://89.116.236.251:7070/${image.name}`" alt="" class="w-1/5 p-2 rounded" />
+     <img v-for="image in item?.realestate_files?.slice(0, 5)" :src="`http://localhost:7070/api/v1/${image.path}`" alt="" class="w-1/5 p-2 rounded" />
     </div>
     <div class="pt-3 flex flex-wrap" v-if="item.scans.length">
      <div class="mr-3 text-center text-lg underline w-full">بيانات المسح الميداني</div>
@@ -144,6 +144,22 @@
       </table>
      </div>
     </div>
+    <div class="pt-3 flex flex-wrap">
+     <div class="mr-3 text-center text-lg underline w-full">تفاصيل التقييم طريقة المقارنات</div>
+     <table class="table table-bordered">
+      <thead>
+       <tr>
+        <th v-for="(, index) in item.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="index">{{ index + 1 }}مقارنة</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr v-for="(evaluation, index) in item.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="index">
+        <!-- <td>{{ evaluation.evaluation?.name }}</td>
+        <td>{{ evaluation.value }}</td> -->
+       </tr>
+      </tbody>
+     </table>
+    </div>
    </div>
   </div>
  </div>
@@ -156,6 +172,9 @@
  import IconPlus from '@/components/icon/icon-plus.vue';
  import IconEdit from '@/components/icon/icon-edit.vue';
  import { useAuctionsStore } from '@/stores/auctions';
+ import { useComparisonsEvaluationsStore } from '@/stores/comparisonsEvaluations';
+ const comparisonsEvaluationsStore = useComparisonsEvaluationsStore();
+ const properties = comparisonsEvaluationsStore.comparisonsEvaluation.properties;
  const auctionsStore = useAuctionsStore();
  const route = useRoute();
  useMeta({ title: 'Invoice Preview' });

@@ -6,7 +6,7 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
    url: '/comparisonsEvaluations',
    comparisonsEvaluations: [],
    comparisonsEvaluation: {
-    properties: ['السعر', 'ظروف السوق', 'شروط التمويل', 'الاستخدام', 'عدد الشوارع', 'المرجح الموزون'],
+    properties: ['السعر', 'ظروف السوق', 'شروط التمويل', 'المساحة', 'المرجح الموزون'],
     comparisons: [
      [
       {
@@ -119,6 +119,7 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
     .then((response) => {
      this.comparisonsEvaluation = response.data;
     });
+   this.reset();
   },
   removeComparisonsEvaluation(id) {
    request.delete(this.url, id).then(() => {
@@ -127,6 +128,38 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
   },
   updateRealestate(realestate) {
    this.realestates = this.realestates.map((r) => (r.id === realestate.id ? realestate : r));
+  },
+  reset() {
+   this.comparisonsEvaluations = [];
+   this.comparisonsEvaluation = {
+    properties: ['السعر', 'ظروف السوق', 'شروط التمويل', 'المساحة', 'المرجح الموزون'],
+    comparisons: [
+     [
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+     ],
+     [
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+     ],
+     [
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+      { value: '', percentage: '' },
+     ],
+    ],
+   };
   },
  },
 });
