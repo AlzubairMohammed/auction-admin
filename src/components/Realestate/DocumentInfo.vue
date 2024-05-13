@@ -53,28 +53,28 @@
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">شمالا</label>
-      <BasicInput v-model="doumentData.north_desc" placeholder="الوصف" type="number" class="w-full p-2" :error-message="doumentErrors.north_desc" />
+      <BasicInput v-model="doumentData.north_desc" placeholder="الوصف" type="text" class="w-full p-2" :error-message="doumentErrors.north_desc" />
       <BasicInput v-model="doumentData.north_space" placeholder="الطول" type="number" class="w-full p-2" :error-message="doumentErrors.north_space" />
      </div>
     </div>
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">شرقا</label>
-      <BasicInput v-model="doumentData.west_desc" placeholder="الوصف" type="number" class="w-full p-2" :error-message="doumentErrors.west_desc" />
+      <BasicInput v-model="doumentData.west_desc" placeholder="الوصف" type="text" class="w-full p-2" :error-message="doumentErrors.west_desc" />
       <BasicInput v-model="doumentData.west_space" placeholder="الطول" type="number" class="w-full p-2" :error-message="doumentErrors.west_space" />
      </div>
     </div>
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">غربا</label>
-      <BasicInput v-model="doumentData.east_desc" placeholder="الوصف" type="number" class="w-full p-2" :error-message="doumentErrors.east_desc" />
+      <BasicInput v-model="doumentData.east_desc" placeholder="الوصف" type="text" class="w-full p-2" :error-message="doumentErrors.east_desc" />
       <BasicInput v-model="doumentData.east_space" placeholder="الطول" type="number" class="w-full p-2" :error-message="doumentErrors.east_space" />
      </div>
     </div>
     <div class="p-3 w-1/4">
      <div class="bg-[#eee] p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 p-3">
       <label for="btnRight">جنوبا</label>
-      <BasicInput v-model="doumentData.south_desc" placeholder="الوصف" type="number" class="w-full p-2" :error-message="doumentErrors.south_desc" />
+      <BasicInput v-model="doumentData.south_desc" placeholder="الوصف" type="text" class="w-full p-2" :error-message="doumentErrors.south_desc" />
       <BasicInput v-model="doumentData.south_space" placeholder="الطول" type="number" class="w-full p-2" :error-message="doumentErrors.south_space" />
      </div>
     </div>

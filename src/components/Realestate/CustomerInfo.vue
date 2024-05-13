@@ -8,7 +8,7 @@
 <template>
  <form>
   <div class="mb-5">
-   <BasicInput class="m-3" required v-model="realestateData.customer_name" :error-message="errors.customer_name" placeholder="اسم العميل" />
+   <BasicInput type="tex" class="m-3" required v-model="realestateData.customer_name" :error-message="errors.customer_name" placeholder="اسم العميل" />
    <BasicInput
     class="m-3"
     required

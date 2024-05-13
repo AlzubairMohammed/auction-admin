@@ -99,7 +99,7 @@
      </tbody>
     </table>
     <div class="flex flex-wrap">
-     <img v-for="image in item?.realestate_files?.slice(0, 5)" :src="`http://localhost:7070/api/v1/${image.path}`" alt="" class="w-1/5 p-2 rounded" />
+     <img v-for="image in item?.realestate_images?.slice(0, 5)" :src="`http://localhost:7070/${image.path}`" alt="" class="w-1/5 p-2 rounded" />
     </div>
     <div class="pt-3 flex flex-wrap" v-if="item.scans.length">
      <div class="mr-3 text-center text-lg underline w-full">بيانات المسح الميداني</div>
