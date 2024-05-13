@@ -9,7 +9,7 @@
     @change="handleFileUpload"
     class="custom-file-container__custom-file__custom-file-input"
     :class="{ 'ring-1 ring-red-300': errorMessage }"
-    multiple
+    :multiple="multiple"
    />
    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
    <span class="custom-file-container__custom-file__custom-file-control ltr:pr-20 rtl:pl-20"></span>
@@ -42,6 +42,7 @@
  const props = defineProps({
   index: 0,
   errorMessage: '',
+  multiple: false,
  });
  const handleFileUpload = (event) => {
   file.value = event.target.files[0];
