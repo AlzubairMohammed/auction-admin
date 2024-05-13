@@ -149,14 +149,13 @@
      <table class="table table-bordered">
       <thead>
        <tr>
-        <th v-for="(, index) in item.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="index">{{ index + 1 }}مقارنة</th>
+        <th class="text-center" v-for="(, index) in item.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="index">{{ index + 1 }}مقارنة</th>
        </tr>
       </thead>
       <tbody>
-       <tr v-for="(evaluation, index) in item.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="index">
-        <!-- <td v-for="(comparison, nestedIndex) in evaluation.comparisons_evaluation_realestates_properties" :key="nestedIndex">{{ comparison }}</td> -->
-        <td class="p-0" v-for="(data, index) in evaluation.comparisons_evaluation_realestates_properties" :key="index">
-         <div class="flex flex-wrap">
+       <tr>
+        <td class="p-0" v-for="(evaluation, index) in item.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="nestedIndex">
+         <div v-for="(data, nestedIndex) in evaluation.comparisons_evaluation_realestates_properties" class="flex flex-wrap">
           <div class="inline w-1/2 text-center">{{ data.percentage }}</div>
           <div class="inline w-1/2 bg-gray-100 text-center m-0">{{ data.value }}</div>
          </div>
