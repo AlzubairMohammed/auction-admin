@@ -166,6 +166,7 @@ export const useRealestatesStore = defineStore('realestates', {
    //     return;
    //    }
    return await request.post(this.url, realestate, '', false).then((response) => {
+    this.reset();
     return response.data;
    });
   },
@@ -181,6 +182,73 @@ export const useRealestatesStore = defineStore('realestates', {
    request.get('realestateTypes').then(({ data }) => {
     this.realestateTypes = data;
    });
+  },
+  reset() {
+   this.realestate = {
+    key: 'id',
+    value: '',
+    auction_id: '',
+    customer_name: '',
+    customer_number: '',
+    owner_name: '',
+    owner_number: '',
+    license: {
+     number: '',
+     issuance_place_id: '',
+     date: '',
+     path: '',
+     realestate_type_id: '',
+     note: '',
+    },
+    files: [],
+    filesNames: [{ name: 'الصك' }, { name: 'الرخصة' }, { name: 'المخطط' }],
+    document: {
+     number: '',
+     area_number: '',
+     block_number: '',
+     graph_number: '',
+     space: '',
+     quarter_id: '',
+     north_desc: '',
+     north_space: '',
+     west_desc: '',
+     west_space: '',
+     east_desc: '',
+     east_space: '',
+     south_desc: '',
+     south_space: '',
+     note: '',
+     path: '',
+     date: '',
+    },
+   };
+   this.realestateErrors = {
+    customer: { customer_name: '', customer_number: '', owner_name: '', owner_number: '' },
+    document: {
+     number: '',
+     area_number: '',
+     block_number: '',
+     graph_number: '',
+     space: '',
+     quarter_id: '',
+     north_desc: '',
+     north_space: '',
+     west_desc: '',
+     west_space: '',
+     east_desc: '',
+     east_space: '',
+     south_desc: '',
+     south_space: '',
+     date: '',
+    },
+    license: {
+     number: '',
+     issuance_place_id: '',
+     date: '',
+     realestate_type_id: '',
+    },
+    files: '',
+   };
   },
  },
 });
