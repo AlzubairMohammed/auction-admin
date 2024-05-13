@@ -145,7 +145,7 @@
      </div>
     </div>
     <div class="pt-3 flex flex-wrap">
-     <div class="mr-3 text-center text-lg underline w-full">تفاصيل التقييم طريقة المقارنات</div>
+     <div class="mr-3 text-center text-lg underline w-full">قيمة الارض طريقة المقارنات</div>
      <table class="table table-bordered">
       <thead>
        <tr>
@@ -159,6 +159,35 @@
           <div class="inline w-1/2 text-center">{{ data.percentage }}</div>
           <div class="inline w-1/2 bg-gray-100 text-center m-0">{{ data.value }}</div>
          </div>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="pt-3 flex flex-wrap">
+     <div class="mr-3 text-center text-lg underline w-full">قيمة المبنى</div>
+     <table class="table table-bordered">
+      <thead>
+       <tr>
+        <th>البيان</th>
+        <th>المساحة</th>
+        <th>سعر المتر</th>
+        <th>الاجمالي</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr v-for="(cost, index) in item.cost_evaluations[0]?.direct_costs[0]?.direct_cost_components" :key="nestedIndex">
+        <td class="p-0">
+         {{ cost.name }}
+        </td>
+        <td class="p-0">
+         {{ cost.area }}
+        </td>
+        <td class="p-0">
+         {{ cost.meter_price }}
+        </td>
+        <td class="p-0">
+         {{ cost.area * +cost.meter_price }}
         </td>
        </tr>
       </tbody>
