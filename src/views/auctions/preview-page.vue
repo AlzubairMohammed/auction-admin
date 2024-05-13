@@ -17,7 +17,7 @@
   <div id="report" class="panel">
    <!-- title and logo -->
    <div class="flex justify-between flex-wrap gap-4 px-4">
-    <div class="text-2xl font-semibold uppercase">تقرير مزاد</div>
+    <div class="text-2xl font-semibold uppercase">بيانات المزاد</div>
     <div class="shrink-0">
      <img src="/assets/images/logo.svg" alt="" class="w-14 ltr:ml-auto rtl:mr-auto" />
     </div>
@@ -154,8 +154,13 @@
       </thead>
       <tbody>
        <tr v-for="(evaluation, index) in item.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="index">
-        <!-- <td>{{ evaluation.evaluation?.name }}</td>
-        <td>{{ evaluation.value }}</td> -->
+        <!-- <td v-for="(comparison, nestedIndex) in evaluation.comparisons_evaluation_realestates_properties" :key="nestedIndex">{{ comparison }}</td> -->
+        <td class="p-0" v-for="(data, index) in evaluation.comparisons_evaluation_realestates_properties" :key="index">
+         <div class="flex flex-wrap">
+          <div class="inline w-1/2 text-center">{{ data.percentage }}</div>
+          <div class="inline w-1/2 bg-gray-100 text-center m-0">{{ data.value }}</div>
+         </div>
+        </td>
        </tr>
       </tbody>
      </table>
@@ -207,3 +212,4 @@
   document.body.innerHTML = originalContents;
  };
 </script>
+<style></style>
