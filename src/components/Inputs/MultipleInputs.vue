@@ -14,7 +14,7 @@
   <input
    v-if="inputTwoPlaceholder"
    :placeholder="inputTwoPlaceholder"
-   v-model="inputTwoValue"
+   @change="$emit('change', $event)"
    class="form-input ltr:rounded-l-none rtl:rounded-r-none flex-1"
    :class="{ 'ltr:border-r rtl:border-l': !inputOnePlaceholder }"
    :type="typeInputTwo"

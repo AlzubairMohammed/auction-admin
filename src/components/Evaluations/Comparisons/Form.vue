@@ -30,11 +30,11 @@
    properties: properties,
    realestate: {
     id: routes.params.id,
-    meters: 2250,
+    meters: +realestate.value.document.space,
    },
   };
   await comparisonsEvaluationsStore.addComparisonsEvaluation(data);
-  result.value = comparisonsEvaluationsStore.comparisonsEvaluation;
+  result.value = comparisonsEvaluationsStore.result;
   isResultModalActive.value = true;
  };
  const pushToRealestates = () => {
@@ -69,10 +69,11 @@
    <thead>
     <tr>
      <th class="text-center">عوامل التسوية</th>
+     <th class="text-center">عقار التقييم</th>
      <th v-for="(attribute, RealestateIndex) in multiArray" :key="RealestateIndex">
       <div class="flex">
-       <IconTrashLines class="w-1/4" v-if="RealestateIndex !== 0" @click="multiArray.splice(RealestateIndex, 1)" />
-       <span class="w-3/4"> {{ RealestateIndex === 0 ? 'عقار التقييم' : `عقار (${RealestateIndex})` }}</span>
+       <IconTrashLines class="w-1/4" @click="multiArray.splice(RealestateIndex, 1)" />
+       <span class="w-3/4"> {{ `عقار (${RealestateIndex})` }}</span>
       </div>
      </th>
     </tr>
@@ -85,15 +86,11 @@
        <span class="w-3/4">{{ properties[index] }}</span>
       </div>
      </td>
+     <td>
+      <MultipleInputs v-if="index === 3 || index === 4" required read-only="true" :inputOnePlaceholder="index === 3 ? realestate?.document?.space : ''" />
+     </td>
      <td v-for="(, RealestateIndex) in multiArray" :key="RealestateIndex">
       <MultipleInputs
-       v-if="(RealestateIndex === 0 && index === 3) || index === 4"
-       required
-       read-only="true"
-       :inputOnePlaceholder="index === 3 ? realestate?.document?.space : ''"
-      />
-      <MultipleInputs
-       v-if="RealestateIndex !== 0"
        v-model="multiArray[RealestateIndex][index].percentage"
        :name="`compairson_percentage_${index}`"
        type="number"
@@ -101,7 +98,7 @@
        class="pt-2"
        :inputOnePlaceholder="index === 0 ? 'السعر' : 'التسوية'"
        :inputTwoPlaceholder="index !== 0 && index !== properties.length - 1 ? 'الوصف' : ''"
-       :inputOneValue="multiArray[RealestateIndex][index].value"
+       @change="multiArray[RealestateIndex][index].value = $event.target.value"
        typeInputOne="number"
        typeInputTwo="text"
       />

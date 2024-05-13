@@ -5,42 +5,13 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
   return {
    url: '/comparisonsEvaluations',
    comparisonsEvaluations: [],
+   result: {},
    comparisonsEvaluation: {
     properties: ['السعر', 'ظروف السوق', 'شروط التمويل', 'المساحة', 'المرجح الموزون'],
     comparisons: [
      [
       {
-       value: '',
-       percentage: '',
-      },
-      {
-       value: '',
-       percentage: '',
-      },
-      {
-       value: '',
-       percentage: '',
-      },
-      {
-       value: '',
-       percentage: '',
-      },
-      {
-       value: '',
-       percentage: '',
-      },
-      {
-       value: '',
-       percentage: '',
-      },
-     ],
-     [
-      {
-       value: '',
-       percentage: '',
-      },
-      {
-       value: '',
+       value: 'السعر',
        percentage: '',
       },
       {
@@ -62,11 +33,7 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
      ],
      [
       {
-       value: '',
-       percentage: '',
-      },
-      {
-       value: '',
+       value: 'السعر',
        percentage: '',
       },
       {
@@ -117,9 +84,9 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
      false
     )
     .then((response) => {
-     this.comparisonsEvaluation = response.data;
+     this.reset();
+     this.result = response.data;
     });
-   this.reset();
   },
   removeComparisonsEvaluation(id) {
    request.delete(this.url, id).then(() => {
@@ -140,18 +107,8 @@ export const useComparisonsEvaluationsStore = defineStore('comparisonsEvaluation
       { value: '', percentage: '' },
       { value: '', percentage: '' },
       { value: '', percentage: '' },
-      { value: '', percentage: '' },
      ],
      [
-      { value: '', percentage: '' },
-      { value: '', percentage: '' },
-      { value: '', percentage: '' },
-      { value: '', percentage: '' },
-      { value: '', percentage: '' },
-      { value: '', percentage: '' },
-     ],
-     [
-      { value: '', percentage: '' },
       { value: '', percentage: '' },
       { value: '', percentage: '' },
       { value: '', percentage: '' },
