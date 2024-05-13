@@ -11,7 +11,7 @@ export const useAuctionsStore = defineStore('auctions', {
     assignment_number: '',
     auction_type: '',
     start_date: '',
-    end_date: '',       
+    end_date: '',
     user_id: 1,
     name: '',
     key: 'name',
@@ -61,6 +61,7 @@ export const useAuctionsStore = defineStore('auctions', {
    const data = await request.post(this.url, auction, null, false).then((response) => {
     return response.data;
    });
+   this.resetAuction();
    return data;
   },
   removeAuction(id) {
@@ -70,6 +71,25 @@ export const useAuctionsStore = defineStore('auctions', {
   },
   updateAuction(auction) {
    this.auctions = this.auctions.map((r) => (r.id === auction?.id ? auction : r));
+  },
+  resetAuction() {
+   this.auction = {
+    assignment_number: '',
+    auction_type: '',
+    start_date: '',
+    end_date: '',
+    user_id: 1,
+    name: '',
+    key: 'name',
+    value: '',
+   };
+   this.auctionErrors = {
+    assignment_number: '',
+    auction_type: '',
+    start_date: '',
+    end_date: '',
+    name: '',
+   };
   },
  },
 });
