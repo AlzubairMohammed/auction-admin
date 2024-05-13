@@ -45,7 +45,7 @@
   multiple: false,
  });
  const handleFileUpload = (event) => {
-  file.value = event.target.files[0];
+  file.value = props.multiple ? event.target.files : event.target.files[0];
   file.index = props.index;
   emit('file-selected', file);
  };

@@ -8,24 +8,24 @@
  const fileItems = useScans.scan;
  let isAddFileModalActive = ref(false);
  const handleFileUpload = (file) => {
+  console.log(file);
   fileItems.files[file.index] = file.value;
-  console.log(fileItems);
  };
 
  const fileInput = ref(null);
 </script>
 <template>
- <AddingBar :clickedFunction="() => fileItems.imagesNames.push('')" title="اضافة حقل لتحميل مزيد من الصور" class="mt-3" />
+ <AddingBar :clickedFunction="() => fileItems.imagesNames.push({ name: '' })" title="اضافة حقل لتحميل مزيد من الصور" class="mt-3" />
  <div
   class="mb-5 border border-gray-200 p-3 rounded shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
   v-for="(item, index) in fileItems.imagesNames"
   :key="index"
  >
   <div class="flex justify-between">
-   <label :for="index" v-if="item">{{ item.name }}</label>
-   <BasicInput v-else v-model="fileItems.imagesNames[index].name" placeholder="الوصف" type="text" class="w-1/8 p-2" />
+   <label :for="index" v-if="index < 2">{{ item.name }}</label>
+   <BasicInput v-if="index > 1" v-model="item.name" placeholder="الوصف" type="text" class="w-1/8 p-2" />
    <a href="javascript:;" @click="fileItems.imagesNames.splice(index, 1)" class="font-size-14">×</a>
   </div>
-  <FlexibleFileUpload @file-selected="handleFileUpload" :index="index" error-message="الحقل مطلوب" class="m-3" required />
+  <FlexibleFileUpload :multiple="false" @file-selected="handleFileUpload" :index="index" error-message="الحقل مطلوب" class="m-3" required />
  </div>
 </template>
