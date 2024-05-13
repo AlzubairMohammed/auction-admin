@@ -24,7 +24,7 @@
  <form @submit.prevent="logTest">
   <AddingBar :clicked-function="activeModal" title="اضافة خاصية" />
   <div class="flex flex-wrap" :key="index">
-   <div v-for="(item, index) in useScans.scan.properties.filter((item) => item.is_feature)" class="w-1/5 p-2">
+   <div v-for="(item, index) in useScans.formProperties.filter((item) => item.is_feature)" class="w-1/5 p-2">
     <div v-if="item.type === 'multiple'" class="flex flex-wrap">
      <MultiSelectInput
       @on-select="

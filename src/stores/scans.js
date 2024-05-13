@@ -23,6 +23,7 @@ export const useScansStore = defineStore('scans', {
     realestateComponents: [],
     components: [],
    },
+   formProperties: [],
   };
  },
  getters: {
@@ -33,7 +34,7 @@ export const useScansStore = defineStore('scans', {
  actions: {
   fetchProperties: async function () {
    await request.get(this.properties_url).then((response) => {
-    this.scan.properties = response.data;
+    this.formProperties = response.data;
     if (this.scan.properties) {
      //  useApp.isShowMainLoader = false;
     }
@@ -58,8 +59,31 @@ export const useScansStore = defineStore('scans', {
    });
   },
   addScan: async function (scan) {
+   scan.properties = this.formProperties;
    return await request.post(this.url, scan, '', false).then((response) => {
+    this.reset();
     return response.data;
+   });
+  },
+  reset() {
+   this.scan = {
+    user_id: 2,
+    realestate_id: '',
+    lat: '5.2323',
+    lng: '4.2333',
+    properties: [],
+    files: [],
+    imagesNames: [{ name: 'صور خارجية' }, { name: 'صور داخلية' }],
+    realestateComponents: [],
+    components: [],
+   };
+   this.scanErrors = {
+    properties: [],
+    files: [],
+    realestateComponents: [],
+   };
+   this.formProperties.map((property) => {
+    property.value = '';
    });
   },
  },
