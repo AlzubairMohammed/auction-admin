@@ -144,6 +144,7 @@
       </table>
      </div>
     </div>
+    <!-- comparisons evaluation -->
     <div class="pt-3 flex flex-wrap">
      <div class="mr-3 text-center text-lg underline w-full">قيمة الارض طريقة المقارنات</div>
      <table class="table table-bordered">
@@ -154,7 +155,7 @@
       </thead>
       <tbody>
        <tr>
-        <td class="p-0" v-for="(evaluation, index) in item.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="nestedIndex">
+        <td class="" v-for="(evaluation, index) in item.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="nestedIndex">
          <div v-for="(data, nestedIndex) in evaluation.comparisons_evaluation_realestates_properties" class="flex flex-wrap">
           <div class="inline w-1/2 text-center">{{ data.percentage }}</div>
           <div class="inline w-1/2 bg-gray-100 text-center m-0">{{ data.value }}</div>
@@ -164,34 +165,105 @@
       </tbody>
      </table>
     </div>
-    <div class="pt-3 flex flex-wrap">
-     <div class="mr-3 text-center text-lg underline w-full">قيمة المبنى</div>
-     <table class="table table-bordered">
-      <thead>
-       <tr>
-        <th>البيان</th>
-        <th>المساحة</th>
-        <th>سعر المتر</th>
-        <th>الاجمالي</th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr v-for="(cost, index) in item.cost_evaluations[0]?.direct_costs[0]?.direct_cost_components" :key="nestedIndex">
-        <td class="p-0">
-         {{ cost.name }}
-        </td>
-        <td class="p-0">
-         {{ cost.area }}
-        </td>
-        <td class="p-0">
-         {{ cost.meter_price }}
-        </td>
-        <td class="p-0">
-         {{ cost.area * +cost.meter_price }}
-        </td>
-       </tr>
-      </tbody>
-     </table>
+    <div class="flex flex-wrap p-5">
+     <!-- direct cost evaluation -->
+     <div class="pt-3 flex flex-wrap w-4/8 p-5" v-if="item.cost_evaluations[0]?.direct_costs[0]">
+      <div class="text-center text-lg underline w-full mb-4">قيمة المبنى</div>
+      <table class="table table-bordered">
+       <thead>
+        <tr>
+         <th>البيان</th>
+         <th>المساحة</th>
+         <th>سعر المتر</th>
+         <th>الاجمالي</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr v-for="(cost, index) in item.cost_evaluations[0]?.direct_costs[0]?.direct_cost_components" :key="nestedIndex">
+         <td class="">
+          {{ cost.name }}
+         </td>
+         <td class="">
+          {{ cost.area }}
+         </td>
+         <td class="">
+          {{ cost.meter_price }}
+         </td>
+         <td class="">
+          {{ cost.area * +cost.meter_price }}
+         </td>
+        </tr>
+        <tr>
+         <td class="bg-gray-200">الاجمالي</td>
+         <td class="text-center bg-blue-200" colspan="3">{{ +item.cost_evaluations[0]?.direct_costs[0]?.direct_cost }}</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <!-- indirect cost evaluation -->
+     <div class="pt-3 flex flex-wrap w-2/8 p-5" v-if="item.cost_evaluations[0]?.indirect_costs[0]">
+      <div class="mr-3 text-center text-lg underline w-full">التكاليف غير المباشرة</div>
+      <table class="table table-bordered">
+       <tbody>
+        <tr v-for="(cost, index) in item.cost_evaluations[0]?.indirect_costs[0]?.indirect_cost_components" :key="nestedIndex">
+         <td class="bg-gray-200" colspan="1">
+          {{ cost.name }}
+         </td>
+         <td class="">
+          {{ cost.percentage ? cost.percentage : cost.price }}
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <!-- direct capitalization evaluation -->
+     <div class="pt-3 flex flex-wrap w-2/8" v-if="item?.cost_evaluations[0]?.depreciations[0]">
+      <div class="mr-3 text-center text-lg underline w-full">حساب الاهلاك</div>
+      <table class="table table-bordered">
+       <tbody>
+        <tr>
+         <td class="bg-gray-200" colspan="1">عمر المبنى</td>
+         <td class="" colspan="1">
+          {{ item.cost_evaluations[0]?.depreciations[0]?.realestate_life_span }}
+         </td>
+        </tr>
+        <tr>
+         <td class="bg-gray-200" colspan="1">العمر الافتراض</td>
+         <td class="" colspan="1">
+          {{ item.cost_evaluations[0]?.depreciations[0]?.realestate_expected_life_span }}
+         </td>
+        </tr>
+
+        <tr>
+         <td class="bg-gray-200" colspan="1">العمر المتبقي</td>
+         <td class="" colspan="1">
+          {{ item.cost_evaluations[0]?.depreciations[0]?.realestate_expected_life_span }}
+         </td>
+        </tr>
+        <tr>
+         <td class="bg-gray-200" colspan="1">معدل الاهلاك</td>
+         <td class="" colspan="1">
+          {{ item.cost_evaluations[0]?.depreciations[0]?.depreciation_rate }}
+         </td>
+        </tr>
+        <tr>
+         <td class="bg-gray-200" colspan="1">قيمة الاهلاك</td>
+         <td class="" colspan="1">
+          {{ item.cost_evaluations[0]?.depreciations[0]?.depreciation_value }}
+         </td>
+        </tr>
+        <tr>
+         <td class="bg-gray-200" colspan="1">قيمة المبنى</td>
+         <td class="" colspan="1">
+          {{
+           item.cost_evaluations[0]?.depreciations[0]?.depreciation_value -
+           (item.cost_evaluations[0]?.depreciations[0]?.realestate_expected_life_span * item.cost_evaluations[0]?.depreciations[0]?.depreciation_rate) / 100
+          }}
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
     </div>
    </div>
   </div>
