@@ -1,3 +1,6 @@
+<script setup>
+ import IconHorizontalDots from '@/components/icon/icon-horizontal-dots.vue';
+</script>
 <template>
  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-6 text-white">
   <!-- Auctions -->
@@ -12,10 +15,10 @@
       <template #content="{ close }">
        <ul @click="close()" class="text-black dark:text-white-dark">
         <li>
-         <a href="javascript:;">View Report</a>
+         <a href="javascript:;">عرض التقرير</a>
         </li>
         <li>
-         <a href="javascript:;">Edit Report</a>
+         <a href="javascript:;">تعديل</a>
         </li>
        </ul>
       </template>
@@ -28,7 +31,7 @@
    </div>
    <div class="flex items-center font-semibold mt-5">
     <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
-    Last Week 44,700
+    آخر اسبوع 44,700
    </div>
   </div>
 
@@ -44,10 +47,10 @@
       <template #content="{ close }">
        <ul @click="close()" class="text-black dark:text-white-dark">
         <li>
-         <a href="javascript:;">View Report</a>
+         <a href="javascript:;">عرض التقرير</a>
         </li>
         <li>
-         <a href="javascript:;">Edit Report</a>
+         <a href="javascript:;">تعديل</a>
         </li>
        </ul>
       </template>
@@ -60,7 +63,7 @@
    </div>
    <div class="flex items-center font-semibold mt-5">
     <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
-    Last Week 84,709
+    آخر اسبوع 84,709
    </div>
   </div>
 
@@ -76,10 +79,10 @@
       <template #content="{ close }">
        <ul @click="close()" class="text-black dark:text-white-dark">
         <li>
-         <a href="javascript:;">View Report</a>
+         <a href="javascript:;">عرض التقرير</a>
         </li>
         <li>
-         <a href="javascript:;">Edit Report</a>
+         <a href="javascript:;">تعديل</a>
         </li>
        </ul>
       </template>
@@ -92,7 +95,7 @@
    </div>
    <div class="flex items-center font-semibold mt-5">
     <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
-    Last Week 37,894
+    آخر اسبوع 37,894
    </div>
   </div>
 
@@ -108,10 +111,10 @@
       <template #content="{ close }">
        <ul @click="close()" class="text-black dark:text-white-dark">
         <li>
-         <a href="javascript:;">View Report</a>
+         <a href="javascript:;">عرض التقرير</a>
         </li>
         <li>
-         <a href="javascript:;">Edit Report</a>
+         <a href="javascript:;">تعديل</a>
         </li>
        </ul>
       </template>
@@ -124,7 +127,7 @@
    </div>
    <div class="flex items-center font-semibold mt-5">
     <icon-eye class="ltr:mr-2 rtl:ml-2 shrink-0" />
-    Last Week 50.01%
+    آخر اسبوع 50.01%
    </div>
   </div>
  </div>
