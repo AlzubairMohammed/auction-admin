@@ -55,7 +55,11 @@
    return;
   }
   formData.value.is_feature = props.isFeature;
-  await useScans.addProperty(formData.value);
+  const data = await useScans.addProperty(formData.value);
+  if (data) {
+   formData.value = { type: '', name: '', options: [] };
+   errorMessage.value = '';
+  }
   await useScans.fetchProperties();
   cancel();
  };

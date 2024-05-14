@@ -46,8 +46,9 @@ export const useScansStore = defineStore('scans', {
    });
   },
   addProperty: async function (property) {
-   await request.post(this.properties_url, property, '', false).then((response) => {
+   return await request.post(this.properties_url, property, '', false).then((response) => {
     this.scan.properties.push(response.data);
+    return response.data;
    });
   },
   fetchRealestateComponents: async function () {
@@ -61,11 +62,11 @@ export const useScansStore = defineStore('scans', {
   addScan: async function (scan) {
    scan.properties = this.formProperties;
    return await request.post(this.url, scan, '', false).then((response) => {
-    this.reset();
+    this.resetScan();
     return response.data;
    });
   },
-  reset() {
+  resetScan() {
    this.scan = {
     user_id: 2,
     realestate_id: '',
