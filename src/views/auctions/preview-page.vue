@@ -92,8 +92,8 @@
          </Popper>
         </div>
 
-        <router-link v-if="!item.scans.length" :to="`/scans/${item.id}`" class="text-success"> مسح ميداني </router-link>
-        <button v-else class="text-warning">تم المسح الميداني</button>
+        <router-link v-if="!item.scans.length" :to="`/scans/${item.id}`" class="text-success"> الدراسة العقار </router-link>
+        <button v-else class="text-warning">تم دراسة العقار</button>
        </td>
       </tr>
      </tbody>
