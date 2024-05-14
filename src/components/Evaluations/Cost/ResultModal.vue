@@ -105,8 +105,8 @@
           </div>
          </div>
          <div class="ltr:text-right rtl:text-left flex justify-end items-center mt-8">
-          <button type="button" class="btn btn-outline-info" @click="again">متابعة</button>
-          <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" @click="goToRealestatePreview">المزيد من التفاصيل</button>
+          <button type="button" class="btn btn-outline-info" @click="again">تم</button>
+          <!-- <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" @click="goToRealestatePreview">المزيد من التفاصيل</button> -->
          </div>
         </form>
        </div>

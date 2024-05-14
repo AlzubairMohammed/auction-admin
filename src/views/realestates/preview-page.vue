@@ -49,7 +49,7 @@
       </div>
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">تاريخ الإنشاء :</div>
-       <div>{{ realestate?.created.substring(0, 10) }}</div>
+       <div>{{ realestate?.created?.substring(0, 10) }}</div>
       </div>
      </div>
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
@@ -80,17 +80,17 @@
     <table class="table table-bordered">
      <thead>
       <tr>
-       <th class="text-center" v-for="(, index) in realestate.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="index">
+       <th class="text-center" v-for="(item, index) in realestate.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="index">
         {{ index + 1 }}مقارنة
        </th>
       </tr>
      </thead>
      <tbody>
       <tr>
-       <td class="" v-for="(evaluation, index) in realestate.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="nestedIndex">
-        <div v-for="(data, nestedIndex) in evaluation.comparisons_evaluation_realestates_properties" class="flex flex-wrap">
-         <div class="inline w-1/2 text-center">{{ data.percentage }}</div>
-         <div class="inline w-1/2 bg-gray-100 text-center m-0">{{ data.value }}</div>
+       <td class="" v-for="(evaluation, nestedIndex) in realestate.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="nestedIndex">
+        <div v-for="(data, subNestedIndex) in evaluation.comparisons_evaluation_realestates_properties" :key="subNestedIndex" class="flex flex-wrap">
+         <div class="inline w-1/2 text-center">{{ data?.percentage }}</div>
+         <div class="inline w-1/2 bg-gray-100 text-center m-0">{{ data?.value }}</div>
         </div>
        </td>
       </tr>
@@ -215,6 +215,7 @@
  const realestate = ref({});
  onBeforeMount(async () => {
   realestate.value = await realestatesSotre.getRealestate(route.params.id);
+  console.log(realestate.value);
  });
  const print = () => {
   let printContents = document.getElementById('report').innerHTML;

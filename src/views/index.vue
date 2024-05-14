@@ -1,3 +1,9 @@
 <template>
- <h1>تحت الانشاء</h1>
+ <div class="pt-5">
+  <ShortNumber />
+ </div>
 </template>
+<script setup>
+ import { ref } from 'vue';
+ import ShortNumber from '@/components/Home/ShortNumber.vue';
+</script>

@@ -1,7 +1,7 @@
 <template>
  <div class="flex md:items-center md:flex-row flex-col mb-5 gap-5">
   <h5 class="font-semibold text-lg dark:text-white-light">{{ title }}</h5>
-  <div class="ltr:ml-auto rtl:mr-auto">
+  <div class="">
    <AddingButton @click="clickedFunction" />
   </div>
  </div>
