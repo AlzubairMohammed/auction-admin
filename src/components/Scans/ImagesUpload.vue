@@ -26,6 +26,14 @@
    <BasicInput v-if="index > 1" v-model="item.name" placeholder="الوصف" type="text" class="w-1/8 p-2" />
    <a href="javascript:;" @click="fileItems.imagesNames.splice(index, 1)" class="font-size-14">×</a>
   </div>
-  <FlexibleFileUpload :multiple="false" @file-selected="handleFileUpload" :index="index" error-message="الحقل مطلوب" class="m-3" required />
+  <FlexibleFileUpload
+   title="اضغط هنا لرفع الصور"
+   :multiple="false"
+   @file-selected="handleFileUpload"
+   :index="index"
+   error-message="الحقل مطلوب"
+   class="m-3"
+   required
+  />
  </div>
 </template>

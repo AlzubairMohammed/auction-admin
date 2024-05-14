@@ -18,6 +18,13 @@
    <BasicInput v-if="index > 2" v-model="item.name" placeholder="الوصف" type="text" class="w-1/8 p-2" />
    <a href="javascript:;" @click="fileItems.filesNames.splice(index, 1)" class="font-size-14">×</a>
   </div>
-  <FlexibleFileUpload @file-selected="(file) => (fileItems.files[file.index] = file.value)" :index="index" class="m-3" error-message="الحقل مطلوب" required />
+  <FlexibleFileUpload
+   title="اضغط هنا لرفع الملف"
+   @file-selected="(file) => (fileItems.files[file.index] = file.value)"
+   :index="index"
+   class="m-3"
+   error-message="الحقل مطلوب"
+   required
+  />
  </div>
 </template>
