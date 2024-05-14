@@ -3,10 +3,7 @@
  import Vue3Datatable from '@bhplugin/vue3-datatable';
  import { useRealestatesStore } from '@/stores/realestates';
  import { useAppStore } from '@/stores/index';
- import IconTrashLines from '@/components/icon/icon-trash-lines.vue';
  import IconPlus from '@/components/icon/icon-plus.vue';
- import IconEdit from '@/components/icon/icon-edit.vue';
- import IconEye from '@/components/icon/icon-eye.vue';
  const items = ref([]);
  const store = useAppStore();
  const useRealestates = useRealestatesStore();
@@ -67,16 +64,10 @@
      </template>
 
      <template #actions="data">
-      <div class="flex gap-4 items-center justify-center">
-       <router-link to="/apps/invoice/edit" class="hover:text-info">
-        <icon-edit class="w-4.5 h-4.5" />
-       </router-link>
-       <router-link :to="`/realestates/preview-page/${data?.value?.id}`" class="hover:text-primary">
-        <icon-eye />
-       </router-link>
-       <button type="button" class="hover:text-danger" @click="deleteRow(`${data?.assignment_number}`)">
-        <icon-trash-lines />
-       </button>
+      <div class="flex gap-4">
+       <router-link :to="`/realestates/preview-page/${data.value.id}`" class="text-primary"> عرض </router-link>
+       <router-link to="" class="text-success"> تعديل </router-link>
+       <router-link :to="`/auctions/preview-page/${data.value.id}`" class="text-danger"> حذف </router-link>
       </div>
      </template>
     </vue3-datatable>

@@ -5,11 +5,19 @@
     <icon-printer />
     طباعة
    </button>
-   <router-link to="/realestates/add-page" class="btn btn-secondary gap-2">
-    <icon-plus />
-    اضافة
-   </router-link>
-   <router-link :to="`/realestates/edit-page/${realestate?.data?.id}`" class="btn btn-warning gap-2">
+   <div class="dropdown">
+    <Popper :placement="'bottom-start'" offsetDistance="0" class="align-middle">
+     <button to="/realestates/add-page" class="btn btn-secondary gap-2">تقييم</button>
+     <template #content="{ close }">
+      <ul @click="close()" class="whitespace-nowrap">
+       <li><router-link :to="`/evaluations/comparisons/${realestate?.id}`">المقارنات</router-link></li>
+       <li><router-link :to="`/evaluations/direct-capitlization/${realestate?.id}`">الرسملة المباشرة</router-link></li>
+       <li><router-link :to="`/evaluations/cost/${realestate?.id}`">التكلفة</router-link></li>
+      </ul>
+     </template>
+    </Popper>
+   </div>
+   <router-link :to="`/realestates/edit-page/${realestate?.id}`" class="btn btn-warning gap-2">
     <icon-edit />
     تعديل
    </router-link>
@@ -17,7 +25,7 @@
   <div id="report" class="panel">
    <!-- title and logo -->
    <div class="flex justify-between flex-wrap gap-4 px-4">
-    <div class="text-2xl font-semibold uppercase">تقرير عقار</div>
+    <div class="text-2xl font-semibold uppercase">بيانات العقار</div>
     <div class="shrink-0">
      <img src="/assets/images/logo.svg" alt="" class="w-14 ltr:ml-auto rtl:mr-auto" />
     </div>
@@ -37,130 +45,174 @@
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">رقم العقار :</div>
-       <div>{{ realestate?.data?.id }}</div>
+       <div>{{ realestate?.id }}</div>
       </div>
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">تاريخ الإنشاء :</div>
-       <div>{{ realestate?.data?.created.substring(0, 10) }}</div>
+       <div>{{ realestate?.created.substring(0, 10) }}</div>
       </div>
      </div>
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">اسم العميل :</div>
-       <div>{{ realestate?.data?.customer_name }}</div>
+       <div>{{ realestate?.customer_name }}</div>
       </div>
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">رقم جوال العميل :</div>
-       <div>{{ realestate?.data?.customer_number }}</div>
+       <div>{{ realestate?.customer_number }}</div>
       </div>
      </div>
      <div class="xl:1/3 lg:w-2/5 sm:w-1/3 px-5">
       <div class="flex items-center w-full justify-between mb-2">
        <div class="text-white-dark">اسم المالك :</div>
-       <div>{{ realestate?.data?.owner_name }}</div>
+       <div>{{ realestate?.owner_name }}</div>
       </div>
       <div class="flex items-center w-full justify-between">
        <div class="text-white-dark">رقم جوال المالك :</div>
-       <div>{{ realestate?.data?.owner_number }}</div>
+       <div>{{ realestate?.owner_number }}</div>
       </div>
      </div>
     </div>
    </div>
-
-   <!-- realestates details -->
-   <div v-for="(item, index) in realestate?.data?.comparisons_evaluations[0]?.comparisons_evaluation_realestates" class="table-responsive mt-6">
-    <h1 class="text-2xl font-semibold text-center">{{ `عقار رقم ${index + 1}` }}</h1>
+   <!-- comparisons evaluations -->
+   <div class="pt-3 flex flex-wrap">
+    <div class="mr-3 text-center text-lg underline w-full">قيمة الارض طريقة المقارنات</div>
     <table class="table table-bordered">
      <thead>
       <tr>
-       <th>اسم العميل</th>
-       <th>رقم العميل</th>
-       <th>اسم المالك</th>
-       <th>رقم المالك</th>
+       <th class="text-center" v-for="(, index) in realestate.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="index">
+        {{ index + 1 }}مقارنة
+       </th>
       </tr>
      </thead>
      <tbody>
       <tr>
-       <td>{{ item.customer_name }}</td>
-       <td>{{ item.customer_number }}</td>
-       <td>{{ item.owner_name }}</td>
-       <td>{{ item.owner_number }}</td>
+       <td class="" v-for="(evaluation, index) in realestate.comparisons_evaluations[0]?.comparisons_evaluation_realestates" :key="nestedIndex">
+        <div v-for="(data, nestedIndex) in evaluation.comparisons_evaluation_realestates_properties" class="flex flex-wrap">
+         <div class="inline w-1/2 text-center">{{ data.percentage }}</div>
+         <div class="inline w-1/2 bg-gray-100 text-center m-0">{{ data.value }}</div>
+        </div>
+       </td>
       </tr>
      </tbody>
     </table>
-    <div class="flex flex-wrap">
-     <!-- <img v-for="image in item.realestate_images.slice(0, 5)" :src="`http://localhost:7070/${image.path}`" alt="" class="w-1/5 p-2 rounded" /> -->
+   </div>
+   <div class="flex flex-wrap p-5">
+    <!-- direct cost evaluation -->
+    <div class="pt-3 flex flex-wrap w-4/8 p-5" v-if="realestate.cost_evaluations[0]?.direct_costs[0]">
+     <div class="text-center text-lg underline w-full mb-4">قيمة المبنى</div>
+     <table class="table table-bordered">
+      <thead>
+       <tr>
+        <th>البيان</th>
+        <th>المساحة</th>
+        <th>سعر المتر</th>
+        <th>الاجمالي</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr v-for="(cost, index) in realestate.cost_evaluations[0]?.direct_costs[0]?.direct_cost_components" :key="nestedIndex">
+        <td class="">
+         {{ cost.name }}
+        </td>
+        <td class="">
+         {{ cost.area }}
+        </td>
+        <td class="">
+         {{ cost.meter_price }}
+        </td>
+        <td class="">
+         {{ cost.area * +cost.meter_price }}
+        </td>
+       </tr>
+       <tr>
+        <td class="bg-gray-200">الاجمالي</td>
+        <td class="text-center bg-blue-200" colspan="3">{{ +realestate.cost_evaluations[0]?.direct_costs[0]?.direct_cost }}</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <!-- indirect cost evaluation -->
+    <div class="pt-3 flex flex-wrap w-2/8 p-5" v-if="realestate.cost_evaluations[0]?.indirect_costs[0]">
+     <div class="mr-3 text-center text-lg underline w-full">التكاليف غير المباشرة</div>
+     <table class="table table-bordered">
+      <tbody>
+       <tr v-for="(cost, index) in realestate.cost_evaluations[0]?.indirect_costs[0]?.indirect_cost_components" :key="nestedIndex">
+        <td class="bg-gray-200" colspan="1">
+         {{ cost.name }}
+        </td>
+        <td class="">
+         {{ cost.percentage ? cost.percentage : cost.price }}
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <!-- direct capitalization evaluation -->
+    <div class="pt-3 flex flex-wrap w-2/8" v-if="realestate?.cost_evaluations[0]?.depreciations[0]">
+     <div class="mr-3 text-center text-lg underline w-full">حساب الاهلاك</div>
+     <table class="table table-bordered">
+      <tbody>
+       <tr>
+        <td class="bg-gray-200" colspan="1">عمر المبنى</td>
+        <td class="" colspan="1">
+         {{ realestate.cost_evaluations[0]?.depreciations[0]?.realestate_life_span }}
+        </td>
+       </tr>
+       <tr>
+        <td class="bg-gray-200" colspan="1">العمر الافتراض</td>
+        <td class="" colspan="1">
+         {{ realestate.cost_evaluations[0]?.depreciations[0]?.realestate_expected_life_span }}
+        </td>
+       </tr>
+
+       <tr>
+        <td class="bg-gray-200" colspan="1">العمر المتبقي</td>
+        <td class="" colspan="1">
+         {{ realestate.cost_evaluations[0]?.depreciations[0]?.realestate_expected_life_span }}
+        </td>
+       </tr>
+       <tr>
+        <td class="bg-gray-200" colspan="1">معدل الاهلاك</td>
+        <td class="" colspan="1">
+         {{ realestate.cost_evaluations[0]?.depreciations[0]?.depreciation_rate }}
+        </td>
+       </tr>
+       <tr>
+        <td class="bg-gray-200" colspan="1">قيمة الاهلاك</td>
+        <td class="" colspan="1">
+         {{ realestate.cost_evaluations[0]?.depreciations[0]?.depreciation_value }}
+        </td>
+       </tr>
+       <tr>
+        <td class="bg-gray-200" colspan="1">قيمة المبنى</td>
+        <td class="" colspan="1">
+         {{
+          realestate.cost_evaluations[0]?.depreciations[0]?.depreciation_value -
+          (realestate.cost_evaluations[0]?.depreciations[0]?.realestate_expected_life_span *
+           realestate.cost_evaluations[0]?.depreciations[0]?.depreciation_rate) /
+           100
+         }}
+        </td>
+       </tr>
+      </tbody>
+     </table>
     </div>
    </div>
   </div>
  </div>
 </template>
 <script setup>
- import { ref, computed, onBeforeMount, onMounted, onUpdated } from 'vue';
+ import { ref, onBeforeMount } from 'vue';
  import { useRoute } from 'vue-router';
  import { useMeta } from '@/composables/use-meta';
  import IconPrinter from '@/components/icon/icon-printer.vue';
- import IconPlus from '@/components/icon/icon-plus.vue';
  import IconEdit from '@/components/icon/icon-edit.vue';
  import { useRealestatesStore } from '@/stores/realestates';
  const realestatesSotre = useRealestatesStore();
  const route = useRoute();
  useMeta({ title: 'Invoice Preview' });
  const realestate = ref({});
- const items = ref([
-  {
-   id: 1,
-   title: 'Calendar App Customization',
-   quantity: 1,
-   price: '120',
-   amount: '120',
-  },
-  {
-   id: 2,
-   title: 'Chat App Customization',
-   quantity: 1,
-   price: '230',
-   amount: '230',
-  },
-  {
-   id: 3,
-   title: 'Laravel Integration',
-   quantity: 1,
-   price: '405',
-   amount: '405',
-  },
-  {
-   id: 4,
-   title: 'Backend UI Design',
-   quantity: 1,
-   price: '2500',
-   amount: '2500',
-  },
- ]);
- const columns = ref([
-  {
-   key: 'id',
-   label: 'S.NO',
-  },
-  {
-   key: 'title',
-   label: 'ITEMS',
-  },
-  {
-   key: 'quantity',
-   label: 'QTY',
-  },
-  {
-   key: 'price',
-   label: 'PRICE',
-   class: 'ltr:text-right rtl:text-left',
-  },
-  {
-   key: 'amount',
-   label: 'AMOUNT',
-   class: 'ltr:text-right rtl:text-left',
-  },
- ]);
  onBeforeMount(async () => {
   realestate.value = await realestatesSotre.getRealestate(route.params.id);
  });
