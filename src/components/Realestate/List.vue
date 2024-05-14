@@ -27,18 +27,6 @@
  <div>
   <div class="panel px-0 pb-1.5 border-[#e0e6ed] dark:border-[#1b2e4b]">
    <div class="datatable invoice-table">
-    <div class="mb-4.5 px-5 flex md:items-center md:flex-row flex-col gap-5">
-     <div class="flex items-center gap-2">
-      <router-link to="/realestates/add-page" class="btn btn-primary gap-2">
-       <icon-plus />
-       اضافة جديد
-      </router-link>
-     </div>
-     <div class="ltr:ml-auto rtl:mr-auto">
-      <input v-model="search" type="text" class="form-input" placeholder="بحث..." />
-     </div>
-    </div>
-
     <vue3-datatable
      ref="datatable"
      :rows="items"
