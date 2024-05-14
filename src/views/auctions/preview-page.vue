@@ -233,13 +233,6 @@
           {{ item.cost_evaluations[0]?.depreciations[0]?.realestate_expected_life_span }}
          </td>
         </tr>
-
-        <tr>
-         <td class="bg-gray-200" colspan="1">العمر المتبقي</td>
-         <td class="" colspan="1">
-          {{ item.cost_evaluations[0]?.depreciations[0]?.realestate_expected_life_span }}
-         </td>
-        </tr>
         <tr>
          <td class="bg-gray-200" colspan="1">معدل الاهلاك</td>
          <td class="" colspan="1">
